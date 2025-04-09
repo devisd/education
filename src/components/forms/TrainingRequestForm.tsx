@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormInput } from './FormInput';
 import { FormSelect } from './FormSelect';
 import { FormCheckbox } from './FormCheckbox';
 import { EDUCATION_PROGRAMS } from '@/constants/education';
+import { Alert } from '@/components/ui';
 
 export const TrainingRequestForm: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -14,6 +15,22 @@ export const TrainingRequestForm: React.FC = () => {
         program: '',
         privacyAgreed: false
     });
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isFormValid, setIsFormValid] = useState(false);
+
+    // Проверка валидности формы при изменении данных
+    useEffect(() => {
+        const { name, phone, email, program, privacyAgreed } = formData;
+        const isValid =
+            name.trim() !== '' &&
+            phone.trim() !== '' &&
+            email.trim() !== '' &&
+            program.trim() !== '' &&
+            privacyAgreed;
+
+        setIsFormValid(isValid);
+    }, [formData]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -31,11 +48,28 @@ export const TrainingRequestForm: React.FC = () => {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Логика отправки формы
-        console.log('Form submitted:', formData);
-        // Здесь будет отправка данных на сервер
+        setIsSubmitting(true);
+        try {
+            // Логика отправки формы
+            console.log('Form submitted:', formData);
+            // Имитация запроса к серверу
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            setSubmitSuccess(true);
+            // Сброс формы после успешной отправки
+            setFormData({
+                name: '',
+                phone: '',
+                email: '',
+                program: '',
+                privacyAgreed: false
+            });
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -44,6 +78,13 @@ export const TrainingRequestForm: React.FC = () => {
                 <span className="inline-block mb-2 text-primary-600 text-sm font-medium uppercase tracking-wider">Начните обучение сейчас</span>
                 <div className="text-2xl">Заявка на <span className="text-primary-600 font-extrabold">обучение</span></div>
             </h3>
+
+            {submitSuccess && (
+                <Alert
+                    type="success"
+                    message="Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время."
+                />
+            )}
 
             <form className="space-y-5" onSubmit={handleSubmit}>
                 <FormInput
@@ -89,13 +130,6 @@ export const TrainingRequestForm: React.FC = () => {
                     required
                 />
 
-                <button
-                    type="submit"
-                    className="w-full bg-primary-600 text-white py-3 px-4 rounded-lg hover:bg-primary-700 transition-all duration-300 font-medium shadow-sm hover:shadow flex items-center justify-center"
-                >
-                    Отправить заявку
-                </button>
-
                 <FormCheckbox
                     id="privacyAgreed"
                     name="privacyAgreed"
@@ -108,6 +142,14 @@ export const TrainingRequestForm: React.FC = () => {
                         </span>
                     }
                 />
+
+                <button
+                    type="submit"
+                    disabled={!isFormValid || isSubmitting}
+                    className={`w-full bg-primary-600 text-white py-3 px-4 rounded-lg hover:bg-primary-700 transition-all duration-300 font-medium shadow-sm hover:shadow flex items-center justify-center ${(!isFormValid || isSubmitting) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                    {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+                </button>
             </form>
         </div>
     );
