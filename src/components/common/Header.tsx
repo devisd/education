@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon } from '@/icons';
 import { EDUCATIONAL_SERVICES, ORGANIZATION_INFO, MAIN_MENU } from '../../constants/header';
 import { MenuItem } from '@/types';
@@ -14,6 +15,20 @@ export const Header = () => {
     const [eduMenuOpen, setEduMenuOpen] = useState(false);
     const [aboutMenuOpen, setAboutMenuOpen] = useState(false);
     const [coursesMenuOpen, setCoursesMenuOpen] = useState(false);
+    const router = useRouter();
+
+    const scrollToContactForm = () => {
+        const contactsSection = document.getElementById('contacts');
+        if (contactsSection) {
+            contactsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        setMobileMenuOpen(false);
+    };
+
+    const goToConsultation = () => {
+        router.push('/consultation');
+        setMobileMenuOpen(false);
+    };
 
     // Функция для рендеринга вложенного меню на десктопе
     const renderDesktopSubmenu = (item: MenuItem, isSubMenu = false) => {
@@ -173,7 +188,7 @@ export const Header = () => {
                             </a>
                             <button
                                 className="text-primary-800 bg-primary-100 hover:bg-primary-200 px-4 py-2 rounded-md text-sm font-medium"
-                                onClick={() => alert('Форма приглашения в тендер')}
+                                onClick={scrollToContactForm}
                             >
                                 ОСТАВИТЬ ЗАЯВКУ
                             </button>
@@ -219,7 +234,7 @@ export const Header = () => {
                         {/* Кнопка консультации в правой части (только для десктопов) */}
                         <button
                             className="hidden lg:block bg-white text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-md text-sm font-medium shadow-sm"
-                            onClick={() => alert('Форма консультации')}
+                            onClick={goToConsultation}
                         >
                             КОНСУЛЬТАЦИЯ
                         </button>
@@ -228,7 +243,7 @@ export const Header = () => {
                         <div className="lg:hidden flex items-center justify-end space-x-4 ml-auto">
                             <button
                                 className="bg-white text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-md text-sm font-medium shadow-sm"
-                                onClick={() => alert('Форма консультации')}
+                                onClick={goToConsultation}
                             >
                                 КОНСУЛЬТАЦИЯ
                             </button>
@@ -295,7 +310,7 @@ export const Header = () => {
                             </a>
                             <button
                                 className="text-primary-800 bg-primary-100 hover:bg-primary-200 px-3 py-3 rounded-md text-sm font-medium"
-                                onClick={() => alert('Форма приглашения в тендер')}
+                                onClick={scrollToContactForm}
                             >
                                 ОСТАВИТЬ ЗАЯВКУ
                             </button>
