@@ -1,0 +1,32 @@
+'use client'
+
+import React from 'react';
+import Link from 'next/link';
+import { ArrowRightIcon } from '@/icons';
+
+interface ServiceCardProps {
+    icon: React.ComponentType<{ className?: string }>;
+    title: string;
+    description: string;
+    link: string;
+}
+
+export const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, description, link }) => {
+    return (
+        <Link
+            href={link}
+            className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-gray-100 hover:border-primary-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
+            aria-label={`Подробнее о программе "${title}"`}
+        >
+            <div className="mb-5 text-primary-600 p-3 bg-primary-50 inline-flex rounded-lg">
+                <Icon className="h-12 w-12 text-primary-600" />
+            </div>
+            <h3 className="text-xl font-semibold mb-3 text-gray-800">{title}</h3>
+            <p className="text-gray-600 mb-5 flex-grow leading-relaxed">{description}</p>
+            <div className="text-primary-600 font-medium flex items-center mt-auto group">
+                <span className="mr-2">Подробнее</span>
+                <ArrowRightIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </div>
+        </Link>
+    );
+}; 

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "Figma": {
+      "url": "http://localhost:3333/sse"
+    },
+    "Firecrawl mcp": {
+      "command": "npx -y firecrawl-mcp"
+    }
+  }
+}
