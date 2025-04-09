@@ -25,6 +25,16 @@ export const ContactForm = () => {
     await submitForm();
   };
 
+  // Check if all required fields are filled
+  const isFormValid = () => {
+    return (
+      !!formData.name.trim() &&
+      (!!formData.email.trim() || !!formData.phone.trim()) &&
+      !!formData.program &&
+      formData.agreement
+    );
+  };
+
   return (
     <section className="py-16 bg-white relative overflow-hidden" id="contacts">
       {/* Декоративные круги */}
@@ -148,8 +158,8 @@ export const ContactForm = () => {
               <div>
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                  disabled={isSubmitting || !isFormValid()}
+                  className={`w-full px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors ${(isSubmitting || !isFormValid()) ? 'opacity-70 cursor-not-allowed' : ''}`}
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
