@@ -1,13 +1,13 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon } from '@/icons';
+import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon, MapIcon, PhoneIcon, EmailIcon } from '@/icons';
 import { EDUCATIONAL_SERVICES, ORGANIZATION_INFO, MAIN_MENU } from '../../constants/header';
+import { CONTACT_LINKS } from '../../constants/footer';
 import { MenuItem } from '@/types';
-import { Dropdown, DropdownItem, DropdownSubmenu } from '../ui';
+import { Dropdown, DropdownItem, DropdownSubmenu, VisuallyImpairedModeToggle } from '../ui';
 
 export const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -15,20 +15,27 @@ export const Header = () => {
     const [eduMenuOpen, setEduMenuOpen] = useState(false);
     const [aboutMenuOpen, setAboutMenuOpen] = useState(false);
     const [coursesMenuOpen, setCoursesMenuOpen] = useState(false);
-    const router = useRouter();
 
-    const scrollToContactForm = () => {
-        const contactsSection = document.getElementById('contacts');
-        if (contactsSection) {
-            contactsSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        setMobileMenuOpen(false);
-    };
+    // Добавляем обработчик скролла для закрытия всех дропдаунов
+    useEffect(() => {
+        const handleScroll = () => {
+            // Закрываем все раскрытые меню на мобильных
+            setEduMenuOpen(false);
+            setAboutMenuOpen(false);
+            setCoursesMenuOpen(false);
 
-    const goToConsultation = () => {
-        router.push('/consultation');
-        setMobileMenuOpen(false);
-    };
+            // Закрываем десктопные дропдауны через диспетчер событий
+            document.dispatchEvent(new CustomEvent('dropdown:close', { detail: { except: '' } }));
+        };
+
+        // Привязываем обработчик к событию скролла
+        window.addEventListener('scroll', handleScroll);
+
+        // Удаляем обработчик при размонтировании компонента
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     // Функция для рендеринга вложенного меню на десктопе
     const renderDesktopSubmenu = (item: MenuItem, isSubMenu = false) => {
@@ -56,7 +63,7 @@ export const Header = () => {
                 id={`menu-${item.title.toLowerCase()}`}
                 className="group"
                 trigger={
-                    <div className="text-white hover:text-gray-100 flex items-center cursor-pointer">
+                    <div className="text-white hover:text-gray-100 flex items-center cursor-pointer text-sm xl:text-base">
                         {item.title}
                         <ChevronDownIcon className="ml-1 h-4 w-4" />
                     </div>
@@ -147,51 +154,72 @@ export const Header = () => {
 
     return (
         <header className="bg-white shadow-md relative overflow-hidden z-[1000]">
-            {/* Декоративные круги */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full border-4 border-primary-200 opacity-5 blur-xl"></div>
-            <div className="absolute bottom-5 -left-20 w-48 h-48 rounded-full border-4 border-primary-200 opacity-5 blur-xl"></div>
-            <div className="absolute top-1/4 right-1/4 w-16 h-16 rounded-full border-2 border-primary-300 opacity-5 blur-lg"></div>
-
             {/* Верхняя часть шапки с контактной информацией */}
             <div className="bg-gray-100 py-2 hidden lg:block">
                 <div className="container mx-auto px-4">
-                    <div className="flex justify-between items-center">
-                        <div className="flex items-center space-x-6 text-sm text-gray-600">
-                            <Link href="/" className="flex items-center mr-4">
-                                <div className="h-12 w-28 relative">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4 xl:gap-10 text-sm text-gray-600">
+                            <Link href="/" className="flex items-center">
+                                <div className="h-24 w-56 relative">
                                     <Image
                                         src="/images/logo.png"
                                         alt="Образовательный терминал"
                                         fill
-                                        sizes="(max-width: 768px) 80px, 112px"
+                                        sizes="(min-width: 1280px) 224px, (min-width: 1024px) 180px, 80px"
                                         style={{ objectFit: 'contain' }}
                                         priority
                                     />
                                 </div>
                             </Link>
-                            <div>
-                                <span>ИРКУТСК, УЛ. СЕРГЕЕВА 3/1, ОФ. 325</span>
+
+                            {/* Адрес */}
+                            <div className='text-primary-600 whitespace-nowrap'>
+                                <a href={CONTACT_LINKS[0].href} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-primary-900">
+                                    <MapIcon className="h-5 w-5 mr-2 text-primary-600 flex-shrink-0 lg:h-6 lg:w-6" />
+                                    <span className="text-sm lg:text-xs xl:text-lg">{CONTACT_LINKS[0].name}</span>
+                                </a>
                             </div>
-                            <div>
-                                <a href="tel:+73952434312" className="hover:text-primary-600">+7 (3952) 43-43-12</a>
+
+                            {/* Телефоны */}
+                            <div className="flex items-center text-primary-600">
+                                <PhoneIcon className="h-5 w-5 mr-2 text-primary-600 flex-shrink-0 lg:h-6 lg:w-6" />
+                                <div className='flex flex-col'>
+                                    <a href={CONTACT_LINKS[1].href} className="flex items-center hover:text-primary-900 text-sm lg:text-xs xl:text-lg whitespace-nowrap">
+                                        {CONTACT_LINKS[1].name}
+                                    </a>
+                                    <a href={CONTACT_LINKS[2].href} className="flex items-center hover:text-primary-900 text-sm lg:text-xs xl:text-lg whitespace-nowrap">
+                                        {CONTACT_LINKS[2].name}
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Почта */}
+                            <div className='text-primary-600 hover:text-primary-900 whitespace-nowrap'>
+                                <a href={CONTACT_LINKS[3].href} className="flex items-center">
+                                    <EmailIcon className="h-5 w-5 mr-2 text-primary-600 flex-shrink-0 lg:h-6 lg:w-6" />
+                                    <span className="text-sm lg:text-xs xl:text-lg">{CONTACT_LINKS[3].name}</span>
+                                </a>
                             </div>
                         </div>
 
-                        <div className="flex items-center space-x-4">
-                            <a href="https://t.me/termedu38" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-700">
-                                <span className="sr-only">Telegram</span>
-                                <TelegramIcon className="h-5 w-5" />
-                            </a>
-                            <a href="https://wa.me/79149148185" target="_blank" rel="noopener noreferrer" className="text-primary-700 hover:text-primary-900">
-                                <span className="sr-only">WhatsApp</span>
-                                <WhatsAppIcon className="h-5 w-5" />
-                            </a>
-                            <button
-                                className="text-primary-800 bg-primary-100 hover:bg-primary-200 px-4 py-2 rounded-md text-sm font-medium"
-                                onClick={scrollToContactForm}
-                            >
-                                ОСТАВИТЬ ЗАЯВКУ
-                            </button>
+                        <div className="flex flex-col gap-2 space-y-1.5">
+                            <div className="flex items-center justify-center space-x-4 w-full">
+                                <a href="https://t.me/termedu38" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-900">
+                                    <span className="sr-only">Telegram</span>
+                                    <TelegramIcon className="h-5 w-5 lg:h-6 lg:w-6" />
+                                </a>
+                                <a href="https://wa.me/79149148185" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-900">
+                                    <span className="sr-only">WhatsApp</span>
+                                    <WhatsAppIcon className="h-5 w-5 lg:h-6 lg:w-6" />
+                                </a>
+                            </div>
+                            <div className="hidden lg:block xl:hidden">
+                                <VisuallyImpairedModeToggle fontSize="small" compact={false} verticalLayout={true} />
+                            </div>
+                            <div className="hidden xl:flex xl:items-center">
+                                <div className="h-6 w-px bg-gray-300 mx-2"></div>
+                                <VisuallyImpairedModeToggle fontSize="small" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,17 +227,17 @@ export const Header = () => {
 
             {/* Основная часть шапки с меню */}
             <div className="bg-[#d76944] relative z-30">
-                <div className="container mx-auto max-md:max-w-full px-4 py-4">
+                <div className="container mx-auto max-md:max-w-full px-4 lg:px-2 xl:px-4 py-4">
                     <div className="flex justify-between items-center">
                         {/* Логотип для мобильных устройств */}
-                        <div className="flex lg:hidden items-center bg-white rounded-md max-md:w-24 px-2">
+                        <div className="flex lg:hidden items-center bg-white rounded-md px-2 py-1">
                             <Link href="/" className="flex items-center">
-                                <div className="h-8 w-20 relative ">
+                                <div className="h-10 w-28 sm:h-12 sm:w-32 md:h-14 md:w-36 relative">
                                     <Image
                                         src="/images/logo.png"
                                         alt="Образовательный терминал"
                                         fill
-                                        sizes="(max-width: 768px) 80px, 112px"
+                                        sizes="(max-width: 640px) 112px, (max-width: 768px) 128px, (max-width: 1024px) 144px"
                                         style={{ objectFit: 'contain' }}
                                         priority
                                     />
@@ -218,35 +246,22 @@ export const Header = () => {
                         </div>
 
                         {/* Desktop menu */}
-                        <nav className="hidden lg:flex items-center space-x-6 relative">
+                        <nav className="hidden lg:flex items-center justify-between w-full relative">
                             {MAIN_MENU.map((item, idx) => {
                                 if (item.children) {
                                     return <React.Fragment key={`main-menu-${item.title}-${idx}`}>{renderDesktopSubmenu(item)}</React.Fragment>;
                                 }
                                 return (
-                                    <Link key={`main-link-${item.title}-${idx}`} href={item.href || '#'} className="text-white hover:text-gray-100">
+                                    <Link key={`main-link-${item.title}-${idx}`} href={item.href || '#'} className="text-white hover:text-gray-100 text-sm xl:text-base whitespace-nowrap">
                                         {item.title}
                                     </Link>
                                 );
                             })}
                         </nav>
 
-                        {/* Кнопка консультации в правой части (только для десктопов) */}
-                        <button
-                            className="hidden lg:block bg-white text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-md text-sm font-medium shadow-sm"
-                            onClick={goToConsultation}
-                        >
-                            КОНСУЛЬТАЦИЯ
-                        </button>
-
                         {/* Mobile menu button */}
                         <div className="lg:hidden flex items-center justify-end space-x-4 ml-auto">
-                            <button
-                                className="bg-white text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-md text-sm font-medium shadow-sm"
-                                onClick={goToConsultation}
-                            >
-                                КОНСУЛЬТАЦИЯ
-                            </button>
+                            <VisuallyImpairedModeToggle compact={true} fontSize="small" />
                             <button
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                                 className="bg-primary-600 text-white p-2 rounded-md"
@@ -289,13 +304,33 @@ export const Header = () => {
                     </div>
 
                     <div className="mt-auto border-t-2 border-gray-500 text-center p-4">
-                        <div className="text-sm text-gray-600">
-                            <div className="mb-2">
-                                <span>ИРКУТСК, УЛ. СЕРГЕЕВА 3/1, ОФ. 325</span>
+                        <div className="text-sm text-gray-600 space-y-2">
+                            {/* Адрес */}
+                            <div>
+                                <a href={CONTACT_LINKS[0].href} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                                    <MapIcon className="h-5 w-5 mr-2 text-primary-600" />
+                                    {CONTACT_LINKS[0].name}
+                                </a>
+                            </div>
+                            {/* Телефоны */}
+                            <div>
+                                <a href={CONTACT_LINKS[1].href} className="flex items-center justify-center">
+                                    <PhoneIcon className="h-5 w-5 mr-2 text-primary-600" />
+                                    {CONTACT_LINKS[1].name}
+                                </a>
                             </div>
                             <div>
-                                <a href="tel:+73952434312" className="hover:text-primary-600">+7 (3952) 43-43-12</a>,&nbsp;
-                                <a href="tel:+79149148185" className="hover:text-primary-600">+7 (914) 91-48-185</a>
+                                <a href={CONTACT_LINKS[2].href} className="flex items-center justify-center">
+                                    <PhoneIcon className="h-5 w-5 mr-2 text-primary-600" />
+                                    {CONTACT_LINKS[2].name}
+                                </a>
+                            </div>
+                            {/* Email */}
+                            <div>
+                                <a href={CONTACT_LINKS[3].href} className="flex items-center justify-center">
+                                    <EmailIcon className="h-5 w-5 mr-2 text-primary-600" />
+                                    {CONTACT_LINKS[3].name}
+                                </a>
                             </div>
                         </div>
 
@@ -308,12 +343,6 @@ export const Header = () => {
                                 <span className="sr-only">WhatsApp</span>
                                 <WhatsAppIcon className="h-5 w-5" />
                             </a>
-                            <button
-                                className="text-primary-800 bg-primary-100 hover:bg-primary-200 px-3 py-3 rounded-md text-sm font-medium"
-                                onClick={scrollToContactForm}
-                            >
-                                ОСТАВИТЬ ЗАЯВКУ
-                            </button>
                         </div>
                     </div>
                 </div>

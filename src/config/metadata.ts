@@ -18,6 +18,11 @@ export const baseMetadata: Metadata = {
     authors: [{ name: 'Образовательный терминал' }],
     creator: 'Образовательный терминал',
     metadataBase: new URL('https://yourdomain.com'),
+    icons: {
+        icon: '/logo.png',
+        shortcut: '/logo.png',
+        apple: '/logo.png',
+    },
     openGraph: {
         title: 'Образовательный терминал в Иркутске',
         description: 'Образовательный терминал в Иркутске - обучение в области охраны труда, пожарной безопасности, промышленной безопасности, электробезопасности и по другим направлениям.',

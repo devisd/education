@@ -12,7 +12,7 @@ export const Courses = () => {
         <SectionTitle
           subtitle="Наши партнеры"
           title={<>С НАМИ <span className="font-extrabold text-primary-600">РАБОТАЮТ</span></>}
-          description="Нам доверяют ведущие компании Иркутской области и России"
+          description="Нам доверяют ведущие компании Иркутской области и России."
         />
 
         <div className="relative">

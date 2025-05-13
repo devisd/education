@@ -6,18 +6,11 @@ export * from './ui';
 
 // Services icons
 export * from './ShieldIcon';
-export * from './FireIcon';
-export * from './LightningIcon';
-export * from './HourglassIcon';
-export * from './FlagIcon';
-export * from './LockIcon';
-export * from './BookIcon';
-export * from './BuildingIcon';
 export * from './MapIcon';
 export * from './PhoneIcon';
 export * from './EmailIcon';
-export * from './ClockIcon';
-export * from './RouteIcon';
+export * from './BookIcon';
+export * from './LightningIcon';
 
 // UI icons
 export * from './ArrowRightIcon';

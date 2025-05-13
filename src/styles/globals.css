@@ -1,3 +1,191 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Загрузка шрифта OpenDyslexic */
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('/fonts/OpenDyslexic-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Visually impaired mode styles */
+.visually-impaired-mode {
+    /* Base styles for visually impaired mode */
+    --vim-bg-normal: white;
+    --vim-text-normal: black;
+    --vim-bg-white: white;
+    --vim-text-white: black;
+    --vim-bg-black: black;
+    --vim-text-black: white;
+    --vim-bg-blue: #9dd1ff;
+    --vim-text-blue: #063462;
+    --vim-bg-yellow: #ffff00;
+    --vim-text-yellow: #000000;
+    --vim-bg-green: #3f704d;
+    --vim-text-green: #ffffff;
+
+    --vim-font-size-normal: 100%;
+    --vim-font-size-medium: 150%;
+    --vim-font-size-large: 200%;
+
+    --vim-spacing-normal: normal;
+    --vim-spacing-medium: 1.5;
+    --vim-spacing-large: 2;
+}
+
+/* Font size settings */
+.visually-impaired-mode[data-font-size='normal'] {
+    font-size: var(--vim-font-size-normal);
+}
+
+.visually-impaired-mode[data-font-size='medium'] {
+    font-size: var(--vim-font-size-medium);
+}
+
+.visually-impaired-mode[data-font-size='large'] {
+    font-size: var(--vim-font-size-large);
+}
+
+/* Font family settings */
+.visually-impaired-mode[data-font-family='default'] {
+    /* Use default font */
+}
+
+.visually-impaired-mode[data-font-family='arial'] {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.visually-impaired-mode[data-font-family='times'] {
+    font-family: 'Times New Roman', Times, serif !important;
+}
+
+.visually-impaired-mode[data-font-family='openDyslexic'] {
+    font-family: 'OpenDyslexic', Arial, sans-serif !important;
+}
+
+/* Cursor size settings */
+.visually-impaired-mode[data-cursor-size='large'] * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' stroke-width='2' stroke='black' fill='white'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M9 9v8l7 -4z' /%3E%3C/svg%3E"), auto !important;
+}
+
+.visually-impaired-mode[data-cursor-size='large'] a,
+.visually-impaired-mode[data-cursor-size='large'] button,
+.visually-impaired-mode[data-cursor-size='large'] input,
+.visually-impaired-mode[data-cursor-size='large'] select {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' stroke-width='2' stroke='black' fill='white'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M8 13v-8.5a1.5 1.5 0 0 1 3 0v7.5' /%3E%3Cpath d='M11 11.5v-2a1.5 1.5 0 0 1 3 0v2.5' /%3E%3Cpath d='M14 10.5v-1a1.5 1.5 0 0 1 3 0v1.5' /%3E%3Cpath d='M17 11.5v-.5a1.5 1.5 0 0 1 3 0v.5' /%3E%3Cpath d='M7 16h13a1 1 0 0 0 1 -1v-1a1 1 0 0 0 -1 -1h-13a.997 .997 0 0 0 -1 .979v1.033a.988 .988 0 0 0 1 .988z' /%3E%3C/svg%3E"), pointer !important;
+}
+
+/* Color scheme settings */
+.visually-impaired-mode[data-color-scheme='normal'] {
+    background-color: var(--vim-bg-normal);
+    color: var(--vim-text-normal);
+}
+
+.visually-impaired-mode[data-color-scheme='white'] {
+    background-color: var(--vim-bg-white);
+    color: var(--vim-text-white);
+}
+
+.visually-impaired-mode[data-color-scheme='white'] * {
+    background-color: var(--vim-bg-white) !important;
+    color: var(--vim-text-white) !important;
+    border-color: var(--vim-text-white) !important;
+}
+
+.visually-impaired-mode[data-color-scheme='black'] {
+    background-color: var(--vim-bg-black);
+    color: var(--vim-text-black);
+}
+
+.visually-impaired-mode[data-color-scheme='black'] * {
+    background-color: var(--vim-bg-black) !important;
+    color: var(--vim-text-black) !important;
+    border-color: var(--vim-text-black) !important;
+}
+
+.visually-impaired-mode[data-color-scheme='blue'] {
+    background-color: var(--vim-bg-blue);
+    color: var(--vim-text-blue);
+}
+
+.visually-impaired-mode[data-color-scheme='blue'] * {
+    background-color: var(--vim-bg-blue) !important;
+    color: var(--vim-text-blue) !important;
+    border-color: var(--vim-text-blue) !important;
+}
+
+.visually-impaired-mode[data-color-scheme='yellow'] {
+    background-color: var(--vim-bg-yellow);
+    color: var(--vim-text-yellow);
+}
+
+.visually-impaired-mode[data-color-scheme='yellow'] * {
+    background-color: var(--vim-bg-yellow) !important;
+    color: var(--vim-text-yellow) !important;
+    border-color: var(--vim-text-yellow) !important;
+}
+
+.visually-impaired-mode[data-color-scheme='green'] {
+    background-color: var(--vim-bg-green);
+    color: var(--vim-text-green);
+}
+
+.visually-impaired-mode[data-color-scheme='green'] * {
+    background-color: var(--vim-bg-green) !important;
+    color: var(--vim-text-green) !important;
+    border-color: var(--vim-text-green) !important;
+}
+
+/* Image display settings */
+.visually-impaired-mode[data-image-display='hidden'] img {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.visually-impaired-mode[data-image-display='hidden'] svg {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Spacing settings */
+.visually-impaired-mode[data-spacing='normal'] {
+    line-height: var(--vim-spacing-normal);
+}
+
+.visually-impaired-mode[data-spacing='medium'] {
+    line-height: var(--vim-spacing-medium);
+}
+
+.visually-impaired-mode[data-spacing='large'] {
+    line-height: var(--vim-spacing-large);
+}
+
+/* Additional GOST-specific styles */
+.visually-impaired-mode a {
+    text-decoration: underline !important;
+}
+
+.visually-impaired-mode button:focus,
+.visually-impaired-mode a:focus,
+.visually-impaired-mode input:focus,
+.visually-impaired-mode select:focus,
+.visually-impaired-mode textarea:focus {
+    outline: 3px solid #000 !important;
+}
+
+.visually-impaired-mode p,
+.visually-impaired-mode h1,
+.visually-impaired-mode h2,
+.visually-impaired-mode h3,
+.visually-impaired-mode h4,
+.visually-impaired-mode h5,
+.visually-impaired-mode h6,
+.visually-impaired-mode li,
+.visually-impaired-mode td,
+.visually-impaired-mode th {
+    letter-spacing: 0.12em !important;
+    word-spacing: 0.16em !important;
+}

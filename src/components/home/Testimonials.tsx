@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { CircleArrowIcon } from '../../icons';
-import { DecorativeCircles } from '../ui/DecorativeCircles';
-import { NewsCard } from '../ui';
+import { DecorativeCircles, NewsCard } from '../ui';
 import { NEWS_ITEMS } from '@/constants/news';
 
 export const Testimonials = () => {
@@ -26,7 +25,7 @@ export const Testimonials = () => {
 
         <div className="mt-12 text-center">
           <Link
-            href="/news"
+            href="/about/news"
             className="inline-flex items-center justify-center bg-primary-600 text-white px-6 py-3 rounded-md hover:bg-primary-700 transition-colors font-medium"
           >
             Все новости и акции
