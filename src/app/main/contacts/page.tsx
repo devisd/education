@@ -10,8 +10,82 @@ import {
     WhatsAppIcon
 } from '@/icons';
 import { CONTACT_LINKS, SOCIAL_LINKS } from '@/constants/footer';
+import { useState, FormEvent } from 'react';
+import { FormCheckbox } from '@/components/forms/FormCheckbox';
 
 export default function ContactsPage() {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+    });
+    const [isConsent, setIsConsent] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<{ success?: boolean; message?: string } | null>(null);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { id, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [id]: value
+        }));
+    };
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+
+        if (!isConsent) return;
+
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        try {
+            // Create an object with form data and destination email
+            const submitData = {
+                ...formData,
+                toEmail: 'terminal.38@mail.ru'
+            };
+
+            // Here you would typically call an API endpoint to send the email
+            // For example:
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(submitData),
+            });
+
+            if (response.ok) {
+                setSubmitStatus({
+                    success: true,
+                    message: 'Сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.'
+                });
+                // Reset form
+                setFormData({
+                    name: '',
+                    email: '',
+                    subject: '',
+                    message: ''
+                });
+                setIsConsent(false);
+            } else {
+                setSubmitStatus({
+                    success: false,
+                    message: 'При отправке сообщения произошла ошибка. Пожалуйста, попробуйте позже.'
+                });
+            }
+        } catch (error) {
+            setSubmitStatus({
+                success: false,
+                message: 'При отправке сообщения произошла ошибка. Пожалуйста, попробуйте позже.'
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
             {/* Декоративные элементы */}
@@ -94,7 +168,7 @@ export default function ContactsPage() {
                                 <div>
                                     <h4 className="text-lg font-semibold text-gray-800 mb-1">Лицензия</h4>
                                     <p className="text-gray-600">
-                                        № Л035-01220-38/00227206 от 19 октября 2021
+                                        №Л035-01220-38/01768415 от 24 января 2025 года.
                                     </p>
                                 </div>
                             </div>
@@ -131,13 +205,6 @@ export default function ContactsPage() {
                                 allowFullScreen
                             ></iframe>
                         </div>
-
-                        <div className="mt-6">
-                            <p className="text-gray-600">
-                                <strong>Как добраться:</strong> Ост. «Сергеева». Идти в сторону Маркета "Народный".
-                                Бизнес-центр за Маркетом, вход со стороны дороги.
-                            </p>
-                        </div>
                     </div>
                 </div>
 
@@ -145,62 +212,117 @@ export default function ContactsPage() {
                 <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Напишите нам</h3>
 
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                    Ваше имя
+                                    Ваше имя <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     type="text"
                                     id="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
                                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                     placeholder="Введите ваше имя"
+                                    required
                                 />
                             </div>
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                    Электронная почта
+                                    Электронная почта <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     type="email"
                                     id="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
                                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                     placeholder="Введите ваш email"
+                                    required
                                 />
                             </div>
                         </div>
 
                         <div>
                             <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                                Тема сообщения
+                                Тема сообщения <span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="text"
                                 id="subject"
+                                value={formData.subject}
+                                onChange={handleChange}
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                 placeholder="Введите тему сообщения"
+                                required
                             />
                         </div>
 
                         <div>
                             <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                                Сообщение
+                                Сообщение <span className="text-red-500">*</span>
                             </label>
                             <textarea
                                 id="message"
                                 rows={5}
+                                value={formData.message}
+                                onChange={handleChange}
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                 placeholder="Введите ваше сообщение"
+                                required
                             ></textarea>
                         </div>
+
+                        <FormCheckbox
+                            id="consent"
+                            name="consent"
+                            label={
+                                <div>
+                                    <p
+                                        className="text-xs "
+                                    >Даю согласие на обработку моих персональных данных, в соответствии с Федеральным
+                                        законом РФ от 27.07.2006 №152-ФЗ {" "}
+                                        <a
+                                            href="/pdf/fz152.pdf"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className='hover:text-primary-600 text-blue-150'
+                                        >
+                                            «О персональных данных».{" "}
+                                        </a></p>
+                                    <p className='text-xs'>
+                                        Ознакомлен с {" "}
+                                        <a
+                                            href="/pdf/privacy.pdf"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className=" text-blue-150 hover:text-primary-600"
+                                        >
+                                            Политикой конфиденциальности обработки персональных данных
+                                        </a>
+                                        {" "} посетителей сайта в информационно-телекоммуникационной сети «Интернет».
+                                        <span className="text-red-500">*</span>
+                                    </p>
+                                </div>
+                            }
+                            checked={isConsent}
+                            onChange={(e) => setIsConsent(e.target.checked)}
+                        />
+
+                        {submitStatus && (
+                            <div className={`p-4 rounded-md ${submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+                                {submitStatus.message}
+                            </div>
+                        )}
 
                         <div>
                             <button
                                 type="submit"
-                                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                                disabled={!isConsent || isSubmitting}
+                                className={`inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${!isConsent || isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
-                                Отправить сообщение
+                                {isSubmitting ? 'Отправка...' : 'Отправить сообщение'}
                             </button>
                         </div>
                     </form>
@@ -210,42 +332,17 @@ export default function ContactsPage() {
                 <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mt-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Режим работы</h3>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="border border-gray-200 rounded-lg p-5">
-                            <h4 className="text-lg font-semibold text-gray-800 mb-3">Часы работы офиса</h4>
-                            <ul className="space-y-2">
-                                <li className="flex justify-between">
-                                    <span className="text-gray-600">Понедельник - Пятница:</span>
-                                    <span className="font-medium text-gray-800">9:00 - 18:00</span>
-                                </li>
-                                <li className="flex justify-between">
-                                    <span className="text-gray-600">Суббота:</span>
-                                    <span className="font-medium text-gray-800">10:00 - 15:00</span>
-                                </li>
-                                <li className="flex justify-between">
-                                    <span className="text-gray-600">Воскресенье:</span>
-                                    <span className="font-medium text-gray-800">Выходной</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div className="border border-gray-200 rounded-lg p-5">
-                            <h4 className="text-lg font-semibold text-gray-800 mb-3">Время для консультаций</h4>
-                            <ul className="space-y-2">
-                                <li className="flex justify-between">
-                                    <span className="text-gray-600">Телефонные консультации:</span>
-                                    <span className="font-medium text-gray-800">9:00 - 17:30</span>
-                                </li>
-                                <li className="flex justify-between">
-                                    <span className="text-gray-600">Консультации онлайн:</span>
-                                    <span className="font-medium text-gray-800">10:00 - 16:00</span>
-                                </li>
-                                <li className="flex justify-between">
-                                    <span className="text-gray-600">Ответы на email:</span>
-                                    <span className="font-medium text-gray-800">В течение 24 часов</span>
-                                </li>
-                            </ul>
-                        </div>
+                    <div className="grid gap-6">
+                        <ul >
+                            <li className="flex justify-between">
+                                <span className="text-gray-600">Понедельник - Пятница:</span>
+                                <span className="font-medium text-gray-800">8:00 - 17:00 (обед 12:00 - 13:00)</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-gray-600">Суббота и воскресенье:</span>
+                                <span className="font-medium text-gray-800">Выходной</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

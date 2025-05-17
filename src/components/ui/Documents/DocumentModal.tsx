@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect } from 'react';
-import Image from 'next/image';
 import { CloseIcon } from '@/icons';
 import { Document } from '@/constants/documents';
 
@@ -13,10 +12,8 @@ interface DocumentModalProps {
 export const DocumentModal: React.FC<DocumentModalProps> = ({ activeDocument, onClose }) => {
     useEffect(() => {
         if (activeDocument) {
-            // Disable scrolling when modal opens
             document.body.style.overflow = 'hidden';
 
-            // Re-enable scrolling when modal closes
             return () => {
                 document.body.style.overflow = '';
             };
@@ -53,11 +50,19 @@ export const DocumentModal: React.FC<DocumentModalProps> = ({ activeDocument, on
                     </button>
                 </div>
                 <div className="w-full h-[85vh] overflow-y-auto">
-                    <img
-                        src={activeDocument.src}
-                        alt={activeDocument.alt}
-                        className="w-full h-auto object-contain block"
-                    />
+                    {activeDocument.isPdf ? (
+                        <iframe
+                            src={activeDocument.src}
+                            className="w-full h-full"
+                            title={activeDocument.alt}
+                        />
+                    ) : (
+                        <img
+                            src={activeDocument.src}
+                            alt={activeDocument.alt}
+                            className="w-full h-auto object-contain block"
+                        />
+                    )}
                 </div>
             </div>
         </div>

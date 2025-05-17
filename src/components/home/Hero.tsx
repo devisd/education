@@ -1,6 +1,7 @@
 import React from 'react';
 import { DecorativeBackground, AdvantageCard } from '@/components/ui';
 import { TrainingRequestForm } from '@/components/forms';
+import Link from 'next/link';
 
 export const Hero = () => {
   return (
@@ -20,9 +21,14 @@ export const Hero = () => {
               каждому клиенту.
             </p>
 
-            <p className="block text-xl md:text-2xl font-medium mt-2 text-primary-600">
+            <p className="block text-xl mb-5 md:text-2xl font-medium mt-2 text-primary-600">
               Образовательный терминал - всегда надёжно и профессионально!
             </p>
+
+            <div className='flex justify-center mt-5'>
+              <Link href="/about/licenses" className="flex items-center max-w-[360px] justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
+                aria-label="Посмотреть все лицензии и аккредитации">Лицензии и Аккредитации</Link>
+            </div>
           </div>
 
           {/* Правая часть - компактная форма заявки */}

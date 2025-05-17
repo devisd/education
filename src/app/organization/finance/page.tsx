@@ -1,54 +1,43 @@
-'use client';
+// 'use client';
 
-import React from 'react';
+// import React from 'react';
 
 export default function FinancialPage() {
     // Данные о годовом бюджете
-    const financialData = {
-        totalBudget: '2 560 543 000',
-        fromFederal: '1 853 624 000',
-        fromServices: '706 919 000',
-        year: '2023'
-    };
+    // const financialData = {
+    //     totalBudget: '2 560 543 000',
+    //     fromFederal: '1 853 624 000',
+    //     fromServices: '706 919 000',
+    //     year: '2023'
+    // };
 
-    // Моковые данные о структуре расходов
-    const expenses = [
-        { category: 'Оплата труда и начисления', amount: '1 325 642 000', percent: '51.8' },
-        { category: 'Стипендиальное обеспечение', amount: '289 341 000', percent: '11.3' },
-        { category: 'Содержание имущества', amount: '312 386 000', percent: '12.2' },
-        { category: 'Коммунальные услуги', amount: '158 754 000', percent: '6.2' },
-        { category: 'Приобретение оборудования', amount: '183 523 000', percent: '7.2' },
-        { category: 'Капитальный ремонт', amount: '87 058 000', percent: '3.4' },
-        { category: 'Прочие расходы', amount: '203 839 000', percent: '7.9' }
-    ];
+    // // Моковые данные о структуре расходов
+    // const expenses = [
+    //     { category: 'Оплата труда и начисления', amount: '1 325 642 000', percent: '51.8' },
+    //     { category: 'Стипендиальное обеспечение', amount: '289 341 000', percent: '11.3' },
+    //     { category: 'Содержание имущества', amount: '312 386 000', percent: '12.2' },
+    //     { category: 'Коммунальные услуги', amount: '158 754 000', percent: '6.2' },
+    //     { category: 'Приобретение оборудования', amount: '183 523 000', percent: '7.2' },
+    //     { category: 'Капитальный ремонт', amount: '87 058 000', percent: '3.4' },
+    //     { category: 'Прочие расходы', amount: '203 839 000', percent: '7.9' }
+    // ];
 
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                         ФИНАНСОВО-ХОЗЯЙСТВЕННАЯ <span className="font-extrabold text-primary-600">ДЕЯТЕЛЬНОСТЬ</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Информация об объеме образовательной деятельности, финансовое обеспечение которой осуществляется за счет бюджетных ассигнований и по договорам об образовании
-                    </p>
                 </div>
 
                 {/* План ФХД */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">План финансово-хозяйственной деятельности</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -96,13 +85,13 @@ export default function FinancialPage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Структура доходов и расходов */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6">Структура доходов и расходов</h3>
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6">Структура доходов и расходов</h3> */}
 
-                    <div className="mb-8">
+                {/* <div className="mb-8">
                         <h4 className="text-xl font-semibold text-gray-800 mb-4">Структура расходов на {financialData.year} год</h4>
 
                         <div className="overflow-x-auto">
@@ -137,10 +126,10 @@ export default function FinancialPage() {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div> */}
 
-                    {/* Доходы от образовательной деятельности */}
-                    <div className="p-6 bg-gray-50 rounded-lg border border-gray-200">
+                {/* Доходы от образовательной деятельности */}
+                {/* <div className="p-6 bg-gray-50 rounded-lg border border-gray-200">
                         <h4 className="text-xl font-semibold text-gray-800 mb-4">Доходы от образовательной деятельности</h4>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -161,11 +150,11 @@ export default function FinancialPage() {
                                 <div className="text-gray-600 text-sm">От иностранных граждан</div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div> */}
+                {/* </div> */}
 
                 {/* Отчеты */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Финансовая отчетность</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -247,7 +236,7 @@ export default function FinancialPage() {
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );

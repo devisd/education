@@ -1,121 +1,110 @@
-'use client';
+// 'use client';
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
 export default function MtsPage() {
     // Табы для разделов МТО
-    const [activeTab, setActiveTab] = useState<string>('facilities');
+    // const [activeTab, setActiveTab] = useState<string>('facilities');
 
-    // Данные об учебных помещениях
-    const facilities = [
-        {
-            id: 1,
-            name: 'Учебный корпус №1',
-            address: 'г. Москва, ул. Университетская, д. 1',
-            equipment: 'Лекционные аудитории с мультимедийным оборудованием, компьютерные классы, лаборатории',
-            accessible: true,
-        },
-        {
-            id: 2,
-            name: 'Учебный корпус №2',
-            address: 'г. Москва, ул. Студенческая, д. 5',
-            equipment: 'Учебные аудитории, научно-исследовательские лаборатории, конференц-зал',
-            accessible: true,
-        },
-        {
-            id: 3,
-            name: 'Научно-исследовательский комплекс',
-            address: 'г. Москва, пр-т Науки, д. 12',
-            equipment: 'Современные лаборатории, центр коллективного пользования научным оборудованием',
-            accessible: true,
-        },
-        {
-            id: 4,
-            name: 'Спортивный комплекс',
-            address: 'г. Москва, ул. Спортивная, д. 3',
-            equipment: 'Спортивные залы, бассейн, стадион, тренажерный зал',
-            accessible: true,
-        },
-    ];
+    // // Данные об учебных помещениях
+    // const facilities = [
+    //     {
+    //         id: 1,
+    //         name: 'Учебный корпус №1',
+    //         address: 'г. Москва, ул. Университетская, д. 1',
+    //         equipment: 'Лекционные аудитории с мультимедийным оборудованием, компьютерные классы, лаборатории',
+    //         accessible: true,
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Учебный корпус №2',
+    //         address: 'г. Москва, ул. Студенческая, д. 5',
+    //         equipment: 'Учебные аудитории, научно-исследовательские лаборатории, конференц-зал',
+    //         accessible: true,
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Научно-исследовательский комплекс',
+    //         address: 'г. Москва, пр-т Науки, д. 12',
+    //         equipment: 'Современные лаборатории, центр коллективного пользования научным оборудованием',
+    //         accessible: true,
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'Спортивный комплекс',
+    //         address: 'г. Москва, ул. Спортивная, д. 3',
+    //         equipment: 'Спортивные залы, бассейн, стадион, тренажерный зал',
+    //         accessible: true,
+    //     },
+    // ];
 
-    // Данные о библиотеках
-    const libraries = [
-        {
-            id: 1,
-            name: 'Главная научная библиотека',
-            address: 'г. Москва, ул. Университетская, д. 1',
-            description: 'Фонд библиотеки насчитывает более 1,5 млн изданий. Читальные залы на 500 мест. Электронный каталог.',
-            accessible: true,
-        },
-        {
-            id: 2,
-            name: 'Библиотека технических наук',
-            address: 'г. Москва, ул. Студенческая, д. 5',
-            description: 'Специализированный фонд по техническим наукам. Читальный зал на 100 мест.',
-            accessible: true,
-        },
-    ];
+    // // Данные о библиотеках
+    // const libraries = [
+    //     {
+    //         id: 1,
+    //         name: 'Главная научная библиотека',
+    //         address: 'г. Москва, ул. Университетская, д. 1',
+    //         description: 'Фонд библиотеки насчитывает более 1,5 млн изданий. Читальные залы на 500 мест. Электронный каталог.',
+    //         accessible: true,
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Библиотека технических наук',
+    //         address: 'г. Москва, ул. Студенческая, д. 5',
+    //         description: 'Специализированный фонд по техническим наукам. Читальный зал на 100 мест.',
+    //         accessible: true,
+    //     },
+    // ];
 
-    // Данные об электронной информационно-образовательной среде
-    const eios = [
-        {
-            id: 1,
-            name: 'Система управления обучением (LMS)',
-            description: 'Виртуальная образовательная среда для организации учебного процесса. Включает курсы, тесты, задания, форумы.',
-            url: 'https://lms.university.ru',
-        },
-        {
-            id: 2,
-            name: 'Электронная библиотечная система',
-            description: 'Доступ к полнотекстовым электронным версиям учебной, научной и художественной литературы.',
-            url: 'https://library.university.ru',
-        },
-        {
-            id: 3,
-            name: 'Электронное портфолио обучающихся',
-            description: 'Система для сбора, хранения и представления результатов образовательной и научной деятельности обучающихся.',
-            url: 'https://portfolio.university.ru',
-        },
-        {
-            id: 4,
-            name: 'Система электронного документооборота',
-            description: 'Система для электронного взаимодействия участников образовательного процесса.',
-            url: 'https://docs.university.ru',
-        },
-    ];
+    // // Данные об электронной информационно-образовательной среде
+    // const eios = [
+    //     {
+    //         id: 1,
+    //         name: 'Система управления обучением (LMS)',
+    //         description: 'Виртуальная образовательная среда для организации учебного процесса. Включает курсы, тесты, задания, форумы.',
+    //         url: 'https://lms.university.ru',
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Электронная библиотечная система',
+    //         description: 'Доступ к полнотекстовым электронным версиям учебной, научной и художественной литературы.',
+    //         url: 'https://library.university.ru',
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Электронное портфолио обучающихся',
+    //         description: 'Система для сбора, хранения и представления результатов образовательной и научной деятельности обучающихся.',
+    //         url: 'https://portfolio.university.ru',
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'Система электронного документооборота',
+    //         description: 'Система для электронного взаимодействия участников образовательного процесса.',
+    //         url: 'https://docs.university.ru',
+    //     },
+    // ];
 
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                        МАТЕРИАЛЬНО-ТЕХНИЧЕСКОЕ <span className="font-extrabold text-primary-600">ОБЕСПЕЧЕНИЕ</span>
+                        МАТЕРИАЛЬНО-ТЕХНИЧЕСКОЕ ОБЕСПЕЧЕНИЕ И ОСНАЩЕННОСТЬ ОБРАЗОВАТЕЛЬНОГО ПРОЦЕССА. <span className="font-extrabold text-primary-600">ДОСТУПНАЯ СРЕДА</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Информация о материально-техническом обеспечении образовательной деятельности и доступной среде
-                    </p>
                 </div>
 
                 {/* Табы для разделов */}
-                <div className="mb-8 flex flex-wrap justify-center gap-2">
+                {/* <div className="mb-8 flex flex-wrap justify-center gap-2">
                     <button
                         onClick={() => setActiveTab('facilities')}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'facilities'
-                                ? 'bg-primary-600 text-white'
-                                : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                             }`}
                     >
                         Учебные помещения
@@ -123,8 +112,8 @@ export default function MtsPage() {
                     <button
                         onClick={() => setActiveTab('libraries')}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'libraries'
-                                ? 'bg-primary-600 text-white'
-                                : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                             }`}
                     >
                         Библиотеки
@@ -132,8 +121,8 @@ export default function MtsPage() {
                     <button
                         onClick={() => setActiveTab('eios')}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'eios'
-                                ? 'bg-primary-600 text-white'
-                                : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                             }`}
                     >
                         ЭИОС
@@ -141,16 +130,16 @@ export default function MtsPage() {
                     <button
                         onClick={() => setActiveTab('accessible')}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'accessible'
-                                ? 'bg-primary-600 text-white'
-                                : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                             }`}
                     >
                         Доступная среда
                     </button>
-                </div>
+                </div> */}
 
                 {/* Учебные помещения */}
-                {activeTab === 'facilities' && (
+                {/* {activeTab === 'facilities' && (
                     <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Учебные помещения и лаборатории</h3>
 
@@ -206,10 +195,10 @@ export default function MtsPage() {
                             </ul>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {/* Библиотеки */}
-                {activeTab === 'libraries' && (
+                {/* {activeTab === 'libraries' && (
                     <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Библиотеки и информационные ресурсы</h3>
 
@@ -265,10 +254,10 @@ export default function MtsPage() {
                             </div>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {/* ЭИОС */}
-                {activeTab === 'eios' && (
+                {/* {activeTab === 'eios' && (
                     <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Электронная информационно-образовательная среда</h3>
 
@@ -317,10 +306,10 @@ export default function MtsPage() {
                             </div>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {/* Доступная среда */}
-                {activeTab === 'accessible' && (
+                {/* {activeTab === 'accessible' && (
                     <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Доступная среда</h3>
 
@@ -443,7 +432,7 @@ export default function MtsPage() {
                             </div>
                         </div>
                     </div>
-                )}
+                )} */}
             </div>
         </section>
     );

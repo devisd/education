@@ -532,9 +532,6 @@ export const VisuallyImpairedModeToggle = ({
         const newEnabled = !enabled
         const newSettings = { ...settings, enabled: newEnabled }
 
-        console.log('Toggle mode, new state:', newEnabled)
-        console.log('New settings to save:', newSettings)
-
         setEnabled(newEnabled)
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newSettings))
 
@@ -580,7 +577,7 @@ export const VisuallyImpairedModeToggle = ({
     return (
         <button
             onClick={toggleMode}
-            className={`flex 'items-center' text-white bg-blue-150 hover:bg-blue-700 transition-colors duration-200 ${compact
+            className={`flex 'items-center' whitespace-nowrap text-white bg-blue-150 hover:bg-blue-700 transition-colors duration-200 ${compact
                 ? 'p-2 rounded-md'
                 : fontSize === 'small'
                     ? `${verticalLayout ? 'px-2 py-1 w-auto' : 'px-2 py-1'} rounded-md text-xs`

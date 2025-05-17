@@ -3,13 +3,13 @@ import { TRAINING_CATEGORIES } from "./trainingCategories";
 
 // Константы для структуры меню
 export const EDUCATIONAL_SERVICES: MenuItem = {
-    title: 'Услуги',
+    title: 'УСЛУГИ',
     children:
         TRAINING_CATEGORIES,
 };
 
 export const ORGANIZATION_INFO: MenuItem = {
-    title: 'Сведения об образовательной организации',
+    title: 'СВЕДЕНИЯ ОБ ОБРАЗОВАТЕЛЬНОЙ ОРГАНИЗАЦИИ',
     children: [
         { title: 'Основные сведения', href: '/organization/main-info' },
         { title: 'Структура и органы управления образовательной организацией', href: '/organization/structure' },
@@ -31,10 +31,9 @@ export const ORGANIZATION_INFO: MenuItem = {
 export const MAIN_MENU: MenuItem[] = [
     ORGANIZATION_INFO,
     EDUCATIONAL_SERVICES,
-    { title: 'Прайс', href: '/main/price' },
-    { title: 'Вопрос-ответ', href: '/main/faq' },
-    { title: 'Отзывы', href: '/main/reviews' },
-    { title: 'Контакты', href: '/main/contacts' },
-    { title: 'Дистанционное обучение', href: '/main/distance-education' },
-    { title: 'Лицензии и Аккредитации', href: '/about/licenses' },
+    { title: 'ПРАЙС', href: '/main/price' },
+    { title: 'ВОПРОС-ОТВЕТ', href: '/main/faq' },
+    { title: 'ОТЗЫВЫ', href: '/main/reviews' },
+    { title: 'КОНТАКТЫ', href: '/main/contacts' },
+    { title: 'ДИСТАНЦИОННОЕ ОБУЧЕНИЕ', href: 'https://sdo.от38.рус/' },
 ]; 

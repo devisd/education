@@ -1,35 +1,20 @@
-'use client';
-
-import React from 'react';
-
 export default function PaidEduPage() {
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                         ПЛАТНЫЕ <span className="font-extrabold text-primary-600">ОБРАЗОВАТЕЛЬНЫЕ УСЛУГИ</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Информация о порядке оказания платных образовательных услуг, в том числе образец договора об оказании платных образовательных услуг, а также об утверждении стоимости обучения
-                    </p>
                 </div>
 
                 {/* Общая информация */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Порядок оказания платных образовательных услуг</h3>
 
                     <p className="text-gray-600 mb-8">
@@ -87,10 +72,10 @@ export default function PaidEduPage() {
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Стоимость обучения */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Стоимость обучения</h3>
 
                     <div className="bg-primary-50 border border-primary-100 rounded-lg p-5 mb-8">
@@ -240,10 +225,10 @@ export default function PaidEduPage() {
                             * Полная информация о стоимости обучения по всем направлениям подготовки содержится в приказе об утверждении стоимости обучения.
                         </p>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Порядок оплаты и условия снижения стоимости */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Порядок оплаты и условия снижения стоимости</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -335,7 +320,7 @@ export default function PaidEduPage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );

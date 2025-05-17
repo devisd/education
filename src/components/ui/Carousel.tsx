@@ -5,7 +5,11 @@ import { useState, useEffect } from 'react';
 interface CarouselProps {
     slides: {
         id: number;
-        image: string;
+        image: {
+            mobile: string;
+            tablet: string;
+            desktop: string;
+        };
         title: string;
         description: string;
     }[];
@@ -40,16 +44,21 @@ export const Carousel = ({ slides, autoPlayInterval = 5000 }: CarouselProps) => 
             >
                 {slides.map((slide) => (
                     <div key={slide.id} className="min-w-full">
-                        <div className="relative h-[400px]">
-                            <img
-                                src={slide.image}
-                                alt={slide.title}
-                                className="w-full h-full object-contain"
-                            />
-                            {/* <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
+                        <div className="relative">
+                            <picture>
+                                <source media="(min-width: 1024px)" srcSet={slide.image.desktop} />
+                                <source media="(min-width: 768px)" srcSet={slide.image.tablet} />
+                                <source media="(max-width: 767px)" srcSet={slide.image.mobile} />
+                                <img
+                                    src={slide.image.mobile}
+                                    alt={slide.title}
+                                    className="w-full h-full object-fit"
+                                />
+                            </picture>
+                            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
                                 <h3 className="text-xl font-bold">{slide.title}</h3>
                                 <p>{slide.description}</p>
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 ))}

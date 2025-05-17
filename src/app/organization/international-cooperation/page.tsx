@@ -1,79 +1,68 @@
-'use client';
+// 'use client';
 
-import React from 'react';
+// import React from 'react';
 
 export default function InternationalCooperationPage() {
     // Моковые данные о международном сотрудничестве
-    const partnerUniversities = [
-        { id: 1, name: 'Берлинский технический университет', country: 'Германия', programTypes: ['Обмен студентами', 'Совместные исследования'] },
-        { id: 2, name: 'Парижский университет Сорбонна', country: 'Франция', programTypes: ['Обмен студентами', 'Обмен преподавателями', 'Летние школы'] },
-        { id: 3, name: 'Оксфордский университет', country: 'Великобритания', programTypes: ['Научные конференции', 'Стажировки'] },
-        { id: 4, name: 'Токийский университет', country: 'Япония', programTypes: ['Совместные исследования', 'Обмен студентами'] },
-        { id: 5, name: 'Пекинский университет', country: 'Китай', programTypes: ['Обмен студентами', 'Языковые курсы'] },
-        { id: 6, name: 'Миланский технический университет', country: 'Италия', programTypes: ['Совместные программы', 'Стажировки'] },
-        { id: 7, name: 'Барселонский университет', country: 'Испания', programTypes: ['Обмен студентами', 'Летние школы'] },
-        { id: 8, name: 'Стэнфордский университет', country: 'США', programTypes: ['Научные проекты', 'Стажировки'] }
-    ];
+    // const partnerUniversities = [
+    //     { id: 1, name: 'Берлинский технический университет', country: 'Германия', programTypes: ['Обмен студентами', 'Совместные исследования'] },
+    //     { id: 2, name: 'Парижский университет Сорбонна', country: 'Франция', programTypes: ['Обмен студентами', 'Обмен преподавателями', 'Летние школы'] },
+    //     { id: 3, name: 'Оксфордский университет', country: 'Великобритания', programTypes: ['Научные конференции', 'Стажировки'] },
+    //     { id: 4, name: 'Токийский университет', country: 'Япония', programTypes: ['Совместные исследования', 'Обмен студентами'] },
+    //     { id: 5, name: 'Пекинский университет', country: 'Китай', programTypes: ['Обмен студентами', 'Языковые курсы'] },
+    //     { id: 6, name: 'Миланский технический университет', country: 'Италия', programTypes: ['Совместные программы', 'Стажировки'] },
+    //     { id: 7, name: 'Барселонский университет', country: 'Испания', programTypes: ['Обмен студентами', 'Летние школы'] },
+    //     { id: 8, name: 'Стэнфордский университет', country: 'США', programTypes: ['Научные проекты', 'Стажировки'] }
+    // ];
 
-    // Моковые данные о международных программах
-    const internationalPrograms = [
-        {
-            id: 1,
-            name: 'Программа двойных дипломов',
-            description: 'Возможность получить два диплома: российский и зарубежного вуза-партнера',
-            duration: '1-2 года',
-            requirements: 'Владение иностранным языком (B2+), высокая успеваемость'
-        },
-        {
-            id: 2,
-            name: 'Программа академического обмена',
-            description: 'Обучение в зарубежном вузе-партнере в течение 1-2 семестров',
-            duration: '1-2 семестра',
-            requirements: 'Владение иностранным языком (B1+), средний балл не ниже 4.0'
-        },
-        {
-            id: 3,
-            name: 'Летние школы',
-            description: 'Краткосрочные образовательные программы в период летних каникул',
-            duration: '2-8 недель',
-            requirements: 'Базовое владение иностранным языком (A2+)'
-        },
-        {
-            id: 4,
-            name: 'Стажировки в зарубежных компаниях',
-            description: 'Прохождение практики в международных компаниях и организациях',
-            duration: '1-6 месяцев',
-            requirements: 'Владение иностранным языком (B2+), профильные знания'
-        }
-    ];
+    // // Моковые данные о международных программах
+    // const internationalPrograms = [
+    //     {
+    //         id: 1,
+    //         name: 'Программа двойных дипломов',
+    //         description: 'Возможность получить два диплома: российский и зарубежного вуза-партнера',
+    //         duration: '1-2 года',
+    //         requirements: 'Владение иностранным языком (B2+), высокая успеваемость'
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Программа академического обмена',
+    //         description: 'Обучение в зарубежном вузе-партнере в течение 1-2 семестров',
+    //         duration: '1-2 семестра',
+    //         requirements: 'Владение иностранным языком (B1+), средний балл не ниже 4.0'
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Летние школы',
+    //         description: 'Краткосрочные образовательные программы в период летних каникул',
+    //         duration: '2-8 недель',
+    //         requirements: 'Базовое владение иностранным языком (A2+)'
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'Стажировки в зарубежных компаниях',
+    //         description: 'Прохождение практики в международных компаниях и организациях',
+    //         duration: '1-6 месяцев',
+    //         requirements: 'Владение иностранным языком (B2+), профильные знания'
+    //     }
+    // ];
 
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                         МЕЖДУНАРОДНОЕ <span className="font-extrabold text-primary-600">СОТРУДНИЧЕСТВО</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Информация о заключенных и планируемых к заключению договорах с иностранными и (или) международными организациями по вопросам образования и науки
-                    </p>
                 </div>
 
                 {/* Общая информация */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">О международном сотрудничестве</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -123,10 +112,10 @@ export default function InternationalCooperationPage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Зарубежные партнеры */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Зарубежные партнеры</h3>
 
                     <div className="overflow-x-auto">
@@ -176,10 +165,10 @@ export default function InternationalCooperationPage() {
                             Полный список партнеров
                         </a>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Международные программы */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Международные образовательные программы</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -202,10 +191,10 @@ export default function InternationalCooperationPage() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div> */}
 
                 {/* Обучение иностранных граждан */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Обучение иностранных граждан</h3>
 
                     <p className="text-gray-700 mb-6">
@@ -274,7 +263,7 @@ export default function InternationalCooperationPage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );

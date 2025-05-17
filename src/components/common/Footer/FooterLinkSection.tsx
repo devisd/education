@@ -13,7 +13,7 @@ const isExternal = (href: string) =>
 
 const FooterLinkSection = memo(({ title, links }: FooterLinkSectionProps) => (
   <div>
-    <h3 className="text-lg font-semibold mb-4 text-gray-900 pb-2 border-b border-gray-300">
+    <h3 className="text-lg font-semibold mb-4 text-gray-900 pb-2 border-b border-primary-500">
       {title}
     </h3>
     <ul className="space-y-2">

@@ -158,7 +158,7 @@ export const Header = () => {
             <div className="bg-gray-100 py-2 hidden lg:block">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4 xl:gap-10 text-sm text-gray-600">
+                        <div className="flex items-center font-bold gap-4 xl:gap-10 text-sm text-gray-600">
                             <Link href="/" className="flex items-center">
                                 <div className="h-24 w-56 relative">
                                     <Image
@@ -202,7 +202,7 @@ export const Header = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-2 space-y-1.5">
+                        <div className="flex flex-col wide:flex-row items-center gap-2 space-y-1.5">
                             <div className="flex items-center justify-center space-x-4 w-full">
                                 <a href="https://t.me/termedu38" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-900">
                                     <span className="sr-only">Telegram</span>
@@ -214,7 +214,7 @@ export const Header = () => {
                                 </a>
                             </div>
                             <div className="hidden lg:block xl:hidden">
-                                <VisuallyImpairedModeToggle fontSize="small" compact={false} verticalLayout={true} />
+                                <VisuallyImpairedModeToggle fontSize="small" compact={false} verticalLayout={false} />
                             </div>
                             <div className="hidden xl:flex xl:items-center">
                                 <div className="h-6 w-px bg-gray-300 mx-2"></div>
@@ -230,11 +230,11 @@ export const Header = () => {
                 <div className="container mx-auto max-md:max-w-full px-4 lg:px-2 xl:px-4 py-4">
                     <div className="flex justify-between items-center">
                         {/* Логотип для мобильных устройств */}
-                        <div className="flex lg:hidden items-center bg-white rounded-md px-2 py-1">
+                        <div className="flex lg:hidden items-center bg-white bg-opacity-70 rounded-md px-2 py-1">
                             <Link href="/" className="flex items-center">
                                 <div className="h-10 w-28 sm:h-12 sm:w-32 md:h-14 md:w-36 relative">
                                     <Image
-                                        src="/images/logo.png"
+                                        src="/images/logo_mobile.png"
                                         alt="Образовательный терминал"
                                         fill
                                         sizes="(max-width: 640px) 112px, (max-width: 768px) 128px, (max-width: 1024px) 144px"

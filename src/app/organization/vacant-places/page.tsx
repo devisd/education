@@ -1,109 +1,98 @@
-'use client';
+// 'use client';
 
-import React from 'react';
+// import React from 'react';
 
 export default function VacantPlacesPage() {
     // Моковые данные о вакантных местах
-    const vacantPlacesData = [
-        {
-            id: 1,
-            faculty: 'Институт информационных технологий',
-            specialty: '09.03.01 Информатика и вычислительная техника',
-            level: 'Бакалавриат',
-            course: 1,
-            budget: 5,
-            paid: 10,
-            target: 2
-        },
-        {
-            id: 2,
-            faculty: 'Институт информационных технологий',
-            specialty: '09.03.01 Информатика и вычислительная техника',
-            level: 'Бакалавриат',
-            course: 2,
-            budget: 3,
-            paid: 7,
-            target: 0
-        },
-        {
-            id: 3,
-            faculty: 'Институт информационных технологий',
-            specialty: '09.03.04 Программная инженерия',
-            level: 'Бакалавриат',
-            course: 1,
-            budget: 4,
-            paid: 12,
-            target: 1
-        },
-        {
-            id: 4,
-            faculty: 'Экономический факультет',
-            specialty: '38.03.01 Экономика',
-            level: 'Бакалавриат',
-            course: 1,
-            budget: 2,
-            paid: 15,
-            target: 0
-        },
-        {
-            id: 5,
-            faculty: 'Юридический факультет',
-            specialty: '40.03.01 Юриспруденция',
-            level: 'Бакалавриат',
-            course: 1,
-            budget: 3,
-            paid: 8,
-            target: 1
-        },
-        {
-            id: 6,
-            faculty: 'Институт информационных технологий',
-            specialty: '09.04.01 Информатика и вычислительная техника',
-            level: 'Магистратура',
-            course: 1,
-            budget: 2,
-            paid: 5,
-            target: 1
-        },
-        {
-            id: 7,
-            faculty: 'Экономический факультет',
-            specialty: '38.04.01 Экономика',
-            level: 'Магистратура',
-            course: 1,
-            budget: 1,
-            paid: 7,
-            target: 0
-        }
-    ];
+    // const vacantPlacesData = [
+    //     {
+    //         id: 1,
+    //         faculty: 'Институт информационных технологий',
+    //         specialty: '09.03.01 Информатика и вычислительная техника',
+    //         level: 'Бакалавриат',
+    //         course: 1,
+    //         budget: 5,
+    //         paid: 10,
+    //         target: 2
+    //     },
+    //     {
+    //         id: 2,
+    //         faculty: 'Институт информационных технологий',
+    //         specialty: '09.03.01 Информатика и вычислительная техника',
+    //         level: 'Бакалавриат',
+    //         course: 2,
+    //         budget: 3,
+    //         paid: 7,
+    //         target: 0
+    //     },
+    //     {
+    //         id: 3,
+    //         faculty: 'Институт информационных технологий',
+    //         specialty: '09.03.04 Программная инженерия',
+    //         level: 'Бакалавриат',
+    //         course: 1,
+    //         budget: 4,
+    //         paid: 12,
+    //         target: 1
+    //     },
+    //     {
+    //         id: 4,
+    //         faculty: 'Экономический факультет',
+    //         specialty: '38.03.01 Экономика',
+    //         level: 'Бакалавриат',
+    //         course: 1,
+    //         budget: 2,
+    //         paid: 15,
+    //         target: 0
+    //     },
+    //     {
+    //         id: 5,
+    //         faculty: 'Юридический факультет',
+    //         specialty: '40.03.01 Юриспруденция',
+    //         level: 'Бакалавриат',
+    //         course: 1,
+    //         budget: 3,
+    //         paid: 8,
+    //         target: 1
+    //     },
+    //     {
+    //         id: 6,
+    //         faculty: 'Институт информационных технологий',
+    //         specialty: '09.04.01 Информатика и вычислительная техника',
+    //         level: 'Магистратура',
+    //         course: 1,
+    //         budget: 2,
+    //         paid: 5,
+    //         target: 1
+    //     },
+    //     {
+    //         id: 7,
+    //         faculty: 'Экономический факультет',
+    //         specialty: '38.04.01 Экономика',
+    //         level: 'Магистратура',
+    //         course: 1,
+    //         budget: 1,
+    //         paid: 7,
+    //         target: 0
+    //     }
+    // ];
 
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                        ВАКАНТНЫЕ МЕСТА ДЛЯ <span className="font-extrabold text-primary-600">ПРИЕМА (ПЕРЕВОДА)</span>
+                        ВАКАНТНЫЕ МЕСТА ДЛЯ <span className="font-extrabold text-primary-600">ПРИЕМА (ПЕРЕВОДА) ОБУЧАЮЩИХСЯ</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Информация о количестве вакантных мест для приема (перевода) обучающихся по каждой образовательной программе, профессии, специальности
-                    </p>
                 </div>
 
                 {/* Информация о вакантных местах */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Вакантные места для приема (перевода)</h3>
 
                     <div className="bg-primary-50 border border-primary-100 rounded-lg p-5 mb-8">
@@ -180,10 +169,10 @@ export default function VacantPlacesPage() {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Условия перевода */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Правила перевода</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -253,10 +242,10 @@ export default function VacantPlacesPage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Контактная информация */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Контактная информация</h3>
 
                     <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
@@ -278,7 +267,7 @@ export default function VacantPlacesPage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );

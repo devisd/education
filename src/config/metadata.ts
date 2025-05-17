@@ -19,9 +19,9 @@ export const baseMetadata: Metadata = {
     creator: 'Образовательный терминал',
     metadataBase: new URL('https://yourdomain.com'),
     icons: {
-        icon: '/logo.png',
-        shortcut: '/logo.png',
-        apple: '/logo.png',
+        icon: '/favicon.ico',
+        shortcut: '/favicon.ico',
+        apple: '/favicon.ico',
     },
     openGraph: {
         title: 'Образовательный терминал в Иркутске',

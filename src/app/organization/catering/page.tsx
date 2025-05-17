@@ -1,79 +1,68 @@
-'use client';
+// 'use client';
 
-import React from 'react';
+// import React from 'react';
 
 export default function CateringPage() {
     // Моковые данные о пунктах питания
-    const cateringPoints = [
-        {
-            id: 1,
-            name: 'Столовая учебного корпуса №1',
-            address: 'Москва, ул. Университетская, д.1',
-            workingHours: 'Пн-Пт: 8:30 - 18:00, Сб: 9:00 - 15:00, Вс: выходной',
-            seats: 200,
-            options: ['Горячие блюда', 'Салат-бар', 'Выпечка', 'Напитки']
-        },
-        {
-            id: 2,
-            name: 'Столовая учебного корпуса №2',
-            address: 'Москва, ул. Студенческая, д.5',
-            workingHours: 'Пн-Пт: 9:00 - 17:00, Сб-Вс: выходной',
-            seats: 150,
-            options: ['Горячие блюда', 'Салаты', 'Десерты', 'Напитки']
-        },
-        {
-            id: 3,
-            name: 'Кафе "Студент"',
-            address: 'Москва, ул. Университетская, д.1',
-            workingHours: 'Пн-Пт: 8:00 - 20:00, Сб-Вс: 10:00 - 18:00',
-            seats: 80,
-            options: ['Кофе', 'Чай', 'Закуски', 'Десерты', 'Выпечка']
-        },
-        {
-            id: 4,
-            name: 'Буфет научной библиотеки',
-            address: 'Москва, ул. Университетская, д.1',
-            workingHours: 'Пн-Пт: 9:00 - 17:00, Сб-Вс: выходной',
-            seats: 30,
-            options: ['Закуски', 'Выпечка', 'Напитки']
-        },
-        {
-            id: 5,
-            name: 'Столовая в общежитии №1',
-            address: 'Москва, ул. Студенческая, д.10',
-            workingHours: 'Пн-Вс: 8:00 - 22:00',
-            seats: 120,
-            options: ['Горячие блюда', 'Салаты', 'Выпечка', 'Напитки']
-        }
-    ];
+    // const cateringPoints = [
+    //     {
+    //         id: 1,
+    //         name: 'Столовая учебного корпуса №1',
+    //         address: 'Москва, ул. Университетская, д.1',
+    //         workingHours: 'Пн-Пт: 8:30 - 18:00, Сб: 9:00 - 15:00, Вс: выходной',
+    //         seats: 200,
+    //         options: ['Горячие блюда', 'Салат-бар', 'Выпечка', 'Напитки']
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Столовая учебного корпуса №2',
+    //         address: 'Москва, ул. Студенческая, д.5',
+    //         workingHours: 'Пн-Пт: 9:00 - 17:00, Сб-Вс: выходной',
+    //         seats: 150,
+    //         options: ['Горячие блюда', 'Салаты', 'Десерты', 'Напитки']
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Кафе "Студент"',
+    //         address: 'Москва, ул. Университетская, д.1',
+    //         workingHours: 'Пн-Пт: 8:00 - 20:00, Сб-Вс: 10:00 - 18:00',
+    //         seats: 80,
+    //         options: ['Кофе', 'Чай', 'Закуски', 'Десерты', 'Выпечка']
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'Буфет научной библиотеки',
+    //         address: 'Москва, ул. Университетская, д.1',
+    //         workingHours: 'Пн-Пт: 9:00 - 17:00, Сб-Вс: выходной',
+    //         seats: 30,
+    //         options: ['Закуски', 'Выпечка', 'Напитки']
+    //     },
+    //     {
+    //         id: 5,
+    //         name: 'Столовая в общежитии №1',
+    //         address: 'Москва, ул. Студенческая, д.10',
+    //         workingHours: 'Пн-Вс: 8:00 - 22:00',
+    //         seats: 120,
+    //         options: ['Горячие блюда', 'Салаты', 'Выпечка', 'Напитки']
+    //     }
+    // ];
 
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                        ОРГАНИЗАЦИЯ <span className="font-extrabold text-primary-600">ПИТАНИЯ</span>
+                        ОРГАНИЗАЦИЯ ПИТАНИЯ В <span className="font-extrabold text-primary-600">ОБРАЗОВАТЕЛЬНОЙ ОРГАНИЗАЦИИ</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Информация об условиях питания обучающихся, в том числе инвалидов и лиц с ограниченными возможностями здоровья
-                    </p>
                 </div>
 
                 {/* Общая информация о питании */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Организация питания</h3>
 
                     <p className="text-gray-700 mb-6">
@@ -97,10 +86,10 @@ export default function CateringPage() {
                             <span className="text-gray-700">Посадочных мест</span>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Список пунктов питания */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Пункты питания</h3>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -138,10 +127,10 @@ export default function CateringPage() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div> */}
 
                 {/* Примерное меню */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Примерное меню столовых</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -236,10 +225,10 @@ export default function CateringPage() {
                             </svg>
                         </a>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Информация для лиц с ОВЗ */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Организация питания для лиц с ОВЗ и инвалидов</h3>
 
                     <p className="text-gray-700 mb-6">
@@ -303,7 +292,7 @@ export default function CateringPage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );

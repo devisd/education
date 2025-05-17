@@ -1,43 +1,31 @@
-'use client';
+// 'use client';
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
 export default function DocsPage() {
     // Кастомные табы для документов
-    const [activeTab, setActiveTab] = useState<string>('founding');
-
+    // const [activeTab, setActiveTab] = useState<string>('founding');
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                        <span className="font-extrabold text-primary-600">ДОКУМЕНТЫ</span>
+                        <span className="font-extrabold text-gray-800">ДОКУМЕНТЫ</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Официальные документы образовательной организации, включая лицензию на осуществление образовательной деятельности, свидетельство о государственной аккредитации, а также локальные нормативные акты
-                    </p>
                 </div>
 
                 {/* Табы для категорий документов */}
-                <div className="mb-8 flex flex-wrap justify-center gap-2">
+                {/* <div className="mb-8 flex flex-wrap justify-center gap-2">
                     <button
                         onClick={() => setActiveTab('founding')}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'founding'
-                                ? 'bg-primary-600 text-white'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         Учредительные документы
@@ -45,8 +33,8 @@ export default function DocsPage() {
                     <button
                         onClick={() => setActiveTab('local')}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'local'
-                                ? 'bg-primary-600 text-white'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         Локальные нормативные акты
@@ -54,16 +42,16 @@ export default function DocsPage() {
                     <button
                         onClick={() => setActiveTab('reports')}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'reports'
-                                ? 'bg-primary-600 text-white'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         Отчетная документация
                     </button>
-                </div>
+                </div> */}
 
                 {/* Учредительные документы */}
-                {activeTab === 'founding' && (
+                {/* {activeTab === 'founding' && (
                     <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Учредительные документы</h3>
 
@@ -117,10 +105,10 @@ export default function DocsPage() {
                             </a>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {/* Локальные нормативные акты */}
-                {activeTab === 'local' && (
+                {/* {activeTab === 'local' && (
                     <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Локальные нормативные акты</h3>
 
@@ -196,10 +184,10 @@ export default function DocsPage() {
                             </a>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {/* Отчетная документация */}
-                {activeTab === 'reports' && (
+                {/* {activeTab === 'reports' && (
                     <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Отчетная документация</h3>
 
@@ -257,7 +245,7 @@ export default function DocsPage() {
                             </a>
                         </div>
                     </div>
-                )}
+                )} */}
             </div>
         </section>
     );

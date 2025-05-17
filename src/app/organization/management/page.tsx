@@ -1,99 +1,88 @@
-'use client';
+// 'use client';
 
-import React from 'react';
+// import React from 'react';
 
 export default function ManagementPage() {
     // Моковые данные о руководстве
-    const managementTeam = [
-        {
-            id: 1,
-            position: 'Проректор по учебной работе',
-            name: 'Смирнова Елена Александровна',
-            degree: 'Доктор педагогических наук, профессор',
-            phone: '+7 (495) 123-45-67',
-            email: 'smirnova.e@university.ru',
-            hours: 'Вторник, четверг: 14:00-16:00',
-            photo: '/images/placeholder-person.jpg',
-        },
-        {
-            id: 2,
-            position: 'Проректор по научной работе',
-            name: 'Иванов Михаил Петрович',
-            degree: 'Доктор физико-математических наук, профессор',
-            phone: '+7 (495) 123-45-68',
-            email: 'ivanov.m@university.ru',
-            hours: 'Понедельник, среда: 14:00-16:00',
-            photo: '/images/placeholder-person.jpg',
-        },
-        {
-            id: 3,
-            position: 'Проректор по инновационной деятельности',
-            name: 'Петров Сергей Иванович',
-            degree: 'Доктор технических наук, профессор',
-            phone: '+7 (495) 123-45-69',
-            email: 'petrov.s@university.ru',
-            hours: 'Вторник, пятница: 14:00-16:00',
-            photo: '/images/placeholder-person.jpg',
-        },
-        {
-            id: 4,
-            position: 'Проректор по международным связям',
-            name: 'Андреева Ольга Викторовна',
-            degree: 'Доктор экономических наук, профессор',
-            phone: '+7 (495) 123-45-70',
-            email: 'andreeva.o@university.ru',
-            hours: 'Понедельник, четверг: 14:00-16:00',
-            photo: '/images/placeholder-person.jpg',
-        },
-        {
-            id: 5,
-            position: 'Проректор по административно-хозяйственной работе',
-            name: 'Кузнецов Алексей Николаевич',
-            degree: 'Кандидат технических наук, доцент',
-            phone: '+7 (495) 123-45-71',
-            email: 'kuznetsov.a@university.ru',
-            hours: 'Среда, пятница: 14:00-16:00',
-            photo: '/images/placeholder-person.jpg',
-        },
-        {
-            id: 6,
-            position: 'Проректор по воспитательной работе',
-            name: 'Соколова Наталья Андреевна',
-            degree: 'Кандидат педагогических наук, доцент',
-            phone: '+7 (495) 123-45-72',
-            email: 'sokolova.n@university.ru',
-            hours: 'Понедельник, пятница: 14:00-16:00',
-            photo: '/images/placeholder-person.jpg',
-        }
-    ];
+    // const managementTeam = [
+    //     {
+    //         id: 1,
+    //         position: 'Проректор по учебной работе',
+    //         name: 'Смирнова Елена Александровна',
+    //         degree: 'Доктор педагогических наук, профессор',
+    //         phone: '+7 (495) 123-45-67',
+    //         email: 'smirnova.e@university.ru',
+    //         hours: 'Вторник, четверг: 14:00-16:00',
+    //         photo: '/images/placeholder-person.jpg',
+    //     },
+    //     {
+    //         id: 2,
+    //         position: 'Проректор по научной работе',
+    //         name: 'Иванов Михаил Петрович',
+    //         degree: 'Доктор физико-математических наук, профессор',
+    //         phone: '+7 (495) 123-45-68',
+    //         email: 'ivanov.m@university.ru',
+    //         hours: 'Понедельник, среда: 14:00-16:00',
+    //         photo: '/images/placeholder-person.jpg',
+    //     },
+    //     {
+    //         id: 3,
+    //         position: 'Проректор по инновационной деятельности',
+    //         name: 'Петров Сергей Иванович',
+    //         degree: 'Доктор технических наук, профессор',
+    //         phone: '+7 (495) 123-45-69',
+    //         email: 'petrov.s@university.ru',
+    //         hours: 'Вторник, пятница: 14:00-16:00',
+    //         photo: '/images/placeholder-person.jpg',
+    //     },
+    //     {
+    //         id: 4,
+    //         position: 'Проректор по международным связям',
+    //         name: 'Андреева Ольга Викторовна',
+    //         degree: 'Доктор экономических наук, профессор',
+    //         phone: '+7 (495) 123-45-70',
+    //         email: 'andreeva.o@university.ru',
+    //         hours: 'Понедельник, четверг: 14:00-16:00',
+    //         photo: '/images/placeholder-person.jpg',
+    //     },
+    //     {
+    //         id: 5,
+    //         position: 'Проректор по административно-хозяйственной работе',
+    //         name: 'Кузнецов Алексей Николаевич',
+    //         degree: 'Кандидат технических наук, доцент',
+    //         phone: '+7 (495) 123-45-71',
+    //         email: 'kuznetsov.a@university.ru',
+    //         hours: 'Среда, пятница: 14:00-16:00',
+    //         photo: '/images/placeholder-person.jpg',
+    //     },
+    //     {
+    //         id: 6,
+    //         position: 'Проректор по воспитательной работе',
+    //         name: 'Соколова Наталья Андреевна',
+    //         degree: 'Кандидат педагогических наук, доцент',
+    //         phone: '+7 (495) 123-45-72',
+    //         email: 'sokolova.n@university.ru',
+    //         hours: 'Понедельник, пятница: 14:00-16:00',
+    //         photo: '/images/placeholder-person.jpg',
+    //     }
+    // ];
 
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                        <span className="font-extrabold text-primary-600">РУКОВОДСТВО</span>
+                        <span className="font-extrabold">РУКОВОДСТВО</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Информация о руководителе образовательной организации, его заместителях
-                    </p>
                 </div>
 
                 {/* Ректор университета */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <div className="flex flex-col md:flex-row">
                         <div className="md:w-1/3 flex justify-center mb-6 md:mb-0">
                             <div className="w-64 h-64 rounded-full overflow-hidden">
@@ -130,10 +119,10 @@ export default function ManagementPage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Проректоры */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Проректоры университета</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -156,10 +145,10 @@ export default function ManagementPage() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div> */}
 
                 {/* Структура управления */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Структура управления университетом</h3>
 
                     <div className="flex justify-center mb-6">
@@ -186,7 +175,7 @@ export default function ManagementPage() {
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );

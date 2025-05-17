@@ -31,7 +31,7 @@ export const LEGAL_LINKS = [
   { name: 'Правила оплаты', href: '/payment-rules' },
   { name: 'Документы', href: '/documents' },
 ];
-export const EDU_LINKS = [{ name: 'Дистанционное обучение', href: '/main/distance-education' }];
+export const EDU_LINKS = [{ name: 'Дистанционное обучение', href: 'https://sdo.от38.рус/' }];
 
 export const CONTACT_LINKS = [
   { name: 'Иркутск, ул. Сергеева 3/1, офис. 325', href: 'https://yandex.ru/maps/-/CHr~qF9J' },

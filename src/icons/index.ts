@@ -17,6 +17,7 @@ export * from './ArrowRightIcon';
 export * from './ZoomIcon';
 export * from './EyeIcon';
 export * from './CloseIcon';
+export * from './DocumentIcon';
 export * from './CertificateIcon';
 
 // News & testimonials icons

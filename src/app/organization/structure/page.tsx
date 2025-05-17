@@ -1,81 +1,70 @@
-'use client';
+// 'use client';
 
-import React from 'react';
+// import React from 'react';
 
 export default function StructurePage() {
     // Моковые данные о структурных подразделениях
-    const departments = [
-        {
-            id: 1,
-            name: 'Институт экономики и управления',
-            head: 'Иванов Иван Иванович',
-            position: 'Директор института',
-            contact: '+7 (999) 123-45-67'
-        },
-        {
-            id: 2,
-            name: 'Институт технических наук',
-            head: 'Петров Петр Петрович',
-            position: 'Директор института',
-            contact: '+7 (999) 123-45-68'
-        },
-        {
-            id: 3,
-            name: 'Институт гуманитарных наук',
-            head: 'Сидорова Мария Ивановна',
-            position: 'Директор института',
-            contact: '+7 (999) 123-45-69'
-        },
-        {
-            id: 4,
-            name: 'Управление международного сотрудничества',
-            head: 'Кузнецов Сергей Александрович',
-            position: 'Начальник управления',
-            contact: '+7 (999) 123-45-70'
-        },
-        {
-            id: 5,
-            name: 'Учебно-методическое управление',
-            head: 'Николаева Елена Владимировна',
-            position: 'Начальник управления',
-            contact: '+7 (999) 123-45-71'
-        },
-        {
-            id: 6,
-            name: 'Управление научных исследований',
-            head: 'Смирнов Алексей Константинович',
-            position: 'Начальник управления',
-            contact: '+7 (999) 123-45-72'
-        }
-    ];
+    // const departments = [
+    //     {
+    //         id: 1,
+    //         name: 'Институт экономики и управления',
+    //         head: 'Иванов Иван Иванович',
+    //         position: 'Директор института',
+    //         contact: '+7 (999) 123-45-67'
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Институт технических наук',
+    //         head: 'Петров Петр Петрович',
+    //         position: 'Директор института',
+    //         contact: '+7 (999) 123-45-68'
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Институт гуманитарных наук',
+    //         head: 'Сидорова Мария Ивановна',
+    //         position: 'Директор института',
+    //         contact: '+7 (999) 123-45-69'
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'Управление международного сотрудничества',
+    //         head: 'Кузнецов Сергей Александрович',
+    //         position: 'Начальник управления',
+    //         contact: '+7 (999) 123-45-70'
+    //     },
+    //     {
+    //         id: 5,
+    //         name: 'Учебно-методическое управление',
+    //         head: 'Николаева Елена Владимировна',
+    //         position: 'Начальник управления',
+    //         contact: '+7 (999) 123-45-71'
+    //     },
+    //     {
+    //         id: 6,
+    //         name: 'Управление научных исследований',
+    //         head: 'Смирнов Алексей Константинович',
+    //         position: 'Начальник управления',
+    //         contact: '+7 (999) 123-45-72'
+    //     }
+    // ];
 
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                        СТРУКТУРА И <span className="font-extrabold text-primary-600">ОРГАНЫ УПРАВЛЕНИЯ</span>
+                        СТРУКТУРА И ОРГАНЫ УПРАВЛЕНИЯ<span className="font-extrabold text-primary-600"> ОБРАЗОВАТЕЛЬНОЙ ОРГАНИЗАЦИЕЙ</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Управление университетом осуществляется в соответствии с законодательством Российской Федерации и Уставом на принципах сочетания единоначалия и коллегиальности.
-                    </p>
                 </div>
 
                 {/* Блок с ректоратом */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Ректорат</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -123,10 +112,10 @@ export default function StructurePage() {
                             <p className="text-gray-700 text-sm"><strong>Email:</strong> [email]</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Структурные подразделения */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Структура университета</h3>
 
                     <div className="mb-8">
@@ -198,10 +187,10 @@ export default function StructurePage() {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Документы о структуре */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">Положения о структурных подразделениях</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -224,7 +213,7 @@ export default function StructurePage() {
                             <p className="text-gray-800 font-medium text-center">Положение об ученом совете</p>
                         </a>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );

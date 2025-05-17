@@ -1,5 +1,4 @@
-// Replace XXXXXXXX with your Yandex Metrika counter ID
-export const YANDEX_METRIKA_ID = 'XXXXXXXX';
+export const YANDEX_METRIKA_ID = '101830564';
 
 export const YandexMetrikaScript = `
   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

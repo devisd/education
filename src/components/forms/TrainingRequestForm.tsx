@@ -13,7 +13,6 @@ export const TrainingRequestForm: React.FC = () => {
     phone: '',
     email: '',
     program: '',
-    privacyAgreed: false,
     privacyPolicyAgreed: false,
   });
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -22,13 +21,12 @@ export const TrainingRequestForm: React.FC = () => {
 
   // Проверка валидности формы при изменении данных
   useEffect(() => {
-    const { name, phone, email, program, privacyAgreed, privacyPolicyAgreed } = formData;
+    const { name, phone, email, program, privacyPolicyAgreed } = formData;
     const isValid =
       name.trim() !== '' &&
       phone.trim() !== '' &&
       email.trim() !== '' &&
       program.trim() !== '' &&
-      privacyAgreed &&
       privacyPolicyAgreed;
 
     setIsFormValid(isValid);
@@ -54,20 +52,42 @@ export const TrainingRequestForm: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // Логика отправки формы
-      console.log('Form submitted:', formData);
-      // Имитация запроса к серверу
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setSubmitSuccess(true);
-      // Сброс формы после успешной отправки
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        program: '',
-        privacyAgreed: false,
-        privacyPolicyAgreed: false,
+      // Prepare data for API
+      const submitData = {
+        name: formData.name,
+        email: formData.email,
+        subject: `Заявка на обучение: ${formData.program}`,
+        message: `
+          Имя: ${formData.name}
+          Телефон: ${formData.phone}
+          Email: ${formData.email}
+          Программа обучения: ${formData.program}
+        `,
+        toEmail: 'terminal.38@mail.ru'
+      };
+
+      // Send data to API
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submitData),
       });
+
+      if (response.ok) {
+        setSubmitSuccess(true);
+        // Сброс формы после успешной отправки
+        setFormData({
+          name: '',
+          phone: '',
+          email: '',
+          program: '',
+          privacyPolicyAgreed: false,
+        });
+      } else {
+        console.error('Error response:', await response.text());
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
     } finally {
@@ -138,39 +158,38 @@ export const TrainingRequestForm: React.FC = () => {
         />
 
         <FormCheckbox
-          id="privacyAgreed"
-          name="privacyAgreed"
-          checked={formData.privacyAgreed}
-          onChange={handleCheckboxChange}
-          required
-          label={
-            <a
-              href="/pdf/fz152.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-blue-150 hover:text-primary-600"
-            >
-              Даю согласие на обработку моих персональных данных, в соответствии с Федеральным
-              законом РФ от 27.07.2006 №152-ФЗ «О персональных данных»
-            </a>
-          }
-        />
-        <FormCheckbox
           id="privacyPolicyAgreed"
           name="privacyPolicyAgreed"
           checked={formData.privacyPolicyAgreed}
           onChange={handleCheckboxChange}
-          required
           label={
-            <a
-              href="/pdf/privacy.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-blue-150 hover:text-primary-600"
-            >
-              Ознакомлен с политикой Конфиденциальности обработки персональных данных посетителей
-              сайта в информационно-телекоммуникационной сети «Интернет».
-            </a>
+            <div>
+              <p
+                className="text-xs "
+              >Даю согласие на обработку моих персональных данных, в соответствии с Федеральным
+                законом РФ от 27.07.2006 №152-ФЗ {" "}
+                <a
+                  href="/pdf/fz152.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='hover:text-primary-600 text-blue-150'
+                >
+                  «О персональных данных».{" "}
+                </a></p>
+              <p className='text-xs'>
+                Ознакомлен с {" "}
+                <a
+                  href="/pdf/privacy.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className=" text-blue-150 hover:text-primary-600"
+                >
+                  Политикой конфиденциальности обработки персональных данных
+                </a>
+                {" "} посетителей сайта в информационно-телекоммуникационной сети «Интернет».
+                <span className="text-red-500">*</span>
+              </p>
+            </div>
           }
         />
 

@@ -1,24 +1,16 @@
-'use client';
+// 'use client';
 
-import React from 'react';
-import { CONTACT_LINKS, SOCIAL_LINKS } from '@/constants/footer';
+// import React from 'react';
+// import { CONTACT_LINKS, SOCIAL_LINKS } from '@/constants/footer';
 
 export default function MainInfoPage() {
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                         ОСНОВНЫЕ <span className="font-extrabold text-primary-600">СВЕДЕНИЯ</span>
@@ -27,7 +19,7 @@ export default function MainInfoPage() {
                 </div>
 
                 {/* Основное содержимое страницы */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <h3 className="text-xl font-semibold text-gray-800 mb-4">Полное наименование</h3>
@@ -70,10 +62,10 @@ export default function MainInfoPage() {
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Контактные телефоны */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <h3 className="text-xl font-semibold text-gray-800 mb-4">Контактные телефоны</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="bg-gray-50 p-4 rounded-md hover:bg-gray-100 transition-colors">
@@ -89,7 +81,7 @@ export default function MainInfoPage() {
                             <p className="text-primary-600 font-bold">{CONTACT_LINKS[1].name}</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );

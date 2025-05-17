@@ -1,84 +1,73 @@
-'use client';
+// 'use client';
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
 export default function StudentSupportPage() {
     // Состояние для активного таба
-    const [activeTab, setActiveTab] = useState<string>('scholarships');
+    // const [activeTab, setActiveTab] = useState<string>('scholarships');
 
-    // Моковые данные о стипендиях
-    const scholarships = [
-        {
-            id: 1,
-            name: 'Государственная академическая стипендия',
-            amount: '2 200 ₽',
-            criteria: 'Выплачивается студентам очной формы, обучающимся на бюджетной основе, не имеющим академической задолженности и оценок "удовлетворительно"',
-        },
-        {
-            id: 2,
-            name: 'Повышенная государственная академическая стипендия',
-            amount: 'от 7 000 ₽',
-            criteria: 'Выплачивается студентам за особые достижения в учебной, научно-исследовательской, общественной, культурно-творческой и спортивной деятельности',
-        },
-        {
-            id: 3,
-            name: 'Государственная социальная стипендия',
-            amount: '3 300 ₽',
-            criteria: 'Выплачивается студентам, относящимся к социально незащищенным категориям граждан',
-        },
-        {
-            id: 4,
-            name: 'Повышенная государственная социальная стипендия',
-            amount: '10 000 ₽',
-            criteria: 'Выплачивается студентам 1 и 2 курсов, имеющим оценки "хорошо" и "отлично" и относящимся к социально незащищенным категориям граждан',
-        },
-        {
-            id: 5,
-            name: 'Стипендия Президента РФ',
-            amount: '2 200 ₽',
-            criteria: 'Выплачивается студентам и аспирантам, достигшим выдающихся успехов в учебной и научной деятельности',
-        },
-        {
-            id: 6,
-            name: 'Стипендия Правительства РФ',
-            amount: '1 440 ₽',
-            criteria: 'Выплачивается студентам и аспирантам, проявившим выдающиеся способности в учебной и научной деятельности',
-        },
-        {
-            id: 7,
-            name: 'Именные стипендии',
-            amount: 'от 3 000 ₽',
-            criteria: 'Выплачиваются за достижения в определенной области научных знаний, учреждаемые федеральными государственными органами, органами власти субъектов РФ, юридическими и физическими лицами',
-        }
-    ];
+    // // Моковые данные о стипендиях
+    // const scholarships = [
+    //     {
+    //         id: 1,
+    //         name: 'Государственная академическая стипендия',
+    //         amount: '2 200 ₽',
+    //         criteria: 'Выплачивается студентам очной формы, обучающимся на бюджетной основе, не имеющим академической задолженности и оценок "удовлетворительно"',
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Повышенная государственная академическая стипендия',
+    //         amount: 'от 7 000 ₽',
+    //         criteria: 'Выплачивается студентам за особые достижения в учебной, научно-исследовательской, общественной, культурно-творческой и спортивной деятельности',
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Государственная социальная стипендия',
+    //         amount: '3 300 ₽',
+    //         criteria: 'Выплачивается студентам, относящимся к социально незащищенным категориям граждан',
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'Повышенная государственная социальная стипендия',
+    //         amount: '10 000 ₽',
+    //         criteria: 'Выплачивается студентам 1 и 2 курсов, имеющим оценки "хорошо" и "отлично" и относящимся к социально незащищенным категориям граждан',
+    //     },
+    //     {
+    //         id: 5,
+    //         name: 'Стипендия Президента РФ',
+    //         amount: '2 200 ₽',
+    //         criteria: 'Выплачивается студентам и аспирантам, достигшим выдающихся успехов в учебной и научной деятельности',
+    //     },
+    //     {
+    //         id: 6,
+    //         name: 'Стипендия Правительства РФ',
+    //         amount: '1 440 ₽',
+    //         criteria: 'Выплачивается студентам и аспирантам, проявившим выдающиеся способности в учебной и научной деятельности',
+    //     },
+    //     {
+    //         id: 7,
+    //         name: 'Именные стипендии',
+    //         amount: 'от 3 000 ₽',
+    //         criteria: 'Выплачиваются за достижения в определенной области научных знаний, учреждаемые федеральными государственными органами, органами власти субъектов РФ, юридическими и физическими лицами',
+    //     }
+    // ];
 
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-40 h-40 rounded-full border-8 border-primary-300 opacity-5 blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full border-8 border-primary-300 opacity-5 blur-3xl"></div>
-                <div className="absolute top-1/2 right-1/4 w-20 h-20 rounded-full border-4 border-primary-400 opacity-5 blur-xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full border-6 border-primary-300 opacity-5 blur-xl"></div>
-            </div>
-
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Сведения об образовательной организации
+                        Основные
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                        СТИПЕНДИИ И <span className="font-extrabold text-primary-600">МЕРЫ ПОДДЕРЖКИ</span>
+                        СТИПЕНДИИ И <span className="font-extrabold text-primary-600">МЕРЫ ПОДДЕРЖКИ ОБУЧАЮЩИХСЯ</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Информация о стипендиях и иных видах материальной поддержки обучающихся
-                    </p>
                 </div>
 
                 {/* Табы для разделов */}
-                <div className="mb-8 flex flex-wrap justify-center gap-2">
+                {/* <div className="mb-8 flex flex-wrap justify-center gap-2">
                     <button
                         onClick={() => setActiveTab('scholarships')}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'scholarships'
@@ -106,10 +95,10 @@ export default function StudentSupportPage() {
                     >
                         Общежития
                     </button>
-                </div>
+                </div> */}
 
                 {/* Стипендии */}
-                {activeTab === 'scholarships' && (
+                {/* {activeTab === 'scholarships' && (
                     <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Стипендиальное обеспечение</h3>
 
@@ -168,10 +157,10 @@ export default function StudentSupportPage() {
                             </a>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {/* Материальная поддержка */}
-                {activeTab === 'support' && (
+                {/* {activeTab === 'support' && (
                     <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Материальная поддержка обучающихся</h3>
 
@@ -242,10 +231,10 @@ export default function StudentSupportPage() {
                             </div>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {/* Общежития */}
-                {activeTab === 'dormitory' && (
+                {/* {activeTab === 'dormitory' && (
                     <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Общежития</h3>
 
@@ -377,7 +366,7 @@ export default function StudentSupportPage() {
                             </div>
                         </div>
                     </div>
-                )}
+                )} */}
             </div>
         </section>
     );

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { APPRECIATION_LETTERS } from '@/constants/documents';
 
 export default function ReviewsPage() {
     // Состояние для фильтрации отзывов по категориям
@@ -154,8 +155,8 @@ export default function ReviewsPage() {
                             key={category.id}
                             onClick={() => setActiveFilter(category.id)}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeFilter === category.id
-                                    ? 'bg-primary-600 text-white'
-                                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                                ? 'bg-primary-600 text-white'
+                                : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                                 }`}
                         >
                             {category.name}
@@ -269,6 +270,39 @@ export default function ReviewsPage() {
                             </button>
                         </div>
                     </form>
+                </div>
+
+                {/* Благодарственные письма */}
+                <div className="mt-20">
+                    <div className="text-center mb-10">
+                        <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
+                            Мнения наших партнеров
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                            БЛАГОДАРСТВЕННЫЕ <span className="font-extrabold text-primary-600">ПИСЬМА</span>
+                        </h2>
+                        <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
+                        <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed mb-10">
+                            Отзывы и благодарности от наших клиентов и партнеров, которые высоко оценили качество нашей работы и профессионализм команды
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {APPRECIATION_LETTERS.map((letter, index) => (
+                            <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+                                <div className="aspect-[1/1.414] relative">
+                                    <img
+                                        src={letter.src}
+                                        alt={letter.alt}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                <div className="p-4 text-center">
+                                    <h3 className="text-lg font-semibold text-gray-800">{letter.alt}</h3>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Статистика */}

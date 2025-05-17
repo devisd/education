@@ -2,16 +2,17 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ZoomIcon, EyeIcon } from '@/icons';
+import { ZoomIcon, EyeIcon, DocumentIcon } from '@/icons';
 
 interface DocumentCardProps {
     id: number;
     src: string;
     alt: string;
+    isPdf?: boolean;
     onOpen: (id: number) => void;
 }
 
-export const DocumentCard: React.FC<DocumentCardProps> = ({ id, src, alt, onOpen }) => {
+export const DocumentCard: React.FC<DocumentCardProps> = ({ id, src, alt, isPdf = false, onOpen }) => {
     return (
         <div
             className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
@@ -30,18 +31,24 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({ id, src, alt, onOpen
                 <h3 className="font-semibold text-gray-800 text-center">{alt}</h3>
             </div>
             <div className="relative aspect-[1/1.414] w-full overflow-hidden">
-                <Image
-                    src={src}
-                    alt={alt}
-                    fill={true}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    priority={id <= 3} // Приоритет загрузки для первых элементов
-                    quality={75} // Optimize quality to balance size and appearance
-                    loading={id <= 3 ? "eager" : "lazy"} // Lazy load non-priority images
-                    placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFdwI2QIlsoQAAAABJRU5ErkJggg=="
-                />
+                {isPdf ? (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                        <DocumentIcon className="h-24 w-24 text-primary-600" />
+                    </div>
+                ) : (
+                    <Image
+                        src={src}
+                        alt={alt}
+                        fill={true}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        priority={id <= 3} // Приоритет загрузки для первых элементов
+                        quality={75} // Optimize quality to balance size and appearance
+                        loading={id <= 3 ? "eager" : "lazy"} // Lazy load non-priority images
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFdwI2QIlsoQAAAABJRU5ErkJggg=="
+                    />
+                )}
                 <div className="absolute inset-0 bg-primary-900 bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                     <div className="bg-white rounded-full p-3 opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300 shadow-md">
                         <ZoomIcon className="h-8 w-8 text-primary-600" />

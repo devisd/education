@@ -32,7 +32,7 @@ export const CookieConsent = () => {
                         На сайте используются cookies для сбора и хранения данных, необходимых для корректной работы сайта и удобства посетителей. Продолжая использовать наш сайт,  <a href="/pdf/privacy.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary-600 font-bold"> Вы соглашаетесь с политикой по обработке персональных данных.</a>
+                            className="text-primary-600 font-bold"> Вы соглашаетесь с политикой конфиденциальности обработки персональных данных.</a>
                     </p>
                 </div>
                 <div className="flex-shrink-0">
