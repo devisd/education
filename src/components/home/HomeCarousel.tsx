@@ -17,9 +17,9 @@ export const HomeCarousel = () => {
         {
             id: 2,
             image: {
-                mobile: '/images/carousel/mobile/slide1.png',
-                tablet: '/images/carousel/tablet/slide1.png',
-                desktop: '/images/carousel/desktop/slide1.png',
+                mobile: '/images/carousel/mobile/slide2.png',
+                tablet: '/images/carousel/tablet/slide2.png',
+                desktop: '/images/carousel/desktop/slide2.png',
             },
             title: '',
             description: '',
@@ -27,9 +27,9 @@ export const HomeCarousel = () => {
         {
             id: 3,
             image: {
-                mobile: '/images/carousel/mobile/slide1.png',
-                tablet: '/images/carousel/tablet/slide1.png',
-                desktop: '/images/carousel/desktop/slide1.png',
+                mobile: '/images/carousel/mobile/slide3.png',
+                tablet: '/images/carousel/tablet/slide3.png',
+                desktop: '/images/carousel/desktop/slide3.png',
             },
             title: '',
             description: '',
@@ -37,9 +37,9 @@ export const HomeCarousel = () => {
         {
             id: 4,
             image: {
-                mobile: '/images/carousel/mobile/slide1.png',
-                tablet: '/images/carousel/tablet/slide1.png',
-                desktop: '/images/carousel/desktop/slide1.png',
+                mobile: '/images/carousel/mobile/slide4.png',
+                tablet: '/images/carousel/tablet/slide4.png',
+                desktop: '/images/carousel/desktop/slide4.png',
             },
             title: '',
             description: '',
@@ -47,9 +47,9 @@ export const HomeCarousel = () => {
         {
             id: 5,
             image: {
-                mobile: '/images/carousel/mobile/slide1.png',
-                tablet: '/images/carousel/tablet/slide1.png',
-                desktop: '/images/carousel/desktop/slide1.png',
+                mobile: '/images/carousel/mobile/slide5.png',
+                tablet: '/images/carousel/tablet/slide5.png',
+                desktop: '/images/carousel/desktop/slide5.png',
             },
             title: '',
             description: '',
@@ -59,7 +59,6 @@ export const HomeCarousel = () => {
     return (
         <section className="py-4">
             <div>
-                {/* <div className="container mx-auto px-4 lg:px-2 xl:px-4 max-w-screen-xl"> */}
                 <div className="mb-4">
                     <FestiveBanner className="w-full" />
                 </div>

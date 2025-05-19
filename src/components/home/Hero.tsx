@@ -25,7 +25,7 @@ export const Hero = () => {
               Образовательный терминал - всегда надёжно и профессионально!
             </p>
 
-            <div className='flex justify-center mt-5'>
+            <div className='flex justify-start mt-5'>
               <Link href="/about/licenses" className="flex items-center max-w-[360px] justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
                 aria-label="Посмотреть все лицензии и аккредитации">Лицензии и Аккредитации</Link>
             </div>

@@ -162,7 +162,7 @@ export const Header = () => {
                             <Link href="/" className="flex items-center">
                                 <div className="h-24 w-56 relative">
                                     <Image
-                                        src="/images/logo.png"
+                                        src="/images/logo_mobile.png"
                                         alt="Образовательный терминал"
                                         fill
                                         sizes="(min-width: 1280px) 224px, (min-width: 1024px) 180px, 80px"
@@ -226,11 +226,11 @@ export const Header = () => {
             </div>
 
             {/* Основная часть шапки с меню */}
-            <div className="bg-[#d76944] relative z-30">
+            <div className="lg:bg-[#d76944] bg-transparent relative z-30">
                 <div className="container mx-auto max-md:max-w-full px-4 lg:px-2 xl:px-4 py-4">
                     <div className="flex justify-between items-center">
                         {/* Логотип для мобильных устройств */}
-                        <div className="flex lg:hidden items-center bg-white bg-opacity-70 rounded-md px-2 py-1">
+                        <div className="flex lg:hidden items-center">
                             <Link href="/" className="flex items-center">
                                 <div className="h-10 w-28 sm:h-12 sm:w-32 md:h-14 md:w-36 relative">
                                     <Image

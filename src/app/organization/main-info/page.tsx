@@ -1,9 +1,74 @@
-// 'use client';
+import React from 'react';
 
-// import React from 'react';
-// import { CONTACT_LINKS, SOCIAL_LINKS } from '@/constants/footer';
+async function getObrazovanieData() {
+    const res = await fetch('https://namely-magical-anhinga.cloudpub.ru/api/obrazovanie', { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to fetch');
+    return res.json();
+}
 
-export default function MainInfoPage() {
+function renderText(child) {
+    let text = child.text || '';
+    if (!text) return null;
+    let el = text;
+    if (child.code) el = <code>{el}</code>;
+    if (child.bold) el = <strong>{el}</strong>;
+    if (child.italic) el = <em>{el}</em>;
+    if (child.underline) el = <u>{el}</u>;
+    return el;
+}
+
+function renderChildren(children) {
+    return children.map((child, idx) => {
+        if (child.type === 'text') return <React.Fragment key={idx}>{renderText(child)}</React.Fragment>;
+        if (child.type === 'link') {
+            return (
+                <a key={idx} href={child.url} className="text-primary-600 underline hover:text-primary-800" target="_blank" rel="noopener noreferrer">
+                    {renderChildren(child.children || [])}
+                </a>
+            );
+        }
+        return null;
+    });
+}
+
+function renderBlock(block, idx) {
+    if (block.type === 'paragraph') {
+        const text = (block.children || []).map(renderText).join('');
+        if (!text.trim() && !(block.children || []).some(c => c.type === 'link')) return null;
+        return <p key={idx} className="mb-6">{renderChildren(block.children || [])}</p>;
+    }
+    if (block.type === 'heading') {
+        const level = block.level || 2;
+        const children = renderChildren(block.children || []);
+        switch (level) {
+            case 2:
+                return <h2 key={idx} className="font-bold text-gray-800 mb-4 mt-8 text-2xl md:text-3xl">{children}</h2>;
+            case 3:
+                return <h3 key={idx} className="font-bold text-gray-800 mb-4 mt-8 text-xl md:text-2xl">{children}</h3>;
+            case 4:
+            default:
+                return <h4 key={idx} className="font-bold text-gray-800 mb-4 mt-8 text-lg md:text-xl">{children}</h4>;
+        }
+    }
+    if (block.type === 'image' && block.image && block.image.url) {
+        const src = block.image.url.startsWith('http') ? block.image.url : `https://namely-magical-anhinga.cloudpub.ru${block.image.url}`;
+        return (
+            <div key={idx} className="my-8 flex justify-center">
+                <img
+                    src={src}
+                    alt={block.image.alternativeText || ''}
+                    className="rounded-lg shadow-md max-w-full h-auto"
+                    style={{ maxWidth: 600 }}
+                />
+            </div>
+        );
+    }
+    return null;
+}
+
+export default async function MainInfoPage() {
+    const data = await getObrazovanieData();
+    const content = data.data.content;
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -18,70 +83,12 @@ export default function MainInfoPage() {
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
                 </div>
 
-                {/* Основное содержимое страницы */}
-                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 className="text-xl font-semibold text-gray-800 mb-4">Полное наименование</h3>
-                            <p className="text-gray-600 mb-6">
-                                Федеральное государственное бюджетное образовательное учреждение высшего образования «[Название университета]»
-                            </p>
-
-                            <h3 className="text-xl font-semibold text-gray-800 mb-4">Дата создания</h3>
-                            <p className="text-gray-600 mb-6">Университет основан в [год] году</p>
-
-                            <h3 className="text-xl font-semibold text-gray-800 mb-4">Учредитель</h3>
-                            <p className="text-gray-600 mb-6">Министерство науки и высшего образования Российской Федерации</p>
-                        </div>
-
-                        <div>
-                            <h3 className="text-xl font-semibold text-gray-800 mb-4">Местонахождение</h3>
-                            <p className="text-gray-600 mb-6">
-                                <strong>Адрес:</strong> {CONTACT_LINKS[0].name}<br />
-                                <strong>Телефон:</strong> {CONTACT_LINKS[1].name}, {CONTACT_LINKS[2].name}<br />
-                                <strong>Email:</strong> {CONTACT_LINKS[3].name}<br />
-                                <strong>Соцсети:</strong> {SOCIAL_LINKS.map((link, index) => (
-                                    <React.Fragment key={link.name}>
-                                        <a
-                                            href={link.href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-primary-600 hover:text-primary-900"
-                                        >
-                                            {link.name}
-                                        </a>
-                                        {index < SOCIAL_LINKS.length - 1 && ', '}
-                                    </React.Fragment>
-                                ))}
-                            </p>
-
-                            <h3 className="text-xl font-semibold text-gray-800 mb-4">Режим и график работы</h3>
-                            <p className="text-gray-600 mb-6">
-                                <strong>Пн-Пт:</strong> 9:00-18:00<br />
-                                <strong>Сб-Вс:</strong> выходные дни
-                            </p>
-                        </div>
+                {/* Основное содержимое из API */}
+                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                    <div className="prose prose-lg max-w-none">
+                        {content.map((block, idx) => renderBlock(block, idx))}
                     </div>
-                </div> */}
-
-                {/* Контактные телефоны */}
-                {/* <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-4">Контактные телефоны</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        <div className="bg-gray-50 p-4 rounded-md hover:bg-gray-100 transition-colors">
-                            <p className="font-medium text-gray-800">Приемная ректора</p>
-                            <p className="text-primary-600 font-bold">{CONTACT_LINKS[1].name}</p>
-                        </div>
-                        <div className="bg-gray-50 p-4 rounded-md hover:bg-gray-100 transition-colors">
-                            <p className="font-medium text-gray-800">Приемная комиссия</p>
-                            <p className="text-primary-600 font-bold">{CONTACT_LINKS[2].name}</p>
-                        </div>
-                        <div className="bg-gray-50 p-4 rounded-md hover:bg-gray-100 transition-colors">
-                            <p className="font-medium text-gray-800">Учебный отдел</p>
-                            <p className="text-primary-600 font-bold">{CONTACT_LINKS[1].name}</p>
-                        </div>
-                    </div>
-                </div> */}
+                </div>
             </div>
         </section>
     );

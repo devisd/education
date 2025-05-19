@@ -189,3 +189,74 @@
     letter-spacing: 0.12em !important;
     word-spacing: 0.16em !important;
 }
+
+/* === Swiper кастомные стили === */
+.swiper-button-next,
+.swiper-button-prev {
+    background: #ffffff;
+    /* primary-500 */
+    opacity: 0.8;
+    border-radius: 9999px;
+    padding: 0.5rem;
+    color: white;
+    transition: background 0.2s, opacity 0.2s;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    opacity: 0.95;
+    background: #3b82f6;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 1.5rem;
+}
+
+/* === Swiper кастомные стили (фикс для активного буллета и стрелок) === */
+.swiper .swiper-pagination-bullet {
+    background: #e67355;
+    opacity: 0.5;
+    width: 12px;
+    height: 12px;
+    margin: 0 4px !important;
+    border-radius: 9999px;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.swiper .swiper-pagination-bullet-active {
+    background: #e67355 !important;
+    opacity: 1 !important;
+}
+
+.swiper .swiper-button-next,
+.swiper .swiper-button-prev {
+    background: #e67355 !important;
+    opacity: 0.8 !important;
+    border-radius: 9999px !important;
+    padding: 0.5rem !important;
+    color: #fff !important;
+    transition: background 0.2s, opacity 0.2s !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.swiper .swiper-button-next:hover,
+.swiper .swiper-button-prev:hover {
+    opacity: 0.95 !important;
+    background: #3b82f6 !important;
+}
+
+.swiper .swiper-button-next::after,
+.swiper .swiper-button-prev::after {
+    font-size: 1.5rem !important;
+    color: #fff !important;
+}
