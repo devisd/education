@@ -1,5 +1,5 @@
 import { renderBlock } from "@/api/parse"
-import { ICont } from "@/types"
+import type { ICont } from "@/types"
 import { EmptyContent } from "./EmptyContent"
 
 export const ParseContent = ({ data }: { data: ICont | null }) => {

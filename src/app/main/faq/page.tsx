@@ -4,7 +4,7 @@
 import { renderBlock } from '@/api/parse';
 import { getFAQ } from '@/api/services';
 import { ErrorMessage } from '@/components/ErrorMessage';
-import { IData } from '@/types';
+import type { IData } from '@/types';
 import { useLayoutEffect, useState } from 'react';
 
 export default function FAQPage() {

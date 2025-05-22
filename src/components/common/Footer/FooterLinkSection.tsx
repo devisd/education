@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
-import { LinkItem } from '@/types';
+import type { LinkItem } from '@/types';
 
 export interface FooterLinkSectionProps {
   title: string;

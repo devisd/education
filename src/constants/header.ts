@@ -1,4 +1,4 @@
-import { MenuItem } from "@/types";
+import type { MenuItem } from "@/types";
 import { TRAINING_CATEGORIES } from "./trainingCategories";
 
 // Константы для структуры меню

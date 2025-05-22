@@ -1,8 +1,7 @@
-import React from 'react';
 import { Carousel } from '@/components/ui/Carousel';
 import { FestiveBanner } from '@/components/ui/FestiveBanner';
 
-export const HomeCarousel = () => {
+export const HomeCarousel = async () => {
     const slides = [
         {
             id: 1,

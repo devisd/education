@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { TeamIcon, ShieldIcon, ChecklistIcon, CurrencyCircleIcon, ArrowRightIcon } from '../../icons';
-import { IconType, NewsItem } from '@/types';
+import type { IconType, NewsItem } from '@/types';
 
 const getIconByType = (iconType: IconType) => {
     switch (iconType) {

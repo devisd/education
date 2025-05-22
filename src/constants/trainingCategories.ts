@@ -1,5 +1,5 @@
 import { BookIcon, CertificateIcon, LightningIcon, ShieldIcon } from '@/icons';
-import { TrainingCategory } from '@/types';
+import type { TrainingCategory } from '@/types';
 
 
 

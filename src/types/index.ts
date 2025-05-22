@@ -14,8 +14,6 @@ interface IContent {
 export interface ICont {
     id: number,
     documentId: string
-    Title?: string
-    Description?: any[],
     content: IContent[],
     createdAt: string
     updatedAt: string

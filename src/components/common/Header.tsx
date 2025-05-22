@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon, MapIcon, PhoneIcon, EmailIcon } from '@/icons';
 import { EDUCATIONAL_SERVICES, ORGANIZATION_INFO, MAIN_MENU } from '../../constants/header';
 import { CONTACT_LINKS } from '../../constants/footer';
-import { MenuItem } from '@/types';
+import type { MenuItem } from '@/types';
 import { Dropdown, DropdownItem, DropdownSubmenu, VisuallyImpairedModeToggle } from '../ui';
 
 export const Header = () => {
@@ -15,6 +15,8 @@ export const Header = () => {
     const [eduMenuOpen, setEduMenuOpen] = useState(false);
     const [aboutMenuOpen, setAboutMenuOpen] = useState(false);
     const [coursesMenuOpen, setCoursesMenuOpen] = useState(false);
+    // Состояние для открытого десктопного дропдауна
+    const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
     // Добавляем обработчик скролла для закрытия всех дропдаунов
     useEffect(() => {
@@ -50,6 +52,7 @@ export const Header = () => {
                         <DropdownItem
                             key={`submenu-item-${child.title}-${idx}`}
                             href={child.href || '#'}
+                            onClick={() => setOpenDropdown(null)}
                         >
                             {child.title}
                         </DropdownItem>
@@ -68,6 +71,9 @@ export const Header = () => {
                         <ChevronDownIcon className="ml-1 h-4 w-4" />
                     </div>
                 }
+                isOpen={openDropdown === item.title}
+                onOpen={() => setOpenDropdown(item.title)}
+                onClose={() => setOpenDropdown(null)}
             >
                 {item.children.map((child, idx) => {
                     if (child.children) {
@@ -77,6 +83,7 @@ export const Header = () => {
                         <DropdownItem
                             key={`menu-item-${child.title}-${idx}`}
                             href={child.href || '#'}
+                            onClick={() => setOpenDropdown(null)}
                         >
                             {child.title}
                         </DropdownItem>
@@ -106,7 +113,17 @@ export const Header = () => {
                             {item.children.map((child, idx) => {
                                 if (!child.children) {
                                     return (
-                                        <Link href={child.href || '#'} key={`mobile-link-${child.title}-${idx}`} className="block py-1 text-gray-600">
+                                        <Link
+                                            href={child.href || '#'}
+                                            key={`mobile-link-${child.title}-${idx}`}
+                                            className="block py-1 text-gray-600"
+                                            onClick={() => {
+                                                setMobileMenuOpen(false);
+                                                setEduMenuOpen(false);
+                                                setAboutMenuOpen(false);
+                                                setCoursesMenuOpen(false);
+                                            }}
+                                        >
                                             {child.title}
                                         </Link>
                                     );
@@ -128,6 +145,12 @@ export const Header = () => {
                                                         href={subChild.href || '#'}
                                                         key={`mobile-sublink-${subChild.title}-${subIdx}`}
                                                         className="block py-1 text-gray-600 text-sm"
+                                                        onClick={() => {
+                                                            setMobileMenuOpen(false);
+                                                            setEduMenuOpen(false);
+                                                            setAboutMenuOpen(false);
+                                                            setCoursesMenuOpen(false);
+                                                        }}
                                                     >
                                                         {subChild.title}
                                                     </Link>
@@ -145,7 +168,16 @@ export const Header = () => {
 
         return (
             <div className="border-b pb-2">
-                <Link href={item.href || '#'} className="block py-2 text-gray-700">
+                <Link
+                    href={item.href || '#'}
+                    className="block py-2 text-gray-700"
+                    onClick={() => {
+                        setMobileMenuOpen(false);
+                        setEduMenuOpen(false);
+                        setAboutMenuOpen(false);
+                        setCoursesMenuOpen(false);
+                    }}
+                >
                     {item.title}
                 </Link>
             </div>

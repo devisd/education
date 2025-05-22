@@ -23,6 +23,9 @@ interface DropdownProps {
     children: React.ReactNode;
     className?: string;
     placement?: 'bottom' | 'right' | 'left' | 'top';
+    isOpen?: boolean;
+    onOpen?: () => void;
+    onClose?: () => void;
 }
 
 interface DropdownItemProps {
@@ -38,19 +41,29 @@ interface DropdownSubmenuProps {
     className?: string;
 }
 
-export function Dropdown({ id, trigger, children, className = '', placement = 'bottom' }: DropdownProps) {
-    const [isOpen, setIsOpen] = useState(false);
+export function Dropdown({ id, trigger, children, className = '', placement = 'bottom', isOpen: controlledIsOpen, onOpen, onClose }: DropdownProps) {
+    const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+    const isControlled = controlledIsOpen !== undefined;
+    const isOpen = isControlled ? controlledIsOpen : uncontrolledOpen;
     const dropdownRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
     const open = () => {
         DropdownManager.setActive(id);
-        setIsOpen(true);
+        if (isControlled) {
+            onOpen && onOpen();
+        } else {
+            setUncontrolledOpen(true);
+        }
     };
 
     const close = () => {
         if (isOpen) {
-            setIsOpen(false);
+            if (isControlled) {
+                onClose && onClose();
+            } else {
+                setUncontrolledOpen(false);
+            }
             if (DropdownManager.activeDropdown === id) {
                 DropdownManager.reset();
             }
@@ -156,10 +169,13 @@ export function Dropdown({ id, trigger, children, className = '', placement = 'b
     );
 }
 
-export function DropdownItem({ children, href, onClick, className = '' }: DropdownItemProps) {
+export function DropdownItem({ children, href, onClick, className = '', ...rest }: DropdownItemProps & { onClose?: () => void }) {
     const handleClick = (e: React.MouseEvent) => {
         if (onClick) {
             onClick(e);
+        }
+        if (rest.onClose) {
+            rest.onClose();
         }
     };
 
@@ -168,6 +184,7 @@ export function DropdownItem({ children, href, onClick, className = '' }: Dropdo
             <Link
                 href={href}
                 className={`block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 ${className}`}
+                onClick={handleClick}
             >
                 {children}
             </Link>

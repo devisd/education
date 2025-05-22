@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Partner } from '@/types';
+import type { Partner } from '@/types';
 
 type PartnerCardProps = {
     partner: Partner;
