@@ -16,8 +16,8 @@ export default function Home() {
         <HomeCarousel />
         <Hero />
         <Features />
-        <Courses />
         <Testimonials />
+        <Courses />
       </main>
       <Footer />
     </div>

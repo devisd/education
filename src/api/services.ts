@@ -1,11 +1,11 @@
-import type { ICont, IData, IImageResponse } from '@/types';
+import type { ICont, IData, IImageResponse, ILetter, ISlideResponse, ITrainingResponse } from '@/types';
 import { request } from './request';
 
 
 // ======= HOME PAGE ========
 // Слайдер
 export const getSlides = () => {
-    return request<IData>({ path: '/slajders' });
+    return request<ISlideResponse[]>({ path: '/slajders?populate=*' });
 }
 
 
@@ -94,7 +94,9 @@ export const getReviews = () => {
 
 // Страница 'Отзывы (Благодарственные письма)'
 export const getGratitudeLetters = () => {
-    return request<IImageResponse[]>({ path: '/blagodarstvennye-pismas?populate=image' });
+    return request<ILetter[]>({
+        path: '/blagodarstvennye-pismas?populate=*'
+    });
 }
 
 // Страница 'Прайс'
@@ -117,7 +119,9 @@ export const getNews = () => {
 // ========= TRAINING ========
 // Страница
 export const getTraining = () => {
-    return request<IData>({ path: '/uslugis?populate=image' });
+    return request<ITrainingResponse[]>({
+        path: '/uslugis?populate=image'
+    });
 }
 
 

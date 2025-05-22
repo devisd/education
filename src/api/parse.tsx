@@ -17,10 +17,18 @@ export function renderChildren(children: any[]) {
         if (child.type === 'link') {
             return (
                 <a key={idx} href={child.url} className="text-primary-600 underline hover:text-primary-800" target="_blank" rel="noopener noreferrer" >
-                    {renderChildren(child.children || [])
-                    }
+                    {renderChildren(child.children || [])}
                 </a>
             );
+        }
+        if (child.type === 'list-item') {
+            return <li key={idx}>{renderChildren(child.children || [])}</li>;
+        }
+        if (child.type === 'bulleted-list') {
+            return <ul key={idx} className="list-disc pl-6 mb-4">{renderChildren(child.children || [])}</ul>;
+        }
+        if (child.type === 'numbered-list') {
+            return <ol key={idx} className="list-decimal pl-6 mb-4">{renderChildren(child.children || [])}</ol>;
         }
         return null;
     });
@@ -59,6 +67,15 @@ export function renderBlock(block: any, idx: number) {
                 />
             </div>
         );
+    }
+    if (block.type === 'list-item') {
+        return <li key={idx}>{renderChildren(block.children || [])}</li>;
+    }
+    if (block.type === 'bulleted-list') {
+        return <ul key={idx} className="list-disc pl-6 mb-4">{renderChildren(block.children || [])}</ul>;
+    }
+    if (block.type === 'numbered-list') {
+        return <ol key={idx} className="list-decimal pl-6 mb-4">{renderChildren(block.children || [])}</ol>;
     }
     return null;
 } 

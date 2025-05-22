@@ -1,6 +1,9 @@
+import { renderBlock } from "@/api/parse";
 import { getGratitudeLetters, getReviews } from "@/api/services";
 import { ErrorMessage } from "@/components/ErrorMessage";
+import { ParseContent } from "@/components/ui/ParseContent";
 import { ParseReview } from "@/components/ui/ParseReview";
+import Image from "next/image";
 
 export default async function ReviewsPage() {
     const { data, error } = await getReviews()
@@ -30,7 +33,16 @@ export default async function ReviewsPage() {
                     </h2>
                 </div>
 
-                <ParseReview data={lettersData} />
+
+                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+                    <div className="prose prose-lg max-w-none" >
+                        {lettersData?.map((el, idx) => (
+                            <div key={idx}>{el.Title}
+                                <Image src={`https://namely-magical-anhinga.cloudpub.ru${el.Image.url}`} alt={el.Title} width={200} height={200} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </section>
     );

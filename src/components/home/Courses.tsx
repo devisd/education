@@ -1,12 +1,11 @@
 import React from 'react';
-import { DecorativeBackground, PartnerCard, SectionTitle } from '@/components/ui';
+import { PartnerCard, SectionTitle } from '@/components/ui';
 import { PARTNERS } from '@/constants/partners';
 
 export const Courses = () => {
   return (
     <section className="py-16 relative overflow-hidden">
-      {/* Декоративный фон */}
-      <DecorativeBackground />
+
 
       <div className="container mx-auto px-4 relative ">
         <SectionTitle

@@ -278,10 +278,25 @@ export const Header = () => {
                         </div>
 
                         {/* Desktop menu */}
-                        <nav className="hidden lg:flex items-center justify-between w-full relative">
+                        <nav className="hidden lg:flex items-center justify-between w-full font-bold relative">
                             {MAIN_MENU.map((item, idx) => {
                                 if (item.children) {
                                     return <React.Fragment key={`main-menu-${item.title}-${idx}`}>{renderDesktopSubmenu(item)}</React.Fragment>;
+                                }
+                                // Check if external link
+                                const isExternal = item.href && item.href.startsWith('http');
+                                if (isExternal) {
+                                    return (
+                                        <a
+                                            key={`main-link-${item.title}-${idx}`}
+                                            href={item.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-white hover:text-gray-100 text-sm xl:text-base whitespace-nowrap"
+                                        >
+                                            {item.title}
+                                        </a>
+                                    );
                                 }
                                 return (
                                     <Link key={`main-link-${item.title}-${idx}`} href={item.href || '#'} className="text-white hover:text-gray-100 text-sm xl:text-base whitespace-nowrap">
@@ -330,7 +345,27 @@ export const Header = () => {
                     <div className="p-4 space-y-4 overflow-y-auto max-h-[calc(100vh-180px)]">
                         {MAIN_MENU.map((item, idx) => (
                             <React.Fragment key={`mobile-menu-${item.title}-${idx}`}>
-                                {renderMobileMenuItem(item)}
+                                {/* For mobile, handle external link for 'ДИСТАНЦИОННОЕ ОБУЧЕНИЕ' */}
+                                {item.children ? renderMobileMenuItem(item) :
+                                    (item.href && item.href.startsWith('http') ? (
+                                        <div className="border-b pb-2">
+                                            <a
+                                                href={item.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="block py-2 text-gray-700"
+                                                onClick={() => {
+                                                    setMobileMenuOpen(false);
+                                                    setEduMenuOpen(false);
+                                                    setAboutMenuOpen(false);
+                                                    setCoursesMenuOpen(false);
+                                                }}
+                                            >
+                                                {item.title}
+                                            </a>
+                                        </div>
+                                    ) : renderMobileMenuItem(item))
+                                }
                             </React.Fragment>
                         ))}
                     </div>

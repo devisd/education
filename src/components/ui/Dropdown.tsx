@@ -160,7 +160,7 @@ export function Dropdown({ id, trigger, children, className = '', placement = 'b
             {isOpen && (
                 <div
                     ref={contentRef}
-                    className="fixed z-[1050] bg-white shadow-lg rounded-md py-2 w-56 origin-top-left"
+                    className="fixed z-[1050] bg-white shadow-lg rounded-md py-2 w-auto max-w-[380px] origin-top-left"
                 >
                     {children}
                 </div>

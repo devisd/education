@@ -15,6 +15,7 @@ interface CarouselProps {
             tablet: string;
             desktop: string;
         };
+        link: string,
         title: string;
         description: string;
     }[];

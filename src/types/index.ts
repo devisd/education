@@ -4,6 +4,41 @@ export interface MenuItem {
     children?: MenuItem[];
 }
 
+interface ISlide {
+    id: number,
+    documentId: string,
+    name: string,
+    alternativeText: string | null,
+    caption: any,
+    width: number,
+    height: number,
+    formats: any,
+    hash: string,
+    ext: string,
+    mime: string,
+    size: number,
+    url: string,
+    previewUrl: string | null,
+    provider: string,
+    provider_metadata: any,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string
+}
+
+export interface ISlideResponse {
+    id: number,
+    documentId: string,
+    link: string | null,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string,
+    small: ISlide,
+    medium: ISlide,
+    large: ISlide
+}
+
+
 interface IContent {
     type: string,
     children: any,
@@ -19,6 +54,17 @@ export interface ICont {
     updatedAt: string
     publishedAt: string
 }
+
+export interface ILetter {
+    id: number,
+    documentId: string,
+    Title: string,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string,
+    Image: IImage
+}
+
 
 export interface IData {
     id: number,
@@ -86,6 +132,17 @@ export interface IImageResponse {
     Publish: boolean,
     image: IImage
 }
+
+export interface ITrainingResponse {
+    id: number
+    documentId: string,
+    content: IContent[],
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string,
+    image: IImage
+}
+
 
 
 export interface LinkItem {

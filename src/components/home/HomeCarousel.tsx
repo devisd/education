@@ -1,59 +1,23 @@
+import { getSlides } from '@/api/services';
 import { Carousel } from '@/components/ui/Carousel';
 import { FestiveBanner } from '@/components/ui/FestiveBanner';
 
 export const HomeCarousel = async () => {
-    const slides = [
-        {
-            id: 1,
+    const { data } = await getSlides()
+
+    const slides = data?.map(el => {
+        return {
+            id: el.id,
             image: {
-                mobile: '/images/carousel/mobile/slide1.png',
-                tablet: '/images/carousel/tablet/slide1.png',
-                desktop: '/images/carousel/desktop/slide1.png',
+                mobile: 'https://namely-magical-anhinga.cloudpub.ru' + el.small.url,
+                tablet: 'https://namely-magical-anhinga.cloudpub.ru' + el.medium.url,
+                desktop: 'https://namely-magical-anhinga.cloudpub.ru' + el.large.url,
             },
+            link: el.link || '',
             title: '',
             description: '',
-        },
-        {
-            id: 2,
-            image: {
-                mobile: '/images/carousel/mobile/slide2.png',
-                tablet: '/images/carousel/tablet/slide2.png',
-                desktop: '/images/carousel/desktop/slide2.png',
-            },
-            title: '',
-            description: '',
-        },
-        {
-            id: 3,
-            image: {
-                mobile: '/images/carousel/mobile/slide3.png',
-                tablet: '/images/carousel/tablet/slide3.png',
-                desktop: '/images/carousel/desktop/slide3.png',
-            },
-            title: '',
-            description: '',
-        },
-        {
-            id: 4,
-            image: {
-                mobile: '/images/carousel/mobile/slide4.png',
-                tablet: '/images/carousel/tablet/slide4.png',
-                desktop: '/images/carousel/desktop/slide4.png',
-            },
-            title: '',
-            description: '',
-        },
-        {
-            id: 5,
-            image: {
-                mobile: '/images/carousel/mobile/slide5.png',
-                tablet: '/images/carousel/tablet/slide5.png',
-                desktop: '/images/carousel/desktop/slide5.png',
-            },
-            title: '',
-            description: '',
-        },
-    ];
+        }
+    })
 
     return (
         <section className="py-4">
@@ -61,7 +25,7 @@ export const HomeCarousel = async () => {
                 <div className="mb-4">
                     <FestiveBanner className="w-full" />
                 </div>
-                <Carousel slides={slides} autoPlayInterval={5000} />
+                <Carousel slides={slides || []} autoPlayInterval={5000} />
             </div>
         </section>
     );

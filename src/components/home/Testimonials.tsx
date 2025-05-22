@@ -1,13 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import { CircleArrowIcon } from '../../icons';
-import { DecorativeCircles, NewsCard } from '../ui';
+import { DecorativeBackground, DecorativeCircles, NewsCard } from '../ui';
 import { NEWS_ITEMS } from '@/constants/news';
 
 export const Testimonials = () => {
   return (
     <section className="py-20 bg-gray-50 relative overflow-hidden">
       <DecorativeCircles />
+      {/* Декоративный фон */}
+      <DecorativeBackground />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
