@@ -4,6 +4,7 @@ import { baseMetadata } from '@/config/metadata'
 import '../styles/globals.css'
 import { CookieConsent, VisuallyImpairedModeProvider } from '@/components/ui'
 import { YandexMetrika } from '@/components/analytics'
+import ErrorBoundary from '@/components/ErrorBoundary'
 
 const roboto = Roboto({
     weight: ['300', '400', '500', '700'],
@@ -23,7 +24,9 @@ export default function RootLayout({
     return (
         <html lang="ru">
             <body className={roboto.className}>
-                {children}
+                <ErrorBoundary>
+                    {children}
+                </ErrorBoundary>
                 <CookieConsent />
                 <YandexMetrika />
                 <VisuallyImpairedModeProvider />

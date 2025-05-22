@@ -1,11 +1,7 @@
 import { BookIcon, CertificateIcon, LightningIcon, ShieldIcon } from '@/icons';
+import { TrainingCategory } from '@/types';
 
-export type TrainingCategory = {
-  icon?: React.ComponentType<{ className?: string }>;
-  title: string;
-  description?: string;
-  href: string;
-};
+
 
 export const TRAINING_CATEGORIES: TrainingCategory[] = [
   {

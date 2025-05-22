@@ -37,9 +37,3 @@ export const PARTNERS = [
     }
 ];
 
-export type Partner = {
-    id: number;
-    name: string;
-    logo: string;
-    website: string;
-}; 

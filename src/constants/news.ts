@@ -1,17 +1,5 @@
-export type IconType = 'team' | 'shield' | 'checklist' | 'currency';
+import { NewsItem } from "@/types";
 
-export interface NewsItem {
-    id: number;
-    title: string;
-    date: string;
-    excerpt: string;
-    content: string[];
-    image: string;
-    slug: string;
-    link: string;
-    iconType: IconType;
-    gradient: string;
-}
 
 export const NEWS_ITEMS: NewsItem[] = [
     {

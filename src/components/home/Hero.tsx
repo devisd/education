@@ -1,5 +1,5 @@
 import React from 'react';
-import { DecorativeBackground, AdvantageCard } from '@/components/ui';
+import { DecorativeBackground } from '@/components/ui';
 import { TrainingRequestForm } from '@/components/forms';
 import Link from 'next/link';
 

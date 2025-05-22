@@ -2,7 +2,6 @@ export * from './Alert';
 export * from './Dropdown';
 export * from './DecorativeBackground';
 export * from './DecorativeCircles';
-export * from './AdvantageCard';
 export * from './PartnerCard';
 export * from './SectionTitle';
 export * from './Documents'
