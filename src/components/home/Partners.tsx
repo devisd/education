@@ -2,7 +2,7 @@ import React from 'react';
 import { PartnerCard, SectionTitle } from '@/components/ui';
 import { PARTNERS } from '@/constants/partners';
 
-export const Courses = () => {
+export const Partners = () => {
   return (
     <section className="py-16 relative overflow-hidden">
 

@@ -1,39 +1,39 @@
 export const PARTNERS = [
     {
         id: 1,
-        name: 'Спецавтохозяйство',
-        logo: '/partners/Спецавтохозяйство.jpg',
-        website: 'http://www.sahirk.ru/'
+        name: 'ООО «А9 Системс»',
+        logo: '/partners/logo_a9.webp',
+        website: 'https://a9systems.ru/'
     },
     {
         id: 2,
-        name: 'Первая автоколонна',
-        logo: '/partners/Первая автоколонна.jpg',
-        website: 'https://xn--1-8sbah4bgoafbb7b.xn--p1ai/'
+        name: 'СХ ПАО Белореченское',
+        logo: '/partners/logo_beloreche.webp',
+        website: 'https://www.belor.ru/'
     },
     {
         id: 3,
-        name: 'Профлидер',
-        logo: '/partners/Профлидер.jpg',
-        website: 'https://profflider.com/'
+        name: 'Иркутский НИИ благородных и редких металов и алмазов',
+        logo: '/partners/logo_irgiredmet.webp',
+        website: 'https://www.irgiredmet.ru/'
     },
     {
         id: 4,
-        name: 'Первая женская клиника',
-        logo: '/partners/Первая женская клиника.jpg',
-        website: 'https://1w.irk.ru/'
+        name: 'Невская Косметика',
+        logo: '/partners/logo_nevs_kosm.webp',
+        website: 'https://www.nevcos.ru/'
     },
     {
         id: 5,
-        name: 'Первая мужская клиника',
-        logo: '/partners/Первая мужская клиника.jpg',
-        website: 'https://1m.irk.ru/'
+        name: 'Разрез Иретский',
+        logo: '/partners/logo_razrez.webp',
+        website: 'https://iretskycoal.org/'
     },
     {
         id: 6,
-        name: 'Байкальский заповедник',
-        logo: '/partners/Байкальский заповедник.jpg',
-        website: 'https://baikalzapovednik.ru/'
+        name: 'Segezha Group',
+        logo: '/partners/logo_segezha.webp',
+        website: 'https://segezha-group.com/'
     }
 ];
 

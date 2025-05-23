@@ -13,14 +13,14 @@ export const Features = () => {
         <div className="container max-md:max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-              Профессиональное обучение
+              Наши услуги
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              НАШИ <span className="font-extrabold text-primary-600">УСЛУГИ</span>
+              ОБРАЗОВАТЕЛЬНЫЕ <span className="font-extrabold text-primary-600">ПРОГРАММЫ</span>
             </h2>
             <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Образовательный центр «Движение» предлагает широкий спектр образовательных программ
+              Образовательный терминал предлагает широкий спектр образовательных программ
               для руководителей и специалистов предприятий всех форм собственности
             </p>
           </div>
@@ -43,7 +43,7 @@ export const Features = () => {
               className="inline-flex items-center justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
               aria-label="Посмотреть все программы обучения"
             >
-              <span>Все программы обучения</span>
+              <span>Стоимость обучения</span>
               <ArrowRightIcon className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>

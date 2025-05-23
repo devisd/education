@@ -2,8 +2,10 @@ const CURRENT_YEAR = new Date().getFullYear();
 
 
 export const MENU_LINKS = [
-  { name: 'Сведения об образовательной организации', href: '/organization/main-info' },
-  { name: 'Услуги', href: '/#services' },
+  { name: 'Обучение взрослых', href: '/training/adults' },
+  { name: 'Профессиональная переподготовка', href: '/training/professional-retraining' },
+  { name: 'Курсы повышения квалификации', href: '/training/skill-upgrading' },
+  { name: 'Профессиональное обучение', href: '/training/professional-education' },
   { name: 'Прайс', href: '/main/price' },
   { name: 'Вопрос-ответ', href: '/main/faq' },
   { name: 'Отзывы', href: '/main/reviews' },

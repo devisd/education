@@ -166,28 +166,51 @@ export default function ContactsPage() {
                             </div>
                         </div>
 
-                        <div className="mt-8 pt-8 border-t border-gray-200">
-                            <h4 className="text-lg font-semibold text-gray-800 mb-4">Мы в социальных сетях</h4>
-                            <div className="flex space-x-4">
-                                <a href={SOCIAL_LINKS[0].href} target="_blank" rel="noopener noreferrer"
-                                    className="bg-primary-100 hover:bg-primary-200 text-primary-600 p-3 rounded-full transition-colors">
-                                    <span className="sr-only">{SOCIAL_LINKS[0].name}</span>
-                                    <TelegramIcon className="h-6 w-6" />
-                                </a>
-                                <a href={SOCIAL_LINKS[1].href} target="_blank" rel="noopener noreferrer"
-                                    className="bg-primary-100 hover:bg-primary-200 text-primary-600 p-3 rounded-full transition-colors">
-                                    <span className="sr-only">{SOCIAL_LINKS[1].name}</span>
-                                    <WhatsAppIcon className="h-6 w-6" />
-                                </a>
+                        <div className='flex justify-between items-start flex-col lg:flex-row'>
+                            <div className="mt-8 pt-8 border-t border-gray-200">
+                                <h4 className="text-lg font-semibold text-gray-800 mb-4">Мы в социальных сетях</h4>
+                                <div className="flex space-x-4">
+                                    <a href={SOCIAL_LINKS[0].href} target="_blank" rel="noopener noreferrer"
+                                        className="bg-primary-100 hover:bg-primary-200 text-primary-600 p-3 rounded-full transition-colors">
+                                        <span className="sr-only">{SOCIAL_LINKS[0].name}</span>
+                                        <TelegramIcon className="h-6 w-6" />
+                                    </a>
+                                    <a href={SOCIAL_LINKS[1].href} target="_blank" rel="noopener noreferrer"
+                                        className="bg-primary-100 hover:bg-primary-200 text-primary-600 p-3 rounded-full transition-colors">
+                                        <span className="sr-only">{SOCIAL_LINKS[1].name}</span>
+                                        <WhatsAppIcon className="h-6 w-6" />
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Часы работы */}
+                            <div className="mt-8 pt-8 border-t border-gray-200">
+                                <h3 className="text-lg font-semibold text-gray-800 mb-4">Режим работы</h3>
+                                <div className="grid gap-6">
+                                    <ul className='text-sm'>
+                                        <li className="flex justify-between max-xl:mb-2 flex-col md:flex-row lg:flex-col xl:flex-row">
+                                            <span className="text-gray-600 md:mr-5">Понедельник - Четверг:</span>
+                                            <span className="font-medium text-gray-800">8:00 - 17:00 (обед 12:00 - 13:00)</span>
+                                        </li>
+                                        <li className="flex justify-between max-xl:mb-2 flex-col md:flex-row lg:flex-col xl:flex-row">
+                                            <span className="text-gray-600 mr-5">Пятница:</span>
+                                            <span className="font-medium text-gray-800">8:00 - 16:00 (обед 12:00 - 13:00)</span>
+                                        </li>
+                                        <li className="flex md:justify-between flex-col md:flex-row lg:flex-col xl:flex-row">
+                                            <span className="text-gray-600 mr-5">Суббота и воскресенье:</span>
+                                            <span className="font-medium text-gray-800">Выходной</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Карта */}
-                    <div className="bg-white rounded-lg shadow-md p-6 md:p-8 overflow-hidden">
+                    <div className="bg-white max-h-[640px] rounded-lg shadow-md p-6 md:p-8 overflow-hidden">
                         <h3 className="text-2xl font-bold text-gray-800 mb-6">Схема проезда</h3>
 
-                        <div className="relative h-96 rounded-lg overflow-hidden">
+                        <div className="relative h-[520px] rounded-lg overflow-hidden">
                             <iframe
                                 className="absolute top-0 left-0 w-full h-full border-0"
                                 src="https://yandex.ru/map-widget/v1/?um=constructor%3A1&amp;source=constructor&amp;scroll=false&amp;ll=104.298033%2C52.283838&amp;z=16&amp;text=Иркутск%2C%20ул.%20Сергеева%203%2F1%2C%20офис.%20325&amp;pt=104.298033%2C52.283838%2Corg&amp;mode=search&amp;oid=141180422773"
@@ -320,23 +343,7 @@ export default function ContactsPage() {
                     </form>
                 </div>
 
-                {/* Часы работы */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mt-8">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6">Режим работы</h3>
 
-                    <div className="grid gap-6">
-                        <ul >
-                            <li className="flex justify-between">
-                                <span className="text-gray-600">Понедельник - Пятница:</span>
-                                <span className="font-medium text-gray-800">8:00 - 17:00 (обед 12:00 - 13:00)</span>
-                            </li>
-                            <li className="flex justify-between">
-                                <span className="text-gray-600">Суббота и воскресенье:</span>
-                                <span className="font-medium text-gray-800">Выходной</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </section>
     );

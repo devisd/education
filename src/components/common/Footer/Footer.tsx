@@ -32,11 +32,14 @@ export const Footer = memo(() => {
                   Учебный центр с широким спектром образовательных услуг и индивидуальным подходом к
                   каждому клиенту.
                 </p>
+                <p className="mt-4 text-gray-600 text-sm leading-relaxed pr-5 max-w-[280px]">
+                  Лицензия №Л035-01220-38/01768415 от 24 января 2025 года.
+                </p>
               </div>
             </div>
 
             {/* Меню сайта */}
-            <FooterLinkSection title="Меню сайта" links={MENU_LINKS} />
+            <FooterLinkSection title="Информация" links={MENU_LINKS} />
 
             {/* Контакты */}
             <div>

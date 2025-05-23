@@ -13,7 +13,7 @@ export default async function EduPage() {
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Основные
+                        Основные сведения об образовательной организации
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                         <span className="font-extrabold text-gray-800">ОБРАЗОВАНИЕ</span>

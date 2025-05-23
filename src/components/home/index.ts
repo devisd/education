@@ -1,4 +1,4 @@
-export { Courses } from './Courses'
+export { Partners } from './Partners'
 export { Features } from './Features'
 export { Hero } from './Hero'
 export { Testimonials } from './Testimonials'
