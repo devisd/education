@@ -8,7 +8,17 @@ interface RequestParams<T> {
     params?: Record<string, any>;
 }
 
+const cache = new Map<string, { data: any; timestamp: number }>();
+const FIVE_MINUTES = 5 * 60 * 1000;
+
 export async function request<T>({ path, method = 'GET', data, params }: RequestParams<T>) {
+    const cacheKey = JSON.stringify({ path, method, data, params });
+    if (method === 'GET') {
+        const cached = cache.get(cacheKey);
+        if (cached && Date.now() - cached.timestamp < FIVE_MINUTES) {
+            return { data: cached.data as T, error: null };
+        }
+    }
     try {
         const response = await axios({
             url: path,
@@ -20,6 +30,9 @@ export async function request<T>({ path, method = 'GET', data, params }: Request
                 Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI}`,
             },
         });
+        if (method === 'GET') {
+            cache.set(cacheKey, { data: response.data.data, timestamp: Date.now() });
+        }
         return { data: response.data.data as T, error: null };
     } catch (error) {
         return { data: null, error };
