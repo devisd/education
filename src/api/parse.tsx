@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function renderText(child: any) {
+export function renderText(child: any, format: string | undefined) {
     let text = child.text || '';
     if (!text) return null;
     let el = text;
@@ -11,24 +11,23 @@ export function renderText(child: any) {
     return el;
 }
 
-export function renderChildren(children: any[]) {
+export function renderChildren(children: any[], format?: string) {
     return children.map((child, idx) => {
-        if (child.type === 'text') return <React.Fragment key={idx}> {renderText(child)} </React.Fragment>;
+        if (child.type === 'text') return <React.Fragment key={idx}>{renderText(child, format)}</React.Fragment>;
         if (child.type === 'link') {
             return (
                 <a key={idx} href={child.url} className="text-primary-600 underline hover:text-primary-800" target="_blank" rel="noopener noreferrer" >
-                    {renderChildren(child.children || [])}
+                    {renderChildren(child.children || [], format)}
                 </a>
             );
         }
         if (child.type === 'list-item') {
-            return <li key={idx}>{renderChildren(child.children || [])}</li>;
+            return <li key={idx}>{renderChildren(child.children || [], format)}</li>;
         }
-        if (child.type === 'bulleted-list') {
-            return <ul key={idx} className="list-disc pl-6 mb-4">{renderChildren(child.children || [])}</ul>;
-        }
-        if (child.type === 'numbered-list') {
-            return <ol key={idx} className="list-decimal pl-6 mb-4">{renderChildren(child.children || [])}</ol>;
+        if (child.type === 'list' && format === 'unordered') {
+            return <ul key={idx} className="list-disc pl-6 mb-4">{renderChildren(child.children || [], 'unordered')}</ul>;
+        } else if (child.type === 'list' && format === 'ordered') {
+            return <ol key={idx} className="list-decimal pl-6 mb-4">{renderChildren(child.children || [], 'ordered')}</ol>;
         }
         return null;
     });
@@ -68,14 +67,12 @@ export function renderBlock(block: any, idx: number) {
             </div>
         );
     }
-    if (block.type === 'list-item') {
-        return <li key={idx}>{renderChildren(block.children || [])}</li>;
-    }
-    if (block.type === 'bulleted-list') {
-        return <ul key={idx} className="list-disc pl-6 mb-4">{renderChildren(block.children || [])}</ul>;
-    }
-    if (block.type === 'numbered-list') {
-        return <ol key={idx} className="list-decimal pl-6 mb-4">{renderChildren(block.children || [])}</ol>;
+    if (block.type === 'list') {
+        if (block.format === 'unordered') {
+            return <ul key={idx} className="list-disc pl-6 mb-4">{renderChildren(block.children || [], 'unordered')}</ul>;
+        } else if (block.format === 'ordered') {
+            return <ol key={idx} className="list-decimal pl-6 mb-4">{renderChildren(block.children || [], 'ordered')}</ol>;
+        }
     }
     return null;
 } 

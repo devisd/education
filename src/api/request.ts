@@ -9,7 +9,7 @@ interface RequestParams<T> {
 }
 
 const cache = new Map<string, { data: any; timestamp: number }>();
-const FIVE_MINUTES = 5 * 60 * 1000;
+const FIVE_MINUTES = 1 * 30 * 1000;
 
 export async function request<T>({ path, method = 'GET', data, params }: RequestParams<T>) {
     const cacheKey = JSON.stringify({ path, method, data, params });
