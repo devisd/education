@@ -1,39 +1,36 @@
 import type { ICont, IData, IImageResponse } from '@/types';
-import axios, { Method } from 'axios';
 
-interface RequestParams<T> {
+export interface RequestParams<T> {
     path: string;
-    method?: Method;
-    data?: ICont | IData[] | IImageResponse[];
+    method?: string;
+    data?: any;
     params?: Record<string, any>;
 }
 
-const cache = new Map<string, { data: any; timestamp: number }>();
-const FIVE_MINUTES = 1 * 30 * 1000;
-
 export async function request<T>({ path, method = 'GET', data, params }: RequestParams<T>) {
-    const cacheKey = JSON.stringify({ path, method, data, params });
-    if (method === 'GET') {
-        const cached = cache.get(cacheKey);
-        if (cached && Date.now() - cached.timestamp < FIVE_MINUTES) {
-            return { data: cached.data as T, error: null };
-        }
+    // Формируем query string если есть params
+    let url = `${process.env.NEXT_PUBLIC_BASE_URL}${path}`;
+    if (params && Object.keys(params).length > 0) {
+        const searchParams = new URLSearchParams(params).toString();
+        url += `?${searchParams}`;
     }
+
     try {
-        const response = await axios({
-            url: path,
+        const res = await fetch(url, {
             method,
-            data,
-            params,
-            baseURL: process.env.NEXT_PUBLIC_BASE_URL,
             headers: {
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI}`,
             },
-        });
-        if (method === 'GET') {
-            cache.set(cacheKey, { data: response.data.data, timestamp: Date.now() });
+            body: method !== 'GET' && data ? JSON.stringify(data) : undefined,
+            next: { revalidate: 30 },
+        } as RequestInit & { next?: { revalidate: number } });
+
+        const json = await res.json();
+        if (!res.ok) {
+            return { data: null, error: json };
         }
-        return { data: response.data.data as T, error: null };
+        return { data: json.data as T, error: null };
     } catch (error) {
         return { data: null, error };
     }

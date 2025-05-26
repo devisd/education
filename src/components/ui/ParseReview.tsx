@@ -3,19 +3,21 @@ import { Stars } from "../Stars"
 import { EmptyContent } from "./EmptyContent";
 import type { IImageResponse } from "@/types"
 
-const getImageUrl = (url: string) => {
-    if (!url) return '';
-    if (url.startsWith('http')) return url;
-    const base = process.env.NEXT_PUBLIC_API_URL;
-    if (!base) {
-        // fallback: относительный путь
-        return url.startsWith('/') ? url : '/' + url;
-    }
-    return base.replace(/\/$/, '') + (url.startsWith('/') ? url : '/' + url);
-};
+// const getImageUrl = (url: string) => {
+//     if (!url) return '';
+//     if (url.startsWith('http')) return url;
+//     const base = process.env.NEXT_PUBLIC_API_URL;
+//     if (!base) {
+//         // fallback: относительный путь
+//         return url.startsWith('/') ? url : '/' + url;
+//     }
+//     return base.replace(/\/$/, '') + (url.startsWith('/') ? url : '/' + url);
+// };
 
 export const ParseReview = ({ data }: { data: IImageResponse[] | null }) => {
+
     if (!data) return <EmptyContent />;
+
     return (
         <>
             {data.map((el) => (
@@ -23,7 +25,8 @@ export const ParseReview = ({ data }: { data: IImageResponse[] | null }) => {
                     <div className="flex-shrink-0">
                         {el.image?.url && (
                             <Image
-                                src={getImageUrl(el.image.url)}
+                                src={`https://namely-magical-anhinga.cloudpub.ru${el.image.url}`}
+                                // src={getImageUrl(el.image.url)}
                                 alt={el.image.name || "review image"}
                                 width={96}
                                 height={96}
