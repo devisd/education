@@ -10,7 +10,7 @@ export const ParseReview = ({ data }: { data: IImageResponse[] | null }) => {
     return (
         <>
             {data.map((el) => (
-                <div key={el.id} className="bg-white rounded-lg shadow-md p-6 flex flex-col h-full">
+                el.Publish ? <div key={el.id} className="bg-white rounded-lg shadow-md p-6 flex flex-col h-full">
                     <div className="flex items-center mb-4">
                         {el.image ? (
                             <Image
@@ -38,7 +38,7 @@ export const ParseReview = ({ data }: { data: IImageResponse[] | null }) => {
                             {el.Service}
                         </p>
                     </div>
-                </div>
+                </div> : null
             ))}
         </>
     )

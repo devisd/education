@@ -1,8 +1,8 @@
 import { getGratitudeLetters, getReviews } from "@/api/services";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { ParseReview } from "@/components/ui/ParseReview";
-import Image from "next/image";
 import { ReviewForm } from "@/components/forms/ReviewForm";
+import { GratitudeLetters } from '@/components/ui';
 
 export default async function ReviewsPage() {
     const { data, error } = await getReviews()
@@ -44,15 +44,7 @@ export default async function ReviewsPage() {
                     </h2>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
-                    <div className="prose prose-lg max-w-none" >
-                        {lettersData?.map((el, idx) => (
-                            <div key={idx}>{el.Title}
-                                <Image src={`https://namely-magical-anhinga.cloudpub.ru${el.Image.url}`} alt={el.Title} width={200} height={200} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <GratitudeLetters lettersData={lettersData ?? []} />
 
                 {/* Статистика */}
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6">

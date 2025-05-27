@@ -127,11 +127,10 @@ export const getTraining = () => {
 
 // ========= POST REQUESTS =========
 // Страница 'Отзывы'
-export const postReview = (data: any) => {
-    console.log("🚀 ~ postReview ~ data:", data)
+export const postReview = (formData: FormData) => {
     return request<any>({
         path: '/otzyvies',
         method: 'POST',
-        data
+        data: formData
     });
 }

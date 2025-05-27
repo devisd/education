@@ -16,7 +16,6 @@ export function ReviewForm() {
     const [submitted, setSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [photo, setPhoto] = useState<File | null>(null);
-    const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
     const validate = () => {
         const newErrors: { [k: string]: string } = {};
@@ -48,10 +47,8 @@ export function ReviewForm() {
         const file = e.target.files?.[0];
         if (file) {
             setPhoto(file);
-            setPhotoPreview(URL.createObjectURL(file));
         } else {
             setPhoto(null);
-            setPhotoPreview(null);
         }
     };
 
@@ -61,17 +58,17 @@ export function ReviewForm() {
         if (validate()) {
             try {
                 const formData = new FormData();
-                formData.append('Name', form.name);
-                formData.append('Service', form.course);
-                formData.append('Content', form.review);
-                formData.append('Rating', String(form.rating));
-                formData.append('Date', new Date().toISOString());
-                formData.append('Publish', 'false');
+                formData.append('data[Name]', form.name);
+                formData.append('data[Service]', form.course);
+                formData.append('data[Content]', form.review);
+                formData.append('data[Rating]', String(form.rating));
+                formData.append('data[Date]', new Date().toISOString());
+                formData.append('data[Publish]', 'false');
                 if (photo) {
-                    formData.append('image', photo);
+                    formData.append('files', photo);
                 }
 
-                const res = await postReview({ data: formData });
+                const res = await postReview(formData);
 
                 if (res.data) {
                     setSubmitted(true);
@@ -87,7 +84,6 @@ export function ReviewForm() {
                     consent: false,
                 });
                 setPhoto(null);
-                setPhotoPreview(null);
             } catch (err) {
                 setSubmitError('Ошибка отправки. Попробуйте позже.');
             }
