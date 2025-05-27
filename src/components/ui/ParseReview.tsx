@@ -3,17 +3,6 @@ import { Stars } from "../Stars"
 import { EmptyContent } from "./EmptyContent";
 import type { IImageResponse } from "@/types"
 
-// const getImageUrl = (url: string) => {
-//     if (!url) return '';
-//     if (url.startsWith('http')) return url;
-//     const base = process.env.NEXT_PUBLIC_API_URL;
-//     if (!base) {
-//         // fallback: относительный путь
-//         return url.startsWith('/') ? url : '/' + url;
-//     }
-//     return base.replace(/\/$/, '') + (url.startsWith('/') ? url : '/' + url);
-// };
-
 export const ParseReview = ({ data }: { data: IImageResponse[] | null }) => {
 
     if (!data) return <EmptyContent />;
@@ -21,24 +10,33 @@ export const ParseReview = ({ data }: { data: IImageResponse[] | null }) => {
     return (
         <>
             {data.map((el) => (
-                <div key={el.id} className="flex mb-8 p-6 bg-white rounded-xl shadow-md sm:flex-row items-center gap-6">
-                    <div className="flex-shrink-0">
-                        {el.image?.url && (
+                <div key={el.id} className="bg-white rounded-lg shadow-md p-6 flex flex-col h-full">
+                    <div className="flex items-center mb-4">
+                        {el.image ? (
                             <Image
                                 src={`https://namely-magical-anhinga.cloudpub.ru${el.image.url}`}
-                                // src={getImageUrl(el.image.url)}
                                 alt={el.image.name || "review image"}
                                 width={96}
                                 height={96}
-                                className="rounded-lg object-cover w-24 h-24"
+                                className="w-12 h-12 rounded-full mr-4 object-cover"
                             />
-                        )}
+                        ) : <div className="w-12 h-12 bg-gray-300 rounded-full mr-4 object-cover"></div>}
+                        <div>
+                            <h4 className="text-lg font-semibold text-gray-800">{el.Name}</h4>
+                            <p className="text-sm text-gray-500">{el.Date}</p>
+                        </div>
                     </div>
-                    <div className="flex-1">
-                        <h3 className="text-xl font-semibold mb-1">{el.Name}</h3>
-                        <div className="text-gray-500 text-sm mb-2">{el.Date}</div>
+
+                    <div className="flex mb-3">
                         <Stars rating={el.Rating} />
-                        <div className="mt-2 text-gray-700">{el.Content}</div>
+                    </div>
+
+                    <p className="text-gray-600 mb-4 flex-grow">{el.Content}</p>
+
+                    <div className="pt-4 mt-auto border-t border-gray-100">
+                        <p className="text-sm font-medium text-primary-600">
+                            {el.Service}
+                        </p>
                     </div>
                 </div>
             ))}

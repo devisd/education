@@ -1,9 +1,8 @@
-import { renderBlock } from "@/api/parse";
 import { getGratitudeLetters, getReviews } from "@/api/services";
 import { ErrorMessage } from "@/components/ErrorMessage";
-import { ParseContent } from "@/components/ui/ParseContent";
 import { ParseReview } from "@/components/ui/ParseReview";
 import Image from "next/image";
+import { ReviewForm } from "@/components/forms/ReviewForm";
 
 export default async function ReviewsPage() {
     const { data, error } = await getReviews()
@@ -23,16 +22,27 @@ export default async function ReviewsPage() {
                         ОТЗЫВЫ <span className="font-extrabold text-primary-600">ОБУЧАЮЩИХСЯ</span>
                     </h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
+                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Отзывы наших выпускников о качестве обучения, преподавателях и учебных программах
+                    </p>
                 </div>
 
-                <ParseReview data={data} />
+                {/* Отзывы */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <ParseReview data={data ?? []} />
+                </div>
+
+                {/* Форма для отправки отзыва */}
+                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6">Оставить отзыв</h3>
+                    <ReviewForm />
+                </div>
 
                 <div className="text-center mt-20 mb-5">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                         БЛАГОДАРСТВЕННЫЕ <span className="font-extrabold text-primary-600">ПИСЬМА</span>
                     </h2>
                 </div>
-
 
                 <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
                     <div className="prose prose-lg max-w-none" >
@@ -41,6 +51,26 @@ export default async function ReviewsPage() {
                                 <Image src={`https://namely-magical-anhinga.cloudpub.ru${el.Image.url}`} alt={el.Title} width={200} height={200} />
                             </div>
                         ))}
+                    </div>
+                </div>
+
+                {/* Статистика */}
+                <div className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                        <div className="text-4xl font-bold text-primary-600 mb-2">96%</div>
+                        <div className="text-gray-700">довольных выпускников</div>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                        <div className="text-4xl font-bold text-primary-600 mb-2">4.8</div>
+                        <div className="text-gray-700">средняя оценка курсов</div>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                        <div className="text-4xl font-bold text-primary-600 mb-2">2500+</div>
+                        <div className="text-gray-700">выпускников</div>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                        <div className="text-4xl font-bold text-primary-600 mb-2">87%</div>
+                        <div className="text-gray-700">трудоустроенных</div>
                     </div>
                 </div>
             </div>

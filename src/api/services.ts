@@ -128,7 +128,8 @@ export const getTraining = () => {
 // ========= POST REQUESTS =========
 // Страница 'Отзывы'
 export const postReview = (data: any) => {
-    return request<IData>({
+    console.log("🚀 ~ postReview ~ data:", data)
+    return request<any>({
         path: '/otzyvies',
         method: 'POST',
         data

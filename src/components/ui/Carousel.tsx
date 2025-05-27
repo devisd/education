@@ -61,21 +61,23 @@ export const Carousel = ({ slides, autoPlayInterval = 5000 }: CarouselProps) => 
                 const bgUrl = slide.image[breakpoint];
                 return (
                     <SwiperSlide key={slide.id}>
-                        <div
-                            className="w-full relative"
-                            style={{
-                                backgroundImage: `url(${bgUrl})`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center',
-                                height: slideHeight,
-                            }}
-                        >
-                            {/* Если нужны подписи, раскомментируйте ниже */}
-                            {/* <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
+                        <a href={slide.link} target='_blank'>
+                            <div
+                                className="w-full relative"
+                                style={{
+                                    backgroundImage: `url(${bgUrl})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                    height: slideHeight,
+                                }}
+                            >
+                                {/* Если нужны подписи, раскомментируйте ниже */}
+                                {/* <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
                                 <h3 className="text-xl font-bold">{slide.title}</h3>
                                 <p>{slide.description}</p>
                             </div> */}
-                        </div>
+                            </div>
+                        </a>
                     </SwiperSlide>
                 );
             })}

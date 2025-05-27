@@ -1,5 +1,3 @@
-import type { ICont, IData, IImageResponse } from '@/types';
-
 export interface RequestParams<T> {
     path: string;
     method?: string;
@@ -16,13 +14,18 @@ export async function request<T>({ path, method = 'GET', data, params }: Request
     }
 
     try {
+        const isFormData = typeof data !== 'undefined' && typeof FormData !== 'undefined' && data instanceof FormData;
         const res = await fetch(url, {
             method,
             headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI}`,
+                ...(isFormData
+                    ? { Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI}` }
+                    : {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI}`,
+                    }),
             },
-            body: method !== 'GET' && data ? JSON.stringify(data) : undefined,
+            body: method !== 'GET' && data ? (isFormData ? data : JSON.stringify(data)) : undefined,
             next: { revalidate: 30 },
         } as RequestInit & { next?: { revalidate: number } });
 

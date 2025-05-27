@@ -14,7 +14,7 @@ export default async function FinancialPage() {
                 {/* Заголовок страницы */}
                 <div className="text-center mb-10">
                     <span className="inline-block text-primary-600 font-medium text-sm uppercase tracking-wider mb-2">
-                        Основные сведения об образовательной организации
+                        Сведения об образовательной организации
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                         ФИНАНСОВО-ХОЗЯЙСТВЕННАЯ <span className="font-extrabold text-primary-600">ДЕЯТЕЛЬНОСТЬ</span>
