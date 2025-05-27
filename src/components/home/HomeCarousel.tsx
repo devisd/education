@@ -1,10 +1,10 @@
-import { Carousel } from '@/components/ui/Carousel';
 import { FestiveBanner } from '@/components/ui/FestiveBanner';
 import { getSlides } from '@/api/services';
+import { ClientCarousel } from './ClientCarousel';
 
 export const HomeCarousel = async () => {
-    const res = await getSlides();
-    const sliderImages = (res.data || [])
+    const { data } = await getSlides();
+    const sliderImages = (data || [])
         .map(el => ({
             id: el.id,
             image: {
@@ -15,8 +15,9 @@ export const HomeCarousel = async () => {
             link: el.link || '',
             title: '',
             description: '',
+            createdAt: el.createdAt,
         }))
-        .sort((a, b) => a.id - b.id);
+        .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
 
     return (
         <section className="py-4">
@@ -24,7 +25,7 @@ export const HomeCarousel = async () => {
                 <div className="mb-4">
                     <FestiveBanner className="w-full" />
                 </div>
-                <Carousel slides={sliderImages} autoPlayInterval={5000} />
+                <ClientCarousel slides={sliderImages} />
             </div>
         </section>
     );

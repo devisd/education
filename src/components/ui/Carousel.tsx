@@ -18,6 +18,7 @@ interface CarouselProps {
         link: string,
         title: string;
         description: string;
+        createdAt?: string;
     }[];
     autoPlayInterval?: number;
 }
