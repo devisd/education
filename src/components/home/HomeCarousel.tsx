@@ -4,17 +4,19 @@ import { getSlides } from '@/api/services';
 
 export const HomeCarousel = async () => {
     const res = await getSlides();
-    const sliderImages = (res.data || []).map(el => ({
-        id: el.id,
-        image: {
-            mobile: 'https://namely-magical-anhinga.cloudpub.ru' + el.small?.url,
-            tablet: 'https://namely-magical-anhinga.cloudpub.ru' + el.medium?.url,
-            desktop: 'https://namely-magical-anhinga.cloudpub.ru' + el.large?.url,
-        },
-        link: el.link || '',
-        title: '',
-        description: '',
-    }));
+    const sliderImages = (res.data || [])
+        .map(el => ({
+            id: el.id,
+            image: {
+                mobile: 'https://namely-magical-anhinga.cloudpub.ru' + el.small?.url,
+                tablet: 'https://namely-magical-anhinga.cloudpub.ru' + el.medium?.url,
+                desktop: 'https://namely-magical-anhinga.cloudpub.ru' + el.large?.url,
+            },
+            link: el.link || '',
+            title: '',
+            description: '',
+        }))
+        .sort((a, b) => a.id - b.id);
 
     return (
         <section className="py-4">

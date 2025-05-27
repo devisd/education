@@ -45,6 +45,12 @@ const useBreakpoint = () => {
     return breakpoint;
 };
 
+function normalizeLink(link: string) {
+    if (!link) return '';
+    if (/^https?:\/\//.test(link)) return link;
+    return 'https://' + link;
+}
+
 export const Carousel = ({ slides, autoPlayInterval = 5000 }: CarouselProps) => {
     const breakpoint = useBreakpoint();
     const slideHeight = breakpoint === 'mobile' ? '300px' : breakpoint === 'tablet' ? '400px' : '390px';
@@ -62,7 +68,7 @@ export const Carousel = ({ slides, autoPlayInterval = 5000 }: CarouselProps) => 
                 const bgUrl = slide.image[breakpoint];
                 return (
                     <SwiperSlide key={slide.id}>
-                        <a href={slide.link} target='_blank'>
+                        <a href={normalizeLink(slide.link)} target='_blank'>
                             <div
                                 className="w-full relative"
                                 style={{
