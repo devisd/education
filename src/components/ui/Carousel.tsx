@@ -22,6 +22,7 @@ interface CarouselProps {
     autoPlayInterval?: number;
 }
 
+
 // Хук для определения breakpoint
 const useBreakpoint = () => {
     const [breakpoint, setBreakpoint] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
