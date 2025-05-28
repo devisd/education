@@ -24,7 +24,7 @@ export const GratitudeLetters: React.FC<GratitudeLettersProps> = ({ lettersData 
     const activeDocument = activeImage ? gratitudeDocs.find(doc => doc.id === activeImage) || null : null;
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+        <div className="p-6 md:p-8 mb-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:grid-cols-3 lg:gap-5 mx-auto">
                 {gratitudeDocs.map(item => (
                     <DocumentCard

@@ -1,4 +1,3 @@
-import { FestiveBanner } from '@/components/ui/FestiveBanner';
 import { getSlides } from '@/api/services';
 import { ClientCarousel } from './ClientCarousel';
 
@@ -21,12 +20,7 @@ export const HomeCarousel = async () => {
 
     return (
         <section className="py-4">
-            <div>
-                <div className="mb-4">
-                    <FestiveBanner className="w-full" />
-                </div>
-                <ClientCarousel slides={sliderImages} />
-            </div>
+            <ClientCarousel slides={sliderImages} />
         </section>
     );
 } 
