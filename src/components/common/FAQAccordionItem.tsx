@@ -18,7 +18,7 @@ export const FAQAccordionItem: React.FC<FAQAccordionItemProps> = ({ items }) => 
     return (
         <>
             {items?.map((el, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+                <div key={index} className="border mb-5 border-gray-200 rounded-lg overflow-hidden">
                     <button
                         className="w-full px-6 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors"
                         onClick={() => toggleAccordion(index)}

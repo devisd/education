@@ -18,19 +18,20 @@ export async function POST(request: Request) {
         // Примечание: в реальном проекте нужно настроить SMTP-сервер и добавить 
         // данные аутентификации в переменные окружения
         const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || 'smtp.mail.ru',
-            port: Number(process.env.SMTP_PORT) || 465,
+            host: process.env.NEXT_PUBLIC_SMTP_HOST || 'smtp.yandex.ru',
+            port: Number(process.env.NEXT_PUBLIC_SMTP_PORT) || 465,
             secure: true,
             auth: {
-                user: process.env.SMTP_USER || 'your_smtp_username',
-                pass: process.env.SMTP_PASSWORD || 'your_smtp_password',
+                user: process.env.NEXT_PUBLIC_SMTP_USER || 'your_smtp_username',
+                pass: process.env.NEXT_PUBLIC_SMTP_PASSWORD || 'your_smtp_password',
             },
         });
 
         // Формируем содержимое письма
         const mailOptions = {
-            from: process.env.SMTP_USER || 'your_smtp_username',
-            to: toEmail || 'terminal.38@mail.ru',
+            from: process.env.NEXT_PUBLIC_SMTP_USER || 'your_smtp_username',
+            to: toEmail || 'devisdumler@gmail.com',
+            // to: toEmail || 'terminal.38@mail.ru',
             subject: `Новое сообщение с сайта: ${subject}`,
             html: `
         <h1>Новое сообщение с формы обратной связи</h1>

@@ -5,7 +5,7 @@ import { DocumentCard, DocumentModal } from '@/components/ui';
 import type { ILetter } from '@/types';
 
 interface GratitudeLettersProps {
-    lettersData: ILetter[];
+    lettersData: ILetter[] | null;
 }
 
 export const GratitudeLetters: React.FC<GratitudeLettersProps> = ({ lettersData }) => {

@@ -26,7 +26,7 @@ export default async function FAQPage() {
                 {data && <FAQAccordionItem items={data} />}
 
                 {/* Не нашли ответ? */}
-                <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+                <div className="bg-white rounded-lg mt-10 shadow-md p-6 md:p-8">
                     <div className="text-center">
                         <h3 className="text-2xl font-bold text-gray-800 mb-4">Не нашли ответ на свой вопрос?</h3>
                         <p className="text-gray-600 max-w-3xl mx-auto mb-8">

@@ -68,5 +68,3 @@ export const Footer = memo(() => {
     </footer>
   );
 });
-
-Footer.displayName = 'Footer';

@@ -130,7 +130,7 @@ export interface IImageResponse {
     updatedAt: string,
     publishedAt: string,
     Publish: boolean,
-    image: IImage
+    Image: IImage
 }
 
 export interface ITrainingResponse {

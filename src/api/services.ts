@@ -85,10 +85,7 @@ export const getCatering = () => {
 // Страница 'Отзывы'
 export const getReviews = () => {
     return request<IImageResponse[]>({
-        path: '/otzyvies',
-        params: {
-            populate: 'image'
-        }
+        path: '/otzyvies?populate=*'
     });
 }
 

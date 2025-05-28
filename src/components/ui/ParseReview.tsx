@@ -1,21 +1,18 @@
 import Image from "next/image"
 import { Stars } from "../Stars"
-import { EmptyContent } from "./EmptyContent";
 import type { IImageResponse } from "@/types"
 
 export const ParseReview = ({ data }: { data: IImageResponse[] | null }) => {
 
-    if (!data) return <EmptyContent />;
-
     return (
         <>
-            {data.map((el) => (
+            {data?.map((el) => (
                 el.Publish ? <div key={el.id} className="bg-white rounded-lg shadow-md p-6 flex flex-col h-full">
                     <div className="flex items-center mb-4">
-                        {el.image ? (
+                        {el.Image ? (
                             <Image
-                                src={`https://namely-magical-anhinga.cloudpub.ru${el.image.url}`}
-                                alt={el.image.name || "review image"}
+                                src={`https://namely-magical-anhinga.cloudpub.ru${el.Image.url}`}
+                                alt={el.Image.name || "review image"}
                                 width={96}
                                 height={96}
                                 className="w-12 h-12 rounded-full mr-4 object-cover"
