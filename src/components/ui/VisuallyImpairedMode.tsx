@@ -493,11 +493,13 @@ export const VisuallyImpairedModePanel = () => {
 export const VisuallyImpairedModeToggle = ({
     compact = false,
     fontSize = 'normal',
-    verticalLayout = false
+    verticalLayout = false,
+    onlyIcon = false,
 }: {
     compact?: boolean;
     fontSize?: 'small' | 'normal';
     verticalLayout?: boolean;
+    onlyIcon?: boolean;
 }) => {
     const [enabled, setEnabled] = useState(false)
     const [mounted, setMounted] = useState(false)
@@ -577,24 +579,30 @@ export const VisuallyImpairedModeToggle = ({
     return (
         <button
             onClick={toggleMode}
-            className={`flex 'items-center' whitespace-nowrap text-white bg-blue-150 hover:bg-blue-700 transition-colors duration-200 ${compact
-                ? 'p-2 rounded-md'
-                : fontSize === 'small'
-                    ? `${verticalLayout ? 'px-2 py-1 w-auto' : 'px-2 py-1'} rounded-md text-xs`
-                    : 'px-3 py-2 rounded-md'
-                }`}
             aria-label="Версия для слабовидящих"
-            title="Версия для слабовидящих"
+            className={
+                onlyIcon
+                    ? 'p-0 w-8 h-8 flex items-center justify-center bg-blue-150 text-white hover:bg-blue-700 rounded transition-colors duration-200'
+                    : `flex items-center whitespace-nowrap text-white bg-blue-150 hover:bg-blue-700 transition-colors duration-200 ${compact
+                        ? 'p-2 rounded-md'
+                        : fontSize === 'small'
+                            ? `${verticalLayout ? 'px-2 py-1 w-auto' : 'px-2 py-1'} rounded-md text-xs`
+                            : 'px-3 py-2 rounded-md'
+                    }`
+            }
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className={compact
-                    ? "w-6 h-6"
-                    : fontSize === 'small'
-                        ? verticalLayout ? "w-5 h-5 mb-1" : "w-4 h-4 mr-1"
-                        : "w-6 h-6 mr-2"
+                className={
+                    onlyIcon
+                        ? 'w-6 h-6'
+                        : compact
+                            ? 'w-6 h-6'
+                            : fontSize === 'small'
+                                ? verticalLayout ? 'w-5 h-5 mb-1' : 'w-4 h-4 mr-1'
+                                : 'w-6 h-6 mr-2'
                 }
             >
                 <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
@@ -604,17 +612,13 @@ export const VisuallyImpairedModeToggle = ({
                     clipRule="evenodd"
                 />
             </svg>
-            {!compact && (
+            {!compact && !onlyIcon && (
                 <span className={`font-medium ${fontSize === 'small'
                     ? verticalLayout
                         ? 'text-[10px] leading-tight'
                         : 'text-xs'
                     : 'text-base lg:text-xs'
                     }`}>
-                    {verticalLayout
-                        ? <>Версия для<br />слабовидящих</>
-                        : 'Версия для слабовидящих'
-                    }
                 </span>
             )}
         </button>

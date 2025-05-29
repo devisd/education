@@ -1,4 +1,4 @@
-import type { ICont, IData, IImageResponse, ILetter, ISlideResponse, ITrainingResponse } from '@/types';
+import type { ICont, IData, IImageResponse, ILetter, INewsResponse, ISlideResponse, ITrainingResponse } from '@/types';
 import { request } from './request';
 
 
@@ -109,7 +109,7 @@ export const getFAQ = () => {
 // ======== ABOUT ==========
 // Страница 'Новости'
 export const getNews = () => {
-    return request<ICont>({ path: '/novostis' });
+    return request<INewsResponse[]>({ path: '/novostis' });
 }
 
 

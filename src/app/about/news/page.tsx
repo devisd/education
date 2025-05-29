@@ -1,6 +1,6 @@
+import { renderBlocksWithBorders } from "@/api/parse"
 import { getNews } from "@/api/services"
 import { ErrorMessage } from "@/components/ErrorMessage"
-import { ParseContent } from "@/components/ui/ParseContent"
 
 
 export default async function NewsPage() {
@@ -25,7 +25,13 @@ export default async function NewsPage() {
                 </div>
 
                 {/* Основное содержимое из API */}
-                <ParseContent data={data} />
+                {data?.map(el => (
+                    <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8" key={el.id}>
+                        <div className="prose prose-lg max-w-none" >
+                            {renderBlocksWithBorders(el?.Content || [])}
+                        </div>
+                    </div>
+                ))}
             </div>
         </section>
     )

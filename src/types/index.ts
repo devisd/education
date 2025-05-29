@@ -38,6 +38,17 @@ export interface ISlideResponse {
     large: ISlide
 }
 
+export interface INewsResponse {
+    id: number,
+    documentId: string,
+    Content: any[],
+    Title: string,
+    Date: string,
+    Description: string,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string
+}
 
 interface IContent {
     type: string,

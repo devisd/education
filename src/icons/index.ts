@@ -25,3 +25,6 @@ export * from './TeamIcon';
 export * from './ChecklistIcon';
 export * from './CurrencyCircleIcon';
 export * from './CircleArrowIcon';
+
+// New export
+export * from './SearchIcon';

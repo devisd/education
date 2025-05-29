@@ -33,6 +33,49 @@ export function renderChildren(children: any[], format?: string) {
     });
 }
 
+export function renderBlocksWithBorders(blocks: any[]) {
+    const result: React.ReactNode[] = [];
+    let i = 0;
+    let keyCounter = 0;
+    while (i < blocks.length) {
+        const block = blocks[i];
+        if (block.type === 'heading' && block.level >= 3 && block.level <= 6) {
+            const group = [block];
+            i++;
+            while (
+                i < blocks.length &&
+                !(blocks[i].type === 'heading' && blocks[i].level >= 2 && blocks[i].level <= 6)
+            ) {
+                group.push(blocks[i]);
+                i++;
+            }
+            result.push(
+                <div className="border border-gray-300 rounded-lg p-4 my-6" key={`border-group-${keyCounter++}`}>
+                    {group.map((b, idx) => renderBlock(b, idx))}
+                </div>
+            );
+        } else if (block.type === 'heading' && block.level === 2) {
+            result.push(renderBlock(block, keyCounter++));
+            i++;
+            while (
+                i < blocks.length &&
+                !(blocks[i].type === 'heading' && blocks[i].level >= 2 && blocks[i].level <= 6)
+            ) {
+                result.push(renderBlock(blocks[i], keyCounter++));
+                i++;
+            }
+        } else if (block.type === 'heading' && block.level === 1) {
+            const h2Block = { ...block, level: 2 };
+            result.push(renderBlock(h2Block, keyCounter++));
+            i++;
+        } else {
+            result.push(renderBlock(block, keyCounter++));
+            i++;
+        }
+    }
+    return result;
+}
+
 export function renderBlock(block: any, idx: number) {
     if (block.type === 'paragraph') {
         const text = (block.children || []).map(renderText).join('');
@@ -40,7 +83,7 @@ export function renderBlock(block: any, idx: number) {
         return <p key={idx} className="mb-6" > {renderChildren(block.children || [])} </p>;
     }
     if (block.type === 'heading') {
-        const level = block.level || 2;
+        const level = block.level === 1 ? 2 : block.level || 2;
         const children = renderChildren(block.children || []);
         const headingProps = {
             2: { tag: 'h2', className: 'font-bold text-gray-800 mb-4 mt-8 text-2xl md:text-3xl' },

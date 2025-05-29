@@ -3,11 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon, MapIcon, PhoneIcon, EmailIcon } from '@/icons';
+import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon, MapIcon, PhoneIcon, EmailIcon, SearchIcon } from '@/icons';
 import { EDUCATIONAL_SERVICES, ORGANIZATION_INFO, MAIN_MENU } from '../../constants/header';
 import { CONTACT_LINKS } from '../../constants/footer';
+import { NEWS_ITEMS } from '../../constants/news';
+import { TRAINING_CATEGORIES } from '../../constants/trainingCategories';
+import { MENU_LINKS, EDU_LINKS } from '../../constants/footer';
 import type { MenuItem } from '@/types';
 import { Dropdown, DropdownItem, DropdownSubmenu, VisuallyImpairedModeToggle } from '../ui';
+import { SiteSearch } from './SiteSearch';
 
 export const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -17,6 +21,37 @@ export const Header = () => {
     const [coursesMenuOpen, setCoursesMenuOpen] = useState(false);
     // Состояние для открытого десктопного дропдауна
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+    // Состояние для поиска
+    const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+    const [searchValue, setSearchValue] = useState('');
+    const [searchOpen, setSearchOpen] = useState(false); // для десктопа
+
+    // Собираем все статические данные для поиска
+    type SearchLink = { title: string; href: string };
+    function flattenMenu(menu: any[]): SearchLink[] {
+        let result: SearchLink[] = [];
+        for (const item of menu) {
+            if (item.href) result.push({ title: item.title, href: item.href });
+            if (item.children) result = result.concat(flattenMenu(item.children));
+        }
+        return result;
+    }
+    const menuLinks: SearchLink[] = flattenMenu(MAIN_MENU);
+    const trainingLinks: SearchLink[] = TRAINING_CATEGORIES.map(c => ({ title: c.title, href: c.href }));
+    const newsLinks: SearchLink[] = NEWS_ITEMS.map(n => ({ title: n.title, href: n.link }));
+    const footerLinks: SearchLink[] = MENU_LINKS.map(l => ({ title: l.name, href: l.href }));
+    const eduLinks: SearchLink[] = EDU_LINKS.map(l => ({ title: l.name, href: l.href }));
+    const allLinks: SearchLink[] = [
+        ...menuLinks,
+        ...trainingLinks,
+        ...newsLinks,
+        ...footerLinks,
+        ...eduLinks,
+    ];
+    // Поиск по всем ссылкам
+    const searchResults = searchValue.length > 0
+        ? allLinks.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+        : [];
 
     // Добавляем обработчик скролла для закрытия всех дропдаунов
     useEffect(() => {
@@ -234,7 +269,7 @@ export const Header = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col wide:flex-row items-center gap-2 space-y-1.5">
+                        <div className="flex items-center gap-2">
                             <div className="flex items-center justify-center space-x-4 w-full">
                                 <a href="https://t.me/termedu38" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-900">
                                     <span className="sr-only">Telegram</span>
@@ -245,12 +280,16 @@ export const Header = () => {
                                     <WhatsAppIcon className="h-5 w-5 lg:h-6 lg:w-6" />
                                 </a>
                             </div>
-                            <div className="hidden lg:block xl:hidden">
-                                <VisuallyImpairedModeToggle fontSize="small" compact={false} verticalLayout={false} />
+                            {/* Десктоп: режим для слабовидящих + поиск */}
+                            <div className="hidden lg:flex lg:items-center xl:hidden gap-4">
+                                <SiteSearch />
+                                <VisuallyImpairedModeToggle onlyIcon={true} />
                             </div>
-                            <div className="hidden xl:flex xl:items-center">
-                                <div className="h-6 w-px bg-gray-300 mx-2"></div>
-                                <VisuallyImpairedModeToggle fontSize="small" />
+                            {/* XL: режим для слабовидящих + поиск */}
+                            <div className="hidden xl:flex xl:items-center gap-4">
+                                {/* <div className="h-6 w-px bg-gray-300 mx-2"></div> */}
+                                <SiteSearch />
+                                <VisuallyImpairedModeToggle onlyIcon={true} />
                             </div>
                         </div>
                     </div>
@@ -261,7 +300,7 @@ export const Header = () => {
             <div className="lg:bg-[#d76944] bg-transparent relative z-30">
                 <div className="container mx-auto max-md:max-w-full px-4 lg:px-2 xl:px-4 py-4">
                     <div className="flex justify-between items-center">
-                        {/* Логотип для мобильных устройств */}
+                        {/* Логотип для мобильных устройств + поиск */}
                         <div className="flex lg:hidden items-center">
                             <Link href="/" className="flex items-center">
                                 <div className="h-10 w-28 sm:h-12 sm:w-32 md:h-14 md:w-36 relative">
@@ -275,6 +314,7 @@ export const Header = () => {
                                     />
                                 </div>
                             </Link>
+
                         </div>
 
                         {/* Desktop menu */}
@@ -308,6 +348,9 @@ export const Header = () => {
 
                         {/* Mobile menu button */}
                         <div className="lg:hidden flex items-center justify-end space-x-4 ml-auto">
+                            {/* Поиск на мобильных/планшетах */}
+                            <SiteSearch />
+
                             <VisuallyImpairedModeToggle compact={true} fontSize="small" />
                             <button
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

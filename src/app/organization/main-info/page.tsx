@@ -1,4 +1,3 @@
-import React from 'react';
 import { getMainInfo } from '@/api/services';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import { ParseContent } from '@/components/ui/ParseContent';

@@ -71,7 +71,7 @@ export const Carousel = ({ slides, autoPlayInterval = 5000 }: CarouselProps) => 
                     <SwiperSlide key={slide.id}>
                         <a href={normalizeLink(slide.link)} target='_blank'>
                             <div
-                                className="w-full relative"
+                                className="w-full relative wide:!h-[550px]"
                                 style={{
                                     backgroundImage: `url(${bgUrl})`,
                                     backgroundSize: 'cover',
