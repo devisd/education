@@ -38,6 +38,22 @@ export interface ISlideResponse {
     large: ISlide
 }
 
+export interface IStatistics {
+    id: number,
+    documentId: string,
+    Title_1?: string,
+    Value_1?: string,
+    Title_2?: string,
+    Value_2?: string,
+    Title_3?: string,
+    Value_3?: string,
+    Title_4?: string,
+    Value_4?: string,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string
+}
+
 export interface INewsResponse {
     id: number,
     documentId: string,

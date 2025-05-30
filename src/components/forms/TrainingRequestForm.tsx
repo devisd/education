@@ -59,6 +59,7 @@ export const TrainingRequestForm: React.FC = () => {
         phone: formData.phone,
         email: formData.email,
         program: formData.program,
+        _template: 'table',
       };
       const response = await fetch('https://formsubmit.co/ajax/terminal.38@mail.ru', {
         method: 'POST',
@@ -106,6 +107,8 @@ export const TrainingRequestForm: React.FC = () => {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-5">
+        <input type="hidden" name="_template" value="table" />
+
         <FormInput
           id="name"
           name="name"
@@ -185,8 +188,6 @@ export const TrainingRequestForm: React.FC = () => {
             </div>
           }
         />
-
-        <input type="hidden" name="_template" value="table"></input>
 
         <button
           type="submit"

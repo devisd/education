@@ -1,4 +1,4 @@
-import type { ICont, IData, IImageResponse, ILetter, INewsResponse, ISlideResponse, ITrainingResponse } from '@/types';
+import type { ICont, IData, IImageResponse, ILetter, INewsResponse, ISlideResponse, IStatistics, ITrainingResponse } from '@/types';
 import { request } from './request';
 
 
@@ -98,14 +98,21 @@ export const getGratitudeLetters = () => {
     });
 }
 
+// Страница 'Отзывы (Статистика)'
+export const getStatistics = () => {
+    return request<IStatistics>({
+        path: '/statistika'
+    });
+}
+
 // Страница 'Прайс'
 export const getPrice = () => {
-    return request<ICont>({ path: '/stoimost' });
+    return request<any>({ path: '/stoimost' });
 }
 
 // Скачать прайс-лист
 export const getPriceList = () => {
-    return request<ICont>({ path: '/prajs-list' });
+    return request<any>({ path: '/prajs-list' });
 }
 
 // Страница 'Вопрос-ответ'

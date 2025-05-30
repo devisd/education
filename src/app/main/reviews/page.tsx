@@ -1,12 +1,14 @@
-import { getGratitudeLetters, getReviews } from "@/api/services";
+import { getGratitudeLetters, getReviews, getStatistics } from "@/api/services";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { ParseReview } from "@/components/ui/ParseReview";
 import { ReviewForm } from "@/components/forms/ReviewForm";
 import { GratitudeLetters } from '@/components/ui';
+import { StatisticsGrid } from "@/components/ui/StatisticsGrid";
 
 export default async function ReviewsPage() {
     const { data, error } = await getReviews()
     const { data: lettersData } = await getGratitudeLetters()
+    const { data: statistics } = await getStatistics()
 
     if (error) return <ErrorMessage />
 
@@ -47,24 +49,7 @@ export default async function ReviewsPage() {
                 <GratitudeLetters lettersData={lettersData} />
 
                 {/* Статистика */}
-                <div className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div className="bg-white rounded-lg shadow-md p-6 text-center">
-                        <div className="text-4xl font-bold text-primary-600 mb-2">96%</div>
-                        <div className="text-gray-700">довольных выпускников</div>
-                    </div>
-                    <div className="bg-white rounded-lg shadow-md p-6 text-center">
-                        <div className="text-4xl font-bold text-primary-600 mb-2">4.8</div>
-                        <div className="text-gray-700">средняя оценка курсов</div>
-                    </div>
-                    <div className="bg-white rounded-lg shadow-md p-6 text-center">
-                        <div className="text-4xl font-bold text-primary-600 mb-2">2500+</div>
-                        <div className="text-gray-700">выпускников</div>
-                    </div>
-                    <div className="bg-white rounded-lg shadow-md p-6 text-center">
-                        <div className="text-4xl font-bold text-primary-600 mb-2">87%</div>
-                        <div className="text-gray-700">трудоустроенных</div>
-                    </div>
-                </div>
+                <StatisticsGrid statistics={statistics ?? undefined} />
             </div>
         </section>
     );
