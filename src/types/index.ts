@@ -57,10 +57,11 @@ export interface IStatistics {
 export interface INewsResponse {
     id: number,
     documentId: string,
-    Content: any[],
+    Content: IContent[],
     Title: string,
     Date: string,
     Description: string,
+    Image: IImage,
     createdAt: string,
     updatedAt: string,
     publishedAt: string
@@ -170,14 +171,10 @@ export interface ITrainingResponse {
     image: IImage
 }
 
-
-
 export interface LinkItem {
     name: string;
     href: string;
 }
-
-export type IconType = 'team' | 'shield' | 'checklist' | 'currency';
 
 export interface NewsItem {
     id: number;
@@ -188,8 +185,6 @@ export interface NewsItem {
     image: string;
     slug: string;
     link: string;
-    iconType: IconType;
-    gradient: string;
 }
 
 export type Partner = {

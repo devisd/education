@@ -1,10 +1,10 @@
-import { renderBlocksWithBorders } from "@/api/parse"
-import { getNews } from "@/api/services"
+import { getAllNews } from "@/api/services"
 import { ErrorMessage } from "@/components/ErrorMessage"
+import { NewsCard } from "@/components/ui"
 
 
 export default async function NewsPage() {
-    const { data, error } = await getNews()
+    const { data, error } = await getAllNews()
 
     if (error) return <ErrorMessage />
 
@@ -25,13 +25,11 @@ export default async function NewsPage() {
                 </div>
 
                 {/* Основное содержимое из API */}
-                {data?.map(el => (
-                    <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8" key={el.id}>
-                        <div className="prose prose-lg max-w-none" >
-                            {renderBlocksWithBorders(el?.Content || [])}
-                        </div>
-                    </div>
-                ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {data?.map((el) => (
+                        <NewsCard key={el.id} item={el} />
+                    ))}
+                </div>
             </div>
         </section>
     )

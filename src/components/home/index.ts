@@ -1,5 +1,5 @@
 export { Partners } from './Partners'
 export { Features } from './Features'
 export { Hero } from './Hero'
-export { Testimonials } from './Testimonials'
+export { News } from './News'
 export { HomeCarousel } from './HomeCarousel'

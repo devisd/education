@@ -121,9 +121,14 @@ export const getFAQ = () => {
 }
 
 // ======== ABOUT ==========
-// Страница 'Новости'
-export const getNews = () => {
-    return request<INewsResponse[]>({ path: '/novostis' });
+// Страница 'Все Новости'
+export const getAllNews = () => {
+    return request<INewsResponse[]>({ path: '/novostis?populate=Image' });
+}
+
+// Страница 'Новость'
+export const getNews = (id: string) => {
+    return request<INewsResponse>({ path: `/novostis/${id}?populate=Image` });
 }
 
 // Страница 'Лицензии'
@@ -134,9 +139,15 @@ export const getLicenses = () => {
 
 // ========= TRAINING ========
 // Страница
-export const getTraining = () => {
+export const getAllTraining = () => {
     return request<ITrainingResponse[]>({
         path: '/uslugis?populate=image'
+    });
+}
+
+export const getTraining = (id: string) => {
+    return request<ITrainingResponse[]>({
+        path: `/uslugis/${id}?populate=image`
     });
 }
 

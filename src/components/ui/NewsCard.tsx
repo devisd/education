@@ -1,30 +1,27 @@
 import React from 'react';
 import Link from 'next/link';
-import { TeamIcon, ShieldIcon, ChecklistIcon, CurrencyCircleIcon, ArrowRightIcon } from '../../icons';
-import type { IconType, NewsItem } from '@/types';
-
-const getIconByType = (iconType: IconType) => {
-    switch (iconType) {
-        case 'team':
-            return <TeamIcon className="w-12 h-12 text-white" />;
-        case 'shield':
-            return <ShieldIcon className="w-12 h-12 text-white" />;
-        case 'checklist':
-            return <ChecklistIcon className="w-12 h-12 text-white" />;
-        case 'currency':
-            return <CurrencyCircleIcon className="w-12 h-12 text-white" />;
-        default:
-            return null;
-    }
-};
+import Image from 'next/image';
+import { ArrowRightIcon } from '../../icons';
+import type { NewsItem, INewsResponse } from '@/types';
 
 interface NewsCardProps {
-    item: NewsItem;
+    item: INewsResponse;
 }
 
+const mapNewsResponseToNewsItem = (item: INewsResponse): NewsItem => ({
+    id: item.id,
+    title: item.Title,
+    date: item.Date,
+    excerpt: item.Description,
+    content: item.Content ? item.Content.map(c => typeof c === 'string' ? c : JSON.stringify(c)) : [],
+    image: item.Image?.url || '',
+    slug: item.id.toString(),
+    link: `/about/news/${item.documentId}`,
+});
+
 export const NewsCard: React.FC<NewsCardProps> = ({ item }) => {
-    const { title, date, excerpt, link, iconType, gradient } = item;
-    const icon = getIconByType(iconType);
+    const mapped = mapNewsResponseToNewsItem(item);
+    const { title, date, excerpt, link, image } = mapped;
 
     return (
         <Link
@@ -32,9 +29,13 @@ export const NewsCard: React.FC<NewsCardProps> = ({ item }) => {
             className="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300 hover:translate-y-[-4px] group block"
         >
             <div className="relative h-48 w-full">
-                <div className={`w-full h-full bg-gradient-to-br ${gradient} flex items-center justify-center p-5 group-hover:opacity-90 transition-opacity duration-300`}>
-                    {icon}
-                </div>
+                <Image
+                    src={`https://terminal-38.cloudpub.ru${image}`}
+                    alt={title}
+                    className="w-full h-full object-cover object-center"
+                    width={340}
+                    height={280}
+                />
                 <div className="absolute bottom-0 right-0 bg-white rounded-tl-lg py-1 px-3">
                     <p className="text-xs font-medium text-gray-600">{date}</p>
                 </div>

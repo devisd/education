@@ -1,10 +1,14 @@
-import React from 'react';
 import Link from 'next/link';
 import { CircleArrowIcon } from '../../icons';
 import { DecorativeBackground, DecorativeCircles, NewsCard } from '../ui';
-import { NEWS_ITEMS } from '@/constants/news';
+import { getAllNews } from '@/api/services';
+import { ErrorMessage } from '../ErrorMessage';
 
-export const Testimonials = () => {
+export const News = async () => {
+  const { data, error } = await getAllNews()
+
+  if (error) return <ErrorMessage />
+
   return (
     <section className="py-20 bg-gray-50 relative overflow-hidden">
       <DecorativeCircles />
@@ -20,8 +24,8 @@ export const Testimonials = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {NEWS_ITEMS.map((item) => (
-            <NewsCard key={item.id} item={item} />
+          {data?.map((el) => (
+            <NewsCard key={el.id} item={el} />
           ))}
         </div>
 

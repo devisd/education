@@ -1,5 +1,5 @@
 import { Footer, Header } from '@/components/common';
-import { Features, Hero, Testimonials, HomeCarousel, Partners } from '@/components/home';
+import { Features, Hero, HomeCarousel, Partners, News } from '@/components/home';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default function Home() {
         <HomeCarousel />
         <Hero />
         <Features />
-        <Testimonials />
+        <News />
         <Partners />
       </main>
       <Footer />

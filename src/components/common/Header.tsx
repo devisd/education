@@ -3,86 +3,71 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon, MapIcon, PhoneIcon, EmailIcon, SearchIcon } from '@/icons';
-import { EDUCATIONAL_SERVICES, ORGANIZATION_INFO, MAIN_MENU } from '../../constants/header';
+import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon, MapIcon, PhoneIcon, EmailIcon } from '@/icons';
+import { ORGANIZATION_INFO } from '../../constants/header';
 import { CONTACT_LINKS } from '../../constants/footer';
-import { NEWS_ITEMS } from '../../constants/news';
-import { TRAINING_CATEGORIES } from '../../constants/trainingCategories';
-import { MENU_LINKS, EDU_LINKS } from '../../constants/footer';
 import type { MenuItem } from '@/types';
 import { Dropdown, DropdownItem, DropdownSubmenu, VisuallyImpairedModeToggle } from '../ui';
 import { SiteSearch } from './SiteSearch';
+import { getAllTraining } from '@/api/services';
 
 export const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    // Состояния для мобильных подменю
     const [eduMenuOpen, setEduMenuOpen] = useState(false);
     const [aboutMenuOpen, setAboutMenuOpen] = useState(false);
     const [coursesMenuOpen, setCoursesMenuOpen] = useState(false);
-    // Состояние для открытого десктопного дропдауна
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-    // Состояние для поиска
-    const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-    const [searchValue, setSearchValue] = useState('');
-    const [searchOpen, setSearchOpen] = useState(false); // для десктопа
+    const [trainingMenu, setTrainingMenu] = useState<MenuItem | null>(null);
+    const [menu, setMenu] = useState<MenuItem[]>([
+        ORGANIZATION_INFO,
+        { title: 'УСЛУГИ', children: [] },
+        { title: 'ПРАЙС', href: '/main/price' },
+        { title: 'ВОПРОС-ОТВЕТ', href: '/main/faq' },
+        { title: 'ОТЗЫВЫ', href: '/main/reviews' },
+        { title: 'КОНТАКТЫ', href: '/main/contacts' },
+        { title: 'ДИСТАНЦИОННОЕ ОБУЧЕНИЕ', href: 'https://sdo.от38.рус/' }
+    ]);
 
-    // Собираем все статические данные для поиска
-    type SearchLink = { title: string; href: string };
-    function flattenMenu(menu: any[]): SearchLink[] {
-        let result: SearchLink[] = [];
-        for (const item of menu) {
-            if (item.href) result.push({ title: item.title, href: item.href });
-            if (item.children) result = result.concat(flattenMenu(item.children));
-        }
-        return result;
-    }
-    const menuLinks: SearchLink[] = flattenMenu(MAIN_MENU);
-    const trainingLinks: SearchLink[] = TRAINING_CATEGORIES.map(c => ({ title: c.title, href: c.href }));
-    const newsLinks: SearchLink[] = NEWS_ITEMS.map(n => ({ title: n.title, href: n.link }));
-    const footerLinks: SearchLink[] = MENU_LINKS.map(l => ({ title: l.name, href: l.href }));
-    const eduLinks: SearchLink[] = EDU_LINKS.map(l => ({ title: l.name, href: l.href }));
-    const allLinks: SearchLink[] = [
-        ...menuLinks,
-        ...trainingLinks,
-        ...newsLinks,
-        ...footerLinks,
-        ...eduLinks,
-    ];
-    // Поиск по всем ссылкам
-    const searchResults = searchValue.length > 0
-        ? allLinks.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-        : [];
-
-    // Добавляем обработчик скролла для закрытия всех дропдаунов
     useEffect(() => {
         const handleScroll = () => {
-            // Закрываем все раскрытые меню на мобильных
             setEduMenuOpen(false);
             setAboutMenuOpen(false);
             setCoursesMenuOpen(false);
-
-            // Закрываем десктопные дропдауны через диспетчер событий
             document.dispatchEvent(new CustomEvent('dropdown:close', { detail: { except: '' } }));
         };
-
-        // Привязываем обработчик к событию скролла
         window.addEventListener('scroll', handleScroll);
-
-        // Удаляем обработчик при размонтировании компонента
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
 
-    // Функция для рендеринга вложенного меню на десктопе
+    useEffect(() => {
+        async function fetchTraining() {
+            try {
+                const { data } = await getAllTraining();
+                if (Array.isArray(data)) {
+                    const children = data.map((item) => ({
+                        title: item.content?.[0]?.children?.[0]?.text || 'Услуга',
+                        href: `/training/${item.documentId}`
+                    }));
+                    setMenu((prevMenu) => prevMenu.map((item) =>
+                        item.title === 'УСЛУГИ'
+                            ? { ...item, children }
+                            : item
+                    ));
+                }
+            } catch (e) {
+                // Ошибка — оставляем пустой раздел 'УСЛУГИ'
+            }
+        }
+        fetchTraining();
+    }, []);
+
     const renderDesktopSubmenu = (item: MenuItem, isSubMenu = false) => {
         if (!item.children) return null;
-
         if (isSubMenu) {
             return (
-                <DropdownSubmenu
-                    trigger={item.title}
-                >
+                <DropdownSubmenu trigger={item.title}>
                     {item.children.map((child, idx) => (
                         <DropdownItem
                             key={`submenu-item-${child.title}-${idx}`}
@@ -95,7 +80,6 @@ export const Header = () => {
                 </DropdownSubmenu>
             );
         }
-
         return (
             <Dropdown
                 id={`menu-${item.title.toLowerCase()}`}
@@ -128,12 +112,10 @@ export const Header = () => {
         );
     };
 
-    // Функция для рендеринга пунктов мобильного меню
     const renderMobileMenuItem = (item: MenuItem) => {
         if (item.children) {
-            const isOpen = item === EDUCATIONAL_SERVICES ? eduMenuOpen : item === ORGANIZATION_INFO ? aboutMenuOpen : false;
-            const setOpen = item === EDUCATIONAL_SERVICES ? setEduMenuOpen : item === ORGANIZATION_INFO ? setAboutMenuOpen : () => { };
-
+            const isOpen = item.title === 'УСЛУГИ' ? eduMenuOpen : item === ORGANIZATION_INFO ? aboutMenuOpen : false;
+            const setOpen = item.title === 'УСЛУГИ' ? setEduMenuOpen : item === ORGANIZATION_INFO ? setAboutMenuOpen : () => { };
             return (
                 <div className="border-b pb-2">
                     <button
@@ -145,62 +127,26 @@ export const Header = () => {
                     </button>
                     {isOpen && (
                         <div className="pl-4 mt-2 space-y-2">
-                            {item.children.map((child, idx) => {
-                                if (!child.children) {
-                                    return (
-                                        <Link
-                                            href={child.href || '#'}
-                                            key={`mobile-link-${child.title}-${idx}`}
-                                            className="block py-1 text-gray-600"
-                                            onClick={() => {
-                                                setMobileMenuOpen(false);
-                                                setEduMenuOpen(false);
-                                                setAboutMenuOpen(false);
-                                                setCoursesMenuOpen(false);
-                                            }}
-                                        >
-                                            {child.title}
-                                        </Link>
-                                    );
-                                }
-                                return (
-                                    <div key={`mobile-submenu-${child.title}-${idx}`} className="py-2 text-gray-700">
-                                        <button
-                                            className="flex justify-between w-full py-2 text-gray-700 text-left items-center"
-                                            onClick={() => setCoursesMenuOpen(!coursesMenuOpen)}
-                                        >
-                                            {child.title}
-                                            <ChevronDownIcon className={`h-5 w-5 transform transition-transform ${coursesMenuOpen ? 'rotate-180' : ''}`} />
-                                        </button>
-
-                                        {coursesMenuOpen && (
-                                            <div className="pl-3 mt-1 space-y-1 mb-1">
-                                                {child.children?.map((subChild, subIdx) => (
-                                                    <Link
-                                                        href={subChild.href || '#'}
-                                                        key={`mobile-sublink-${subChild.title}-${subIdx}`}
-                                                        className="block py-1 text-gray-600 text-sm"
-                                                        onClick={() => {
-                                                            setMobileMenuOpen(false);
-                                                            setEduMenuOpen(false);
-                                                            setAboutMenuOpen(false);
-                                                            setCoursesMenuOpen(false);
-                                                        }}
-                                                    >
-                                                        {subChild.title}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
-                                );
-                            })}
+                            {item.children.map((child, idx) => (
+                                <Link
+                                    href={child.href || '#'}
+                                    key={`mobile-link-${child.title}-${idx}`}
+                                    className="block py-1 text-gray-600"
+                                    onClick={() => {
+                                        setMobileMenuOpen(false);
+                                        setEduMenuOpen(false);
+                                        setAboutMenuOpen(false);
+                                        setCoursesMenuOpen(false);
+                                    }}
+                                >
+                                    {child.title}
+                                </Link>
+                            ))}
                         </div>
                     )}
                 </div>
             );
         }
-
         return (
             <div className="border-b pb-2">
                 <Link
@@ -238,7 +184,6 @@ export const Header = () => {
                                     />
                                 </div>
                             </Link>
-
                             {/* Адрес */}
                             <div className='text-primary-600 whitespace-nowrap'>
                                 <a href={CONTACT_LINKS[0].href} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-primary-900">
@@ -246,7 +191,6 @@ export const Header = () => {
                                     <span className="text-sm lg:text-xs xl:text-lg">{CONTACT_LINKS[0].name}</span>
                                 </a>
                             </div>
-
                             {/* Телефоны */}
                             <div className="flex items-center text-primary-600">
                                 <PhoneIcon className="h-5 w-5 mr-2 text-primary-600 flex-shrink-0 lg:h-6 lg:w-6" />
@@ -259,7 +203,6 @@ export const Header = () => {
                                     </a>
                                 </div>
                             </div>
-
                             {/* Почта */}
                             <div className='text-primary-600 hover:text-primary-900 whitespace-nowrap'>
                                 <a href={CONTACT_LINKS[3].href} className="flex items-center">
@@ -268,7 +211,6 @@ export const Header = () => {
                                 </a>
                             </div>
                         </div>
-
                         <div className="flex items-center gap-2">
                             <div className="flex items-center justify-center space-x-4 w-full">
                                 <a href="https://t.me/termedu38" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-900">
@@ -287,7 +229,6 @@ export const Header = () => {
                             </div>
                             {/* XL: режим для слабовидящих + поиск */}
                             <div className="hidden xl:flex xl:items-center gap-4">
-                                {/* <div className="h-6 w-px bg-gray-300 mx-2"></div> */}
                                 <SiteSearch />
                                 <VisuallyImpairedModeToggle onlyIcon={true} />
                             </div>
@@ -295,12 +236,11 @@ export const Header = () => {
                     </div>
                 </div>
             </div>
-
             {/* Основная часть шапки с меню */}
             <div className="lg:bg-[#d76944] bg-transparent relative z-30">
                 <div className="container mx-auto max-md:max-w-full px-4 lg:px-2 xl:px-4 py-4">
                     <div className="flex justify-between items-center">
-                        {/* Логотип для мобильных устройств + поиск */}
+                        {/* Логотип для мобильных устройств */}
                         <div className="flex lg:hidden items-center">
                             <Link href="/" className="flex items-center">
                                 <div className="h-10 w-28 sm:h-12 sm:w-32 md:h-14 md:w-36 relative">
@@ -314,16 +254,13 @@ export const Header = () => {
                                     />
                                 </div>
                             </Link>
-
                         </div>
-
                         {/* Desktop menu */}
                         <nav className="hidden lg:flex items-center justify-between w-full font-bold relative">
-                            {MAIN_MENU.map((item, idx) => {
+                            {menu.map((item, idx) => {
                                 if (item.children) {
                                     return <React.Fragment key={`main-menu-${item.title}-${idx}`}>{renderDesktopSubmenu(item)}</React.Fragment>;
                                 }
-                                // Check if external link
                                 const isExternal = item.href && item.href.startsWith('http');
                                 if (isExternal) {
                                     return (
@@ -345,12 +282,9 @@ export const Header = () => {
                                 );
                             })}
                         </nav>
-
                         {/* Mobile menu button */}
                         <div className="lg:hidden flex items-center justify-end space-x-4 ml-auto">
-                            {/* Поиск на мобильных/планшетах */}
                             <SiteSearch />
-
                             <VisuallyImpairedModeToggle compact={true} fontSize="small" />
                             <button
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -362,16 +296,13 @@ export const Header = () => {
                     </div>
                 </div>
             </div>
-
             {/* Mobile menu */}
             <div
-                className={`lg:hidden fixed inset-0 pb-1 bg-gray-800 bg-opacity-50 backdrop-blur-sm transition-opacity z-50 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-                    }`}
+                className={`lg:hidden fixed inset-0 pb-1 bg-gray-800 bg-opacity-50 backdrop-blur-sm transition-opacity z-50 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
                 onClick={() => setMobileMenuOpen(false)}
             >
                 <div
-                    className={`fixed right-0 top-0 bottom-0 w-full mob:w-[360px] bg-white shadow-xl transform transition-transform overflow-y-auto ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-                        }`}
+                    className={`fixed right-0 top-0 bottom-0 w-full mob:w-[360px] bg-white shadow-xl transform transition-transform overflow-y-auto ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Mobile menu content */}
@@ -386,9 +317,8 @@ export const Header = () => {
                         </button>
                     </div>
                     <div className="p-4 space-y-4 overflow-y-auto max-h-[calc(100vh-180px)]">
-                        {MAIN_MENU.map((item, idx) => (
+                        {menu.map((item, idx) => (
                             <React.Fragment key={`mobile-menu-${item.title}-${idx}`}>
-                                {/* For mobile, handle external link for 'ДИСТАНЦИОННОЕ ОБУЧЕНИЕ' */}
                                 {item.children ? renderMobileMenuItem(item) :
                                     (item.href && item.href.startsWith('http') ? (
                                         <div className="border-b pb-2">
@@ -412,7 +342,6 @@ export const Header = () => {
                             </React.Fragment>
                         ))}
                     </div>
-
                     <div className="mt-auto border-t-2 border-gray-500 text-center p-4">
                         <div className="text-sm text-gray-600 space-y-2">
                             {/* Адрес */}
@@ -443,7 +372,6 @@ export const Header = () => {
                                 </a>
                             </div>
                         </div>
-
                         <div className="flex space-x-4 items-center justify-center mt-3">
                             <a href="https://t.me/termedu38" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-700">
                                 <span className="sr-only">Telegram</span>
