@@ -10,9 +10,10 @@ interface DocumentCardProps {
     alt: string;
     isPdf?: boolean;
     onOpen: (id: number) => void;
+    isPlaceholder?: boolean;
 }
 
-export const DocumentCard: React.FC<DocumentCardProps> = ({ id, src, alt, isPdf = false, onOpen }) => {
+export const DocumentCard: React.FC<DocumentCardProps> = ({ id, src, alt, isPdf = false, onOpen, isPlaceholder = false }) => {
     return (
         <div
             className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
@@ -28,12 +29,16 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({ id, src, alt, isPdf 
             }}
         >
             <div className="p-4 border-b border-gray-100">
-                <h3 className="font-semibold text-gray-800 text-center">{alt}</h3>
+                <h3 className="font-semibold text-gray-800 text-center min-h-[48px] flex items-center justify-center">{alt}</h3>
             </div>
             <div className="relative aspect-[1/1.414] w-full overflow-hidden">
                 {isPdf ? (
                     <div className="w-full h-full flex items-center justify-center bg-gray-100">
                         <DocumentIcon className="h-24 w-24 text-primary-600" />
+                    </div>
+                ) : isPlaceholder ? (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                        <DocumentIcon className="h-24 w-24 text-gray-300" />
                     </div>
                 ) : (
                     <Image

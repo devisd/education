@@ -1,16 +1,11 @@
-'use client';
+import { getLicenses } from '@/api/services';
+import { ErrorMessage } from '@/components/ErrorMessage';
+import { GratitudeLetters } from '@/components/ui';
 
-import React, { useState } from 'react';
-import { DocumentCard, DocumentModal } from '@/components/ui';
-import { LICENSE_IMAGES } from '@/constants/documents';
+export default async function LicensesPage() {
+  const { data, error } = await getLicenses()
 
-export default function LicensesPage() {
-  const [activeImage, setActiveImage] = useState<number | null>(null);
-
-  // Находим активный документ для модального окна
-  const activeDocument = activeImage
-    ? LICENSE_IMAGES.find(img => img.id === activeImage) || null
-    : null;
+  if (error) return <ErrorMessage />
 
   return (
     <>
@@ -35,21 +30,7 @@ export default function LicensesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-4xl mx-auto">
-            {LICENSE_IMAGES.map(item => (
-              <DocumentCard
-                key={item.id}
-                id={item.id}
-                src={item.src}
-                alt={item.alt}
-                isPdf={item.isPdf}
-                onOpen={setActiveImage}
-              />
-            ))}
-          </div>
-
-          {/* Модальное окно для просмотра документа */}
-          <DocumentModal activeDocument={activeDocument} onClose={() => setActiveImage(null)} />
+          <GratitudeLetters lettersData={data} />
         </div>
       </section>
     </>

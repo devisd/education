@@ -47,7 +47,9 @@ export const getProfessors = () => {
 
 // Страница 'Материально-техническое обеспечение и оснащенность образовательного процесса. Досупная среда'
 export const getMTS = () => {
-    return request<ICont>({ path: '/materialno-tehnicheskoe-obespechenie-i-osnashhennost-obrazovatelnogo-proczessa-dostupnaya-sreda' });
+    return request<ICont>({
+        path: '/materialno-tehnicheskoe-obespechenie'
+    });
 }
 
 // Страница 'Платные образовательные услуги'
@@ -101,6 +103,11 @@ export const getPrice = () => {
     return request<ICont>({ path: '/stoimost' });
 }
 
+// Скачать прайс-лист
+export const getPriceList = () => {
+    return request<ICont>({ path: '/prajs-list' });
+}
+
 // Страница 'Вопрос-ответ'
 export const getFAQ = () => {
     return request<IData[]>({ path: '/vopros-otvets' });
@@ -110,6 +117,11 @@ export const getFAQ = () => {
 // Страница 'Новости'
 export const getNews = () => {
     return request<INewsResponse[]>({ path: '/novostis' });
+}
+
+// Страница 'Лицензии'
+export const getLicenses = () => {
+    return request<ILetter[]>({ path: '/liczenzii-i-akkreditacziis?populate=Image' });
 }
 
 

@@ -51,33 +51,25 @@ export const TrainingRequestForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitSuccess(false);
     try {
-      // Prepare data for API
-      const submitData = {
+      // Формируем данные для отправки
+      const payload = {
         name: formData.name,
+        phone: formData.phone,
         email: formData.email,
-        subject: `Заявка на обучение: ${formData.program}`,
-        message: `
-          Имя: ${formData.name}
-          Телефон: ${formData.phone}
-          Email: ${formData.email}
-          Программа обучения: ${formData.program}
-        `,
-        toEmail: 'terminal.38@mail.ru'
+        program: formData.program,
       };
-
-      // Send data to API
-      const response = await fetch('/api/send-email', {
+      const response = await fetch('https://formsubmit.co/ajax/terminal.38@mail.ru', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify(submitData),
+        body: JSON.stringify(payload),
       });
-
       if (response.ok) {
         setSubmitSuccess(true);
-        // Сброс формы после успешной отправки
         setFormData({
           name: '',
           phone: '',
@@ -86,10 +78,10 @@ export const TrainingRequestForm: React.FC = () => {
           privacyPolicyAgreed: false,
         });
       } else {
-        console.error('Error response:', await response.text());
+        console.error('Ошибка отправки:', await response.text());
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Ошибка отправки:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -113,10 +105,11 @@ export const TrainingRequestForm: React.FC = () => {
         />
       )}
 
-      <form className="space-y-5" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="space-y-5">
         <FormInput
           id="name"
           name="name"
+          type='text'
           label="Ваше имя"
           value={formData.name}
           onChange={handleChange}
@@ -192,6 +185,8 @@ export const TrainingRequestForm: React.FC = () => {
             </div>
           }
         />
+
+        <input type="hidden" name="_template" value="table"></input>
 
         <button
           type="submit"
