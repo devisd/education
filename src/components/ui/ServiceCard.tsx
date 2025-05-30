@@ -2,17 +2,18 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRightIcon } from '@/icons';
 
 interface ServiceCardProps {
-  icon?: React.ComponentType<{ className?: string }>;
+  icon?: string;
   title: string;
   description?: string;
   href: string;
 }
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({
-  icon: Icon,
+  icon,
   title,
   description,
   href,
@@ -24,7 +25,12 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       aria-label={`Подробнее о программе "${title}"`}
     >
       <div className="mb-5 text-primary-600 p-3 bg-primary-50 inline-flex rounded-lg">
-        {Icon && <Icon className="h-12 w-12 text-primary-600" />}
+        {icon?.length ?
+          <Image src={`https://terminal-38.cloudpub.ru${icon}`} alt={title} width={48} height={48} className="h-12 w-12 text-primary-600 " />
+          :
+          <div className="h-12 w-12 bg-primary-600" />
+
+        }
       </div>
       <h3 className="text-xl font-semibold mb-3 text-gray-800">{title}</h3>
       <p className="text-gray-600 mb-5 flex-grow leading-relaxed">{description}</p>

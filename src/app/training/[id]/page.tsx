@@ -46,15 +46,22 @@ export default async function TrainingDetailPage({ params }) {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <SectionTitle
                     subtitle="Программа обучения"
-                    title={title}
+                    title={data?.name}
                 />
                 <article className="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div className="flex flex-col md:flex-row">
-                        <div className="md:w-1/3 flex-shrink-0 flex items-center justify-center bg-white/10">
+                    <div className="flex flex-col md:flex-row lg:justify-end border rounded-lg border-primary-600">
+                        <div className='md:w-2/3 flex flex-col gap-2 pl-4 pt-4'>
+                            <p className='text-gray-800 font-bold text-3xl'>Срок обучения: <span className='text-primary-600 font-bold'>{data?.term_of_study}ч.</span></p>
+                            <p className='text-gray-800 font-bold text-3xl'>Выдаваемый документ: <span className='text-primary-600 font-bold'>{data?.document}</span></p>
+                            <p className='text-gray-800 font-bold text-3xl'>Формат обучения: <span className='text-primary-600 font-bold'>{data?.form_of_study}</span></p>
+                            <p className='text-gray-800 font-bold text-3xl'>Категория студентов: <span className='text-primary-600 font-bold'>{data?.category_of_students}</span></p>
+                            <a href={data?.study_plan_text} className='underline text-primary-600 hover:text-primary-800 text-xl font-bold'>{data?.study_plan_link}</a>
+                        </div>
+                        <div className="md:w-1/3 flex-shrink-0 flex items-center bg-white/10">
                             <Image
                                 src={image}
                                 alt={title}
-                                className="object-cover w-full h-full max-h-56 md:max-h-72"
+                                className="object-cover w-full h-full max-h-56 md:max-h-72 rounded-lg"
                                 width={340}
                                 height={220}
                             />

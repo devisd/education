@@ -1,3 +1,4 @@
+import { getAllTraining } from '@/api/services';
 import { Footer, Header } from '@/components/common';
 import { Features, Hero, HomeCarousel, Partners, News } from '@/components/home';
 import { Metadata } from 'next';
@@ -8,7 +9,8 @@ export const metadata: Metadata = {
     'Образовательный терминал в Иркутске - обучение в области охраны труда, пожарной безопасности, промышленной безопасности, электробезопасности и по другим направлениям.',
 };
 
-export default function Home() {
+export default async function Home() {
+  const { data } = await getAllTraining()
 
   return (
     <div>
@@ -16,7 +18,7 @@ export default function Home() {
       <main>
         <HomeCarousel />
         <Hero />
-        <Features />
+        <Features data={data} />
         <News />
         <Partners />
       </main>

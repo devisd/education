@@ -141,12 +141,12 @@ export const getLicenses = () => {
 // Страница
 export const getAllTraining = () => {
     return request<ITrainingResponse[]>({
-        path: '/uslugis?populate=image'
+        path: '/uslugis?populate=*'
     });
 }
 
 export const getTraining = (id: string) => {
-    return request<ITrainingResponse[]>({
+    return request<ITrainingResponse>({
         path: `/uslugis/${id}?populate=image`
     });
 }

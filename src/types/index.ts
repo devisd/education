@@ -4,6 +4,28 @@ export interface MenuItem {
     children?: MenuItem[];
 }
 
+interface IIcon {
+    id: number,
+    documentId: string,
+    name: string,
+    alternativeText: string | null,
+    caption: any,
+    width: number,
+    height: number,
+    formats: any,
+    hash: string,
+    ext: string,
+    mime: string,
+    size: number,
+    url: string,
+    previewUrl: string | null,
+    provider: string,
+    provider_metadata: any,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string
+}
+
 interface ISlide {
     id: number,
     documentId: string,
@@ -168,7 +190,15 @@ export interface ITrainingResponse {
     createdAt: string,
     updatedAt: string,
     publishedAt: string,
-    image: IImage
+    name: string,
+    term_of_study: number,
+    document: string,
+    category_of_students: string,
+    form_of_study: string,
+    study_plan_text: string,
+    study_plan_link: string,
+    image: IImage,
+    icon: IIcon
 }
 
 export interface LinkItem {
