@@ -1,4 +1,4 @@
-import type { ICont, IData, IImageResponse, ILetter, INewsResponse, ISlideResponse, IStatistics, ITrainingResponse } from '@/types';
+import type { ICont, IData, IImageResponse, ILetter, INewsResponse, IPriceList, ISlideResponse, IStatistics, ITrainingResponse } from '@/types';
 import { request } from './request';
 
 
@@ -112,7 +112,7 @@ export const getPrice = () => {
 
 // Скачать прайс-лист
 export const getPriceList = () => {
-    return request<any>({ path: '/prajs-list' });
+    return request<IPriceList>({ path: '/prajs-list?populate=*' });
 }
 
 // Страница 'Вопрос-ответ'

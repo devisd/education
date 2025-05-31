@@ -4,6 +4,35 @@ export interface MenuItem {
     children?: MenuItem[];
 }
 
+export interface IPriceList {
+    id: number,
+    documentId: string,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string,
+    document: {
+        id: number,
+        documentId: string,
+        name: string,
+        alternativeText: string | null,
+        caption: any,
+        width: number | null,
+        height: number | null,
+        formats: any,
+        hash: string,
+        ext: string,
+        mime: string,
+        size: number,
+        url: string,
+        previewUrl: string | null,
+        provider: string,
+        provider_metadata: any,
+        createdAt: string,
+        updatedAt: string,
+        publishedAt: string
+    }
+}
+
 interface IIcon {
     id: number,
     documentId: string,
