@@ -6,27 +6,34 @@ import Image from 'next/image';
 import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon, MapIcon, PhoneIcon, EmailIcon } from '@/icons';
 import { ORGANIZATION_INFO } from '../../constants/header';
 import { CONTACT_LINKS } from '../../constants/footer';
-import type { MenuItem } from '@/types';
+import type { ITrainingResponse, MenuItem } from '@/types';
 import { Dropdown, DropdownItem, DropdownSubmenu, VisuallyImpairedModeToggle } from '../ui';
 import { SiteSearch } from './SiteSearch';
-import { getAllTraining } from '@/api/services';
 
-export const Header = () => {
+export const Header = ({ data }: { data: ITrainingResponse[] | null }) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [eduMenuOpen, setEduMenuOpen] = useState(false);
     const [aboutMenuOpen, setAboutMenuOpen] = useState(false);
     const [coursesMenuOpen, setCoursesMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const [trainingMenu, setTrainingMenu] = useState<MenuItem | null>(null);
-    const [menu, setMenu] = useState<MenuItem[]>([
-        ORGANIZATION_INFO,
-        { title: 'УСЛУГИ', children: [] },
-        { title: 'ПРАЙС', href: '/main/price' },
-        { title: 'ВОПРОС-ОТВЕТ', href: '/main/faq' },
-        { title: 'ОТЗЫВЫ', href: '/main/reviews' },
-        { title: 'КОНТАКТЫ', href: '/main/contacts' },
-        { title: 'ДИСТАНЦИОННОЕ ОБУЧЕНИЕ', href: 'https://sdo.от38.рус/' }
-    ]);
+    const [menu, setMenu] = useState<MenuItem[]>(() => {
+        const servicesChildren = Array.isArray(data)
+            ? data.map((item) => ({
+                title: item.content?.[0]?.children?.[0]?.text || 'Услуга',
+                href: `/training/${item.documentId}`
+            }))
+            : [];
+        return [
+            { ...ORGANIZATION_INFO },
+            { title: 'УСЛУГИ', children: servicesChildren },
+            { title: 'ПРАЙС', href: '/main/price' },
+            { title: 'ВОПРОС-ОТВЕТ', href: '/main/faq' },
+            { title: 'ОТЗЫВЫ', href: '/main/reviews' },
+            { title: 'КОНТАКТЫ', href: '/main/contacts' },
+            { title: 'ДИСТАНЦИОННОЕ ОБУЧЕНИЕ', href: 'https://sdo.от38.рус/' }
+        ];
+    });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -39,28 +46,6 @@ export const Header = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
-
-    useEffect(() => {
-        async function fetchTraining() {
-            try {
-                const { data } = await getAllTraining();
-                if (Array.isArray(data)) {
-                    const children = data.map((item) => ({
-                        title: item.content?.[0]?.children?.[0]?.text || 'Услуга',
-                        href: `/training/${item.documentId}`
-                    }));
-                    setMenu((prevMenu) => prevMenu.map((item) =>
-                        item.title === 'УСЛУГИ'
-                            ? { ...item, children }
-                            : item
-                    ));
-                }
-            } catch (e) {
-                // Ошибка — оставляем пустой раздел 'УСЛУГИ'
-            }
-        }
-        fetchTraining();
     }, []);
 
     const renderDesktopSubmenu = (item: MenuItem, isSubMenu = false) => {

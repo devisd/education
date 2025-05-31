@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRightIcon } from '@/icons';
 import { getNews, getAllNews } from '@/api/services';
 import type { INewsResponse } from '@/types';
@@ -59,18 +58,9 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <article className="bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="bg-gradient-to-r from-primary-500 to-primary-700 p-0 md:p-0 flex items-stretch">
-                        <div className="w-4/6 md:w-2/3 flex flex-col justify-start p-6 md:p-8 text-white">
+                        <div className="w-4/6 md:w-2/3 flex flex-col gap-4 justify-start md:pb-2 p-6 md:pt-8 text-white">
                             <h1 className="text-2xl md:text-3xl font-bold">{newsItem.Title}</h1>
                             <p className="text-sm text-white/80 mb-2 mt-auto">{newsItem.Date}</p>
-                        </div>
-                        <div className="w-2/6 md:w-1/3 flex-shrink-0 flex items-center justify-center bg-white/10">
-                            <Image
-                                src={`https://terminal-38.cloudpub.ru${newsItem.Image?.url}` || ''}
-                                alt={newsItem.Title}
-                                className="object-cover w-full h-full max-h-56 md:max-h-72"
-                                width={240}
-                                height={140}
-                            />
                         </div>
                     </div>
 

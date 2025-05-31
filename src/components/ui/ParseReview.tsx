@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Stars } from "../Stars"
 import type { IImageResponse } from "@/types"
+import { UserIcon } from "@/icons"
 
 export const ParseReview = ({ data }: { data: IImageResponse[] | null }) => {
 
@@ -17,7 +18,9 @@ export const ParseReview = ({ data }: { data: IImageResponse[] | null }) => {
                                 height={96}
                                 className="w-12 h-12 rounded-full mr-4 object-cover"
                             />
-                        ) : <div className="w-12 h-12 bg-gray-300 rounded-full mr-4 object-cover"></div>}
+                        ) : <div className="w-12 h-12 bg-gray-300/50 rounded-full mr-4 flex items-center justify-center">
+                            <UserIcon className="w-8 h-8 text-primary-600" />
+                        </div>}
                         <div>
                             <h4 className="text-lg font-semibold text-gray-800">{el.Name}</h4>
                             <p className="text-sm text-gray-500">{el.Date}</p>

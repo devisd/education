@@ -5,6 +5,7 @@ import { renderBlocksWithBorders } from '@/api/parse';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SectionTitle } from '@/components/ui/SectionTitle';
+import { BookIcon, CertificateIcon, TeamIcon, ChecklistIcon, ClockIcon } from '@/icons';
 
 function extractTitle(content) {
     if (!Array.isArray(content)) return 'Услуга';
@@ -49,13 +50,28 @@ export default async function TrainingDetailPage({ params }) {
                     title={data?.name}
                 />
                 <article className="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div className="flex flex-col md:flex-row lg:justify-end border rounded-lg border-primary-600">
-                        <div className='md:w-2/3 flex flex-col gap-2 pl-4 pt-4'>
-                            <p className='text-gray-800 font-bold text-3xl'>Срок обучения: <span className='text-primary-600 font-bold'>{data?.term_of_study}ч.</span></p>
-                            <p className='text-gray-800 font-bold text-3xl'>Выдаваемый документ: <span className='text-primary-600 font-bold'>{data?.document}</span></p>
-                            <p className='text-gray-800 font-bold text-3xl'>Формат обучения: <span className='text-primary-600 font-bold'>{data?.form_of_study}</span></p>
-                            <p className='text-gray-800 font-bold text-3xl'>Категория студентов: <span className='text-primary-600 font-bold'>{data?.category_of_students}</span></p>
-                            <a href={data?.study_plan_text} className='underline text-primary-600 hover:text-primary-800 text-xl font-bold'>{data?.study_plan_link}</a>
+                    <div className="flex flex-col md:flex-row lg:justify-end ">
+                        <div className='md:w-2/3 flex flex-col gap-2 pl-4 pt-10'>
+                            <p className='text-gray-800 text-xl flex items-center gap-2'>
+                                <ClockIcon className="w-6 h-6 text-primary-600" />
+                                Срок обучения: <span className='text-primary-600 font-bold'>{data?.term_of_study}ч.</span>
+                            </p>
+                            <p className='text-gray-800 text-xl flex items-center gap-2'>
+                                <BookIcon className="w-6 h-6 text-primary-600" />
+                                Выдаваемый документ: <span className='text-primary-600 font-bold'>{data?.document}</span>
+                            </p>
+                            <p className='text-gray-800 text-xl flex items-center gap-2'>
+                                <CertificateIcon className="w-6 h-6 text-primary-600" />
+                                Формат обучения: <span className='text-primary-600 font-bold'>{data?.form_of_study}</span>
+                            </p>
+                            <p className='text-gray-800 text-xl flex items-center gap-2'>
+                                <TeamIcon className="w-6 h-6 text-primary-600" />
+                                Категория студентов: <span className='text-primary-600 font-bold'>{data?.category_of_students}</span>
+                            </p>
+                            <a href={data?.study_plan_text} className='underline text-primary-600 hover:text-primary-800 text-base font-bold flex items-center gap-2'>
+                                <ChecklistIcon className="w-6 h-6 text-primary-600" />
+                                {data?.study_plan_link}
+                            </a>
                         </div>
                         <div className="md:w-1/3 flex-shrink-0 flex items-center bg-white/10">
                             <Image
@@ -77,7 +93,7 @@ export default async function TrainingDetailPage({ params }) {
                 {/* Кнопка назад */}
                 <div className="mt-10 flex justify-center">
                     <Link
-                        href="/training"
+                        href="/#services"
                         className="inline-flex items-center justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
                     >
                         <span>← Назад к списку программ</span>

@@ -1,16 +1,19 @@
 import Link from 'next/link';
 import { Header, Footer } from '@/components/common';
 import { Metadata } from 'next';
+import { getAllTraining } from '@/api/services';
 
 export const metadata: Metadata = {
     title: 'Страница не найдена - Образовательный терминал в Иркутске',
     description: 'Запрашиваемая страница не найдена. Вернитесь на главную страницу или воспользуйтесь меню.',
 }
 
-export default function NotFound() {
+export default async function NotFound() {
+    const { data } = await getAllTraining()
+
     return (
         <div>
-            <Header />
+            <Header data={data} />
             <main className="min-h-[50vh] flex items-center justify-center py-16">
                 <div className="container mx-auto px-4 text-center relative">
                     {/* Декоративные круги как в footer */}

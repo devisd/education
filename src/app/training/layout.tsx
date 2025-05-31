@@ -1,12 +1,12 @@
-'use client';
-
-import React from 'react';
 import { Header, Footer } from '@/components/common';
+import { getAllTraining } from '@/api/services';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  const { data } = await getAllTraining()
+
   return (
     <div>
-      <Header />
+      <Header data={data} />
       <main>{children}</main>
       <Footer />
     </div>

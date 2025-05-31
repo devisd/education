@@ -14,7 +14,7 @@ export default async function Home() {
 
   return (
     <div>
-      <Header />
+      <Header data={data} />
       <main>
         <HomeCarousel />
         <Hero />

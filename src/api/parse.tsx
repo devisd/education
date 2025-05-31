@@ -50,7 +50,7 @@ export function renderBlocksWithBorders(blocks: any[]) {
                 i++;
             }
             result.push(
-                <div className="border border-gray-300 rounded-lg p-4 my-6" key={`border-group-${keyCounter++}`}>
+                <div className="border border-gray-300 rounded-lg px-4 py-2 my-4" key={`border-group-${keyCounter++}`}>
                     {group.map((b, idx) => renderBlock(b, idx))}
                 </div>
             );
@@ -80,17 +80,17 @@ export function renderBlock(block: any, idx: number) {
     if (block.type === 'paragraph') {
         const text = (block.children || []).map(renderText).join('');
         if (!text.trim() && !(block.children || []).some((c: any) => c.type === 'link')) return null;
-        return <p key={idx} className="mb-6" > {renderChildren(block.children || [])} </p>;
+        return <p key={idx} className="mb-2 text-sm" > {renderChildren(block.children || [])} </p>;
     }
     if (block.type === 'heading') {
         const level = block.level === 1 ? 2 : block.level || 2;
         const children = renderChildren(block.children || []);
         const headingProps = {
-            2: { tag: 'h2', className: 'font-bold text-gray-800 mb-4 mt-8 text-2xl md:text-3xl' },
-            3: { tag: 'h3', className: 'font-bold text-gray-800 mb-4 mt-8 text-xl md:text-2xl' },
-            4: { tag: 'h4', className: 'font-bold text-gray-800 mb-4 mt-8 text-lg md:text-xl' },
-            5: { tag: 'h5', className: 'font-bold text-gray-800 mb-4 mt-8 text-base md:text-lg' },
-            6: { tag: 'h6', className: 'font-bold text-gray-800 mb-4 mt-8 text-sm md:text-base' },
+            2: { tag: 'h2', className: 'font-bold text-gray-800 mb-4 mt-4 text-2xl md:text-3xl' },
+            3: { tag: 'h3', className: 'font-bold text-gray-800 mb-2 mt-2 text-lg md:text-xl' },
+            4: { tag: 'h4', className: 'font-bold text-gray-800 mb-2 mt-2 text-lg md:text-xl' },
+            5: { tag: 'h5', className: 'font-bold text-gray-800 mb-2 mt-2 text-base md:text-lg' },
+            6: { tag: 'h6', className: 'font-bold text-gray-800 mb-2 mt-2 text-sm md:text-base' },
         };
         const { tag, className } = headingProps[level] || headingProps[4];
         const Tag = tag as keyof JSX.IntrinsicElements;

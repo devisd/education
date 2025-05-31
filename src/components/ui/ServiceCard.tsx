@@ -33,7 +33,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         }
       </div>
       <h3 className="text-xl font-semibold mb-3 text-gray-800">{title}</h3>
-      <p className="text-gray-600 mb-5 flex-grow leading-relaxed">{description}</p>
+      {/* <p className="text-gray-600 mb-5 flex-grow leading-relaxed">{description}</p> */}
       <div className="text-primary-600 font-medium flex items-center mt-auto group">
         <span className="mr-2">Подробнее</span>
         <ArrowRightIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
