@@ -144,12 +144,26 @@ export const SiteSearch = () => {
                     title: n.Title || 'Новость',
                     href: `/about/news/${n.documentId}`,
                     category: 'Новости',
-                    description: n.Description
+                    description: n.Description || ''
                 })) || [];
 
                 // Добавляем услуги из API
                 const apiTrainingLinks: SearchLink[] = trainingResponse.data?.map(t => {
-                    const title = t.content?.[0]?.children?.text || 'Услуга';
+                    // Получаем заголовок услуги
+                    let title = '';
+                    if (Array.isArray(t.content) && t.content.length > 0) {
+                        // Пробуем взять первый текстовый блок как заголовок
+                        const firstBlock = t.content[0];
+                        if (firstBlock.children && Array.isArray(firstBlock.children) && firstBlock.children.length > 0) {
+                            title = firstBlock.children[0].text || '';
+                        }
+                        if (!title) {
+                            // Если не найдено, пробуем извлечь весь текст
+                            title = extractTextFromContent([firstBlock]);
+                        }
+                    }
+                    if (!title) title = 'Услуга';
+                    // Описание услуги
                     const description = extractTextFromContent(t.content || []);
                     return {
                         title,
@@ -160,12 +174,21 @@ export const SiteSearch = () => {
                 }) || [];
 
                 // Добавляем FAQ из API
-                const faqLinks: SearchLink[] = faqResponse.data?.map(f => ({
-                    title: f.Title || 'Вопрос',
-                    href: `/faq#${f.documentId}`,
-                    category: 'FAQ',
-                    description: extractTextFromContent(f.Description || [])
-                })) || [];
+                const faqLinks: SearchLink[] = faqResponse.data?.map(f => {
+                    // Описание может быть строкой или массивом блоков
+                    let description = '';
+                    if (Array.isArray(f.Description)) {
+                        description = extractTextFromContent(f.Description);
+                    } else if (typeof f.Description === 'string') {
+                        description = f.Description;
+                    }
+                    return {
+                        title: f.Title || 'Вопрос',
+                        href: `/faq#${f.documentId}`,
+                        category: 'FAQ',
+                        description
+                    };
+                }) || [];
 
                 // Добавляем основные сведения
                 const mainInfoLink: SearchLink | null = mainInfoResponse.data ? {
