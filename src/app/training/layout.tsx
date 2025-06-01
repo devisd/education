@@ -1,12 +1,10 @@
 import { Header, Footer } from '@/components/common';
-import { getAllTraining } from '@/api/services';
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
-  const { data } = await getAllTraining()
+export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div>
-      <Header data={data} />
+      <Header />
       <main>{children}</main>
       <Footer />
     </div>

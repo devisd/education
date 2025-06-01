@@ -1,78 +1,95 @@
 'use client'
 
 import React, { useState } from 'react'
+import type { IPrice } from '@/types';
 
-// TODO Заменить интерфейс с any на нужный. Также заменить названия табов и распарсить контент.
-export const CourseTab = ({ courses }: { courses: any }) => {
-    const [activeTab, setActiveTab] = useState<string>('adult');
+function formatPrice(price: number) {
+    return price.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 });
+}
+
+const tabTypes = [
+    'Обучение взрослых',
+    'Профессиональная переподготовка',
+    'Курсы повышения квалификации',
+    'Профессиональное обучение',
+];
+
+export const CourseTab = ({ courses }: { courses: IPrice[] | null }) => {
+    const [activeTab, setActiveTab] = useState<string>('Обучение взрослых');
+
+    const filteredCourses = courses?.filter(course => course.type === activeTab) || [];
 
     return (
         <>
             <div className="mb-8 flex flex-wrap justify-center gap-2">
-                <button
-                    onClick={() => setActiveTab('adult')}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'adult'
-                        ? 'bg-primary-600 text-white'
-                        : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                        }`}
-                >
-                    Обучение взрослых
-                </button>
-                <button
-                    onClick={() => setActiveTab('professional-retraining')}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'professional-retraining'
-                        ? 'bg-primary-600 text-white'
-                        : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                        }`}
-                >
-                    Профессиональная переподготовка
-                </button>
-                <button
-                    onClick={() => setActiveTab('skill-upgrading')}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'skill-upgrading'
-                        ? 'bg-primary-600 text-white'
-                        : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                        }`}
-                >
-                    Курсы повышения квалификации
-                </button>
-                <button
-                    onClick={() => setActiveTab('professional-education')}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'professional-education'
-                        ? 'bg-primary-600 text-white'
-                        : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                        }`}
-                >
-                    Профессиональное обучение
-                </button>
+                {tabTypes.map(tab => (
+                    <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === tab
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                            }`}
+                    >
+                        {tab}
+                    </button>
+                ))}
             </div>
 
             {/* Контент табов */}
             <div className='bg-white rounded-lg shadow-md p-6 md:p-8 mb-10'>
-                {activeTab === 'adult' && (
-                    <div>
-                        {/* Контент для "Обучение взрослых" */}
-                        <p>Программа обучения взрослых.</p>
-                    </div>
-                )}
-                {activeTab === 'professional-retraining' && (
-                    <div>
-                        {/* Контент для "Профессиональная переподготовка" */}
-                        <p>Программа профессиональной переподготовки.</p>
-                    </div>
-                )}
-                {activeTab === 'skill-upgrading' && (
-                    <div>
-                        {/* Контент для "Курсы повышения квалификации" */}
-                        <p>Программа курсов повышения квалификации.</p>
-                    </div>
-                )}
-                {activeTab === 'professional-education' && (
-                    <div>
-                        {/* Контент для "Профессиональное обучение" */}
-                        <p>Программа профессионального обучения.</p>
-                    </div>
-                )}
+                <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Наименование программы
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Срок обучения
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Выдаваемый документ
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Форма обучения
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Стоимость
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {filteredCourses.length === 0 ? (
+                                <tr>
+                                    <td colSpan={6} className="px-6 py-4 text-center text-gray-500">Нет программ для выбранного типа</td>
+                                </tr>
+                            ) : (
+                                filteredCourses.map((course) => (
+                                    <tr key={course.id} className="hover:bg-gray-50">
+                                        <td className="px-6 py-4 whitespace-normal text-sm font-medium text-gray-900">
+                                            {course.name}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                            {course.term_of_study} ч.
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-normal text-sm text-gray-700">
+                                            {course.document}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                            {course.form_of_study}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <span className="bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full">
+                                                {formatPrice(course.price)}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </>
     )

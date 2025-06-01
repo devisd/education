@@ -50,21 +50,21 @@ export default async function TrainingDetailPage({ params }) {
                     title={data?.name}
                 />
                 <article className="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div className="flex flex-col md:flex-row lg:justify-end ">
-                        <div className='md:w-2/3 flex flex-col gap-2 pl-4 pt-10'>
-                            <p className='text-gray-800 text-xl flex items-center gap-2'>
+                    <div className="flex flex-col md:flex-row lg:justify-end">
+                        <div className="md:w-2/3 flex flex-col gap-2 pl-2 max-sm:mb-5 md:pl-4 pt-0 md:pt-10 order-2 md:order-none">
+                            <p className='text-gray-800 text-xl max-sm:text-base flex items-center gap-2'>
                                 <ClockIcon className="w-6 h-6 text-primary-600" />
                                 Срок обучения: <span className='text-primary-600 font-bold'>{data?.term_of_study}ч.</span>
                             </p>
-                            <p className='text-gray-800 text-xl flex items-center gap-2'>
-                                <BookIcon className="w-6 h-6 text-primary-600" />
+                            <p className='text-gray-800 text-xl max-sm:text-base flex items-center gap-2'>
+                                <CertificateIcon className="w-6 h-6 text-primary-600" />
                                 Выдаваемый документ: <span className='text-primary-600 font-bold'>{data?.document}</span>
                             </p>
-                            <p className='text-gray-800 text-xl flex items-center gap-2'>
-                                <CertificateIcon className="w-6 h-6 text-primary-600" />
+                            <p className='text-gray-800 text-xl max-sm:text-base flex items-center gap-2'>
+                                <BookIcon className="w-6 h-6 text-primary-600" />
                                 Формат обучения: <span className='text-primary-600 font-bold'>{data?.form_of_study}</span>
                             </p>
-                            <p className='text-gray-800 text-xl flex items-center gap-2'>
+                            <p className='text-gray-800 text-xl max-sm:text-base flex items-center gap-2'>
                                 <TeamIcon className="w-6 h-6 text-primary-600" />
                                 Категория студентов: <span className='text-primary-600 font-bold'>{data?.category_of_students}</span>
                             </p>
@@ -73,7 +73,7 @@ export default async function TrainingDetailPage({ params }) {
                                 {data?.study_plan_link}
                             </a>
                         </div>
-                        <div className="md:w-1/3 flex-shrink-0 flex items-center bg-white/10">
+                        <div className="md:w-1/3 flex-shrink-0 flex items-center bg-white/10 order-1 md:order-none mb-6 md:mb-0">
                             <Image
                                 src={image}
                                 alt={title}

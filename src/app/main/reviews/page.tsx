@@ -30,9 +30,7 @@ export default async function ReviewsPage() {
                 </div>
 
                 {/* Отзывы */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                    <ParseReview data={data} />
-                </div>
+                <ParseReview data={data} />
 
                 {/* Форма для отправки отзыва */}
                 <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
@@ -51,6 +49,6 @@ export default async function ReviewsPage() {
                 {/* Статистика */}
                 <StatisticsGrid statistics={statistics ?? undefined} />
             </div>
-        </section>
+        </section >
     );
 }

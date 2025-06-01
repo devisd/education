@@ -4,6 +4,20 @@ export interface MenuItem {
     children?: MenuItem[];
 }
 
+export interface IPrice {
+    id: number,
+    documentId: string,
+    type: string,
+    name: string,
+    term_of_study: number,
+    document: string,
+    price: number,
+    form_of_study: string,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string
+}
+
 export interface IPriceList {
     id: number,
     documentId: string,
@@ -227,7 +241,8 @@ export interface ITrainingResponse {
     study_plan_text: string,
     study_plan_link: string,
     image: IImage,
-    icon: IIcon
+    icon: IIcon,
+    type: string
 }
 
 export interface LinkItem {

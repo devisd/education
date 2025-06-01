@@ -125,28 +125,32 @@ export function ReviewForm() {
                 </div>
             </div>
 
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Оценка курса <span className="text-red-500">*</span>
-                </label>
-                <div className="flex items-center gap-6 flex-wrap">
-                    <StarRating value={form.rating} onChange={v => setForm(f => ({ ...f, rating: v }))} />
-                    <div className="flex mx-auto md:ml-auto md:mr-0 items-center gap-4 ">
-                        <label
-                            htmlFor="photo-upload"
-                            className="flex items-center px-4 py-2 bg-primary-600 text-white rounded-md shadow-sm cursor-pointer hover:bg-primary-700 transition-colors text-sm font-medium"
-                        >
-                            {photo ? "Изменить фото" : "Загрузить фото"}
-                            <input
-                                id="photo-upload"
-                                type="file"
-                                accept="image/*"
-                                onChange={handlePhotoChange}
-                                className="hidden"
-                            />
-                        </label>
-                    </div>
+            <div className="flex max-sm:flex-col gap-6">
+                <div className="flex flex-col justify-start ">
+                    <p className="block text-sm font-medium text-gray-700 mb-1">Добавить аватар</p>
+                    <label
+                        htmlFor="photo-upload"
+                        className="flex items-center max-md:justify-center px-4 py-2 bg-primary-600 text-white rounded-md shadow-sm cursor-pointer hover:bg-primary-700 transition-colors text-sm font-medium"
+                    >
+                        {photo ? "Изменить фото" : "Загрузить фото"}
+                        <input
+                            id="photo-upload"
+                            type="file"
+                            accept="image/*"
+                            onChange={handlePhotoChange}
+                            className="hidden"
+                        />
+                    </label>
                 </div>
+                <div className="flex flex-col max-md:items-start items-center gap-6 flex-wrap">
+                    <label className="block text-sm font-medium text-gray-700">
+                        Оценка курса <span className="text-red-500">*</span>
+                        <div className="mt-2">
+                            <StarRating value={form.rating} onChange={v => setForm(f => ({ ...f, rating: v }))} />
+                        </div>
+                    </label>
+                </div>
+
                 {errors.rating && <p className="text-xs text-red-500 mt-1">{errors.rating}</p>}
             </div>
 

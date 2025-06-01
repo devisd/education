@@ -8,7 +8,7 @@ export default async function PricePage() {
     const { data, error } = await getPrice()
     const { data: priceList } = await getPriceList()
 
-    // if (error) return <ErrorMessage />
+    if (error) return <ErrorMessage />
 
     return (
         <section className="py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">

@@ -1,4 +1,4 @@
-import type { ICont, IData, IImageResponse, ILetter, INewsResponse, IPriceList, ISlideResponse, IStatistics, ITrainingResponse } from '@/types';
+import type { ICont, IData, IImageResponse, ILetter, INewsResponse, IPrice, IPriceList, ISlideResponse, IStatistics, ITrainingResponse } from '@/types';
 import { request } from './request';
 
 
@@ -107,7 +107,7 @@ export const getStatistics = () => {
 
 // Страница 'Прайс'
 export const getPrice = () => {
-    return request<any>({ path: '/stoimost' });
+    return request<IPrice[]>({ path: '/stoimosts' });
 }
 
 // Скачать прайс-лист

@@ -6,27 +6,21 @@ import Image from 'next/image';
 import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon, MapIcon, PhoneIcon, EmailIcon } from '@/icons';
 import { ORGANIZATION_INFO } from '../../constants/header';
 import { CONTACT_LINKS } from '../../constants/footer';
-import type { ITrainingResponse, MenuItem } from '@/types';
+import { TRAINING_CATEGORIES } from '../../constants/trainingCategories';
+import type { MenuItem } from '@/types';
 import { Dropdown, DropdownItem, DropdownSubmenu, VisuallyImpairedModeToggle } from '../ui';
 import { SiteSearch } from './SiteSearch';
 
-export const Header = ({ data }: { data: ITrainingResponse[] | null }) => {
+export const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [eduMenuOpen, setEduMenuOpen] = useState(false);
     const [aboutMenuOpen, setAboutMenuOpen] = useState(false);
     const [coursesMenuOpen, setCoursesMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-    const [trainingMenu, setTrainingMenu] = useState<MenuItem | null>(null);
     const [menu, setMenu] = useState<MenuItem[]>(() => {
-        const servicesChildren = Array.isArray(data)
-            ? data.map((item) => ({
-                title: item.content?.[0]?.children?.[0]?.text || 'Услуга',
-                href: `/training/${item.documentId}`
-            }))
-            : [];
         return [
             { ...ORGANIZATION_INFO },
-            { title: 'УСЛУГИ', children: servicesChildren },
+            { title: 'УСЛУГИ', children: TRAINING_CATEGORIES },
             { title: 'ПРАЙС', href: '/main/price' },
             { title: 'ВОПРОС-ОТВЕТ', href: '/main/faq' },
             { title: 'ОТЗЫВЫ', href: '/main/reviews' },

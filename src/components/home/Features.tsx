@@ -3,19 +3,9 @@
 import Link from 'next/link';
 import { ArrowRightIcon } from '@/icons';
 import { ServiceCard } from '../ui';
-import type { ITrainingResponse } from '@/types';
+import { TRAINING_CATEGORIES } from '@/constants/trainingCategories';
 
-function extractTextFromContent(content: any[]): string {
-  if (!Array.isArray(content)) return '';
-  return content.map(block => {
-    if (block.children) {
-      return block.children.map((child: any) => child.text || '').join(' ');
-    }
-    return '';
-  }).join(' ');
-}
-
-export const Features = ({ data }: { data: ITrainingResponse[] | null }) => {
+export const Features = () => {
 
   return (
     <>
@@ -37,18 +27,15 @@ export const Features = ({ data }: { data: ITrainingResponse[] | null }) => {
           </div>
 
           <div className="grid grid-cols-1 sm:p-5 w580:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8">
-            {data?.map((item, index) => {
-              const description = extractTextFromContent(item.content?.slice(1, 2) || []);
-              return (
-                <ServiceCard
-                  key={item.id || index}
-                  icon={item.icon.url}
-                  title={item.name}
-                  description={description}
-                  href={`/training/${item.documentId}`}
-                />
-              );
-            })}
+            {TRAINING_CATEGORIES.map((category, index) => (
+              <ServiceCard
+                key={index}
+                icon={category.icon}
+                title={category.title}
+                description={category.description}
+                href={category.href}
+              />
+            ))}
           </div>
 
           <div className="mt-16 text-center">

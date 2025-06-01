@@ -323,7 +323,7 @@ export const SiteSearch = () => {
                     title: 'Прайс',
                     href: '/main/price',
                     category: 'Цены',
-                    description: extractTextFromContent(priceResponse.data.content || [])
+                    description: priceResponse.data.map(item => item.name).join('; ')
                 } : null;
 
                 // Добавляем лицензии
