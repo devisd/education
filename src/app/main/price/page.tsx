@@ -1,6 +1,7 @@
 import { getPrice, getPriceList } from "@/api/services";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { CourseTab } from "@/components/ui";
+import { PhoneIcon } from "@/icons";
 
 
 export default async function PricePage() {
@@ -29,10 +30,19 @@ export default async function PricePage() {
                 {/* Скидки */}
                 <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
                     <p className="text-gray-700 font-bold text-lg">Для наших клиентов всегда действует гибкая система скидок.
-                        Более подробно о скидках и акциях можно узнать у наших менеджеров по телефонам <span className="text-primary-600">
-                            +7 (3952) 43-43-12</span> и <span className="text-primary-600">+7 (914) 91-48-185
-                        </span>
                     </p>
+                    <p className="text-gray-700 font-bold text-lg">Более подробно о скидках и акциях можно узнать у наших менеджеров по телефонам:
+                    </p>
+                    <div className="flex max-sm:flex-col sm:items-center sm:gap-2 font-bold text-lg">
+                        <PhoneIcon className="h-5 w-5 text-primary-600 max-sm:hidden" />
+                        <a href="tel:+73952434312" className="text-primary-600 hover:text-primary-900 ">
+                            +7 (3952) 43-43-12
+                        </a>
+                        <p className="max-sm:hidden">|</p>
+                        <a href="tel:+79149148185" className="text-primary-600 hover:text-primary-900 ">
+                            +7 (914) 91-48-185
+                        </a>
+                    </div>
 
                     <div className="flex justify-end mt-5">
                         <a href={`https://terminal-38.cloudpub.ru${priceList?.document.url}`} className="inline-flex items-center px-4 py-2 border border-primary-600 text-primary-600 bg-white hover:bg-primary-50 rounded-lg font-medium transition-colors">
