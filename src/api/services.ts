@@ -161,3 +161,17 @@ export const postReview = (formData: FormData) => {
         data: formData
     });
 }
+
+// Загрузка фото и привязка к отзыву
+export const uploadReviewPhoto = (photo: File, reviewId: number) => {
+    const formData = new FormData();
+    formData.append('files', photo);
+    formData.append('ref', 'api::otzyvy.otzyvy');
+    formData.append('refId', String(reviewId));
+    formData.append('field', 'Image');
+    return request<any>({
+        path: '/upload',
+        method: 'POST',
+        data: formData
+    });
+};

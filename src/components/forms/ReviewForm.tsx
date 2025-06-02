@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { StarRating } from "@/components/ui/StarRating";
-import { postReview } from "@/api/services";
+import { postReview, uploadReviewPhoto } from "@/api/services";
 
 export function ReviewForm() {
     const [form, setForm] = useState({
@@ -16,6 +16,7 @@ export function ReviewForm() {
     const [submitted, setSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [photo, setPhoto] = useState<File | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const validate = () => {
         const newErrors: { [k: string]: string } = {};
@@ -56,7 +57,9 @@ export function ReviewForm() {
         e.preventDefault();
         setSubmitError(null);
         if (validate()) {
+            setIsSubmitting(true);
             try {
+                // 1. Отправляем отзыв без фото
                 const formData = new FormData();
                 formData.append('data[Name]', form.name);
                 formData.append('data[Service]', form.course);
@@ -64,13 +67,15 @@ export function ReviewForm() {
                 formData.append('data[Rating]', String(form.rating));
                 formData.append('data[Date]', new Date().toISOString());
                 formData.append('data[Publish]', 'false');
-                if (photo) {
-                    formData.append('files', photo);
-                }
 
                 const res = await postReview(formData);
 
-                if (res.data) {
+                if (res.data && res.data.id) {
+                    // 2. Если есть фото, отправляем его отдельным запросом
+                    if (photo) {
+                        const reviewId = Number(res.data.id) - 1;
+                        await uploadReviewPhoto(photo, reviewId);
+                    }
                     setSubmitted(true);
                 } else {
                     setSubmitError('Ошибка отправки. Попробуйте позже.');
@@ -86,6 +91,8 @@ export function ReviewForm() {
                 setPhoto(null);
             } catch (err) {
                 setSubmitError('Ошибка отправки. Попробуйте позже.');
+            } finally {
+                setIsSubmitting(false);
             }
         }
     };
@@ -195,10 +202,10 @@ export function ReviewForm() {
             <div className="flex md:flex-row flex-col items-center justify-between">
                 <button
                     type="submit"
-                    disabled={Object.keys(errors).length > 0 || !form.consent}
-                    className={`max-md:w-full max-md:justify-center inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${Object.keys(errors).length > 0 || !form.consent ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={isSubmitting || Object.keys(errors).length > 0 || !form.consent}
+                    className={`max-md:w-full max-md:justify-center inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${isSubmitting || Object.keys(errors).length > 0 || !form.consent ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                    Отправить отзыв
+                    {isSubmitting ? 'Отправка...' : 'Отправить отзыв'}
                 </button>
                 <div>
                     {submitted && <p className="text-green-600 font-bold max-md:mt-3">Спасибо за ваш отзыв!</p>}
