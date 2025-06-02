@@ -33,7 +33,7 @@ export const ContactForm: React.FC = () => {
                 message: formData.message,
                 _template: 'table',
             };
-            const response = await fetch('https://formsubmit.co/ajax/terminal.38@mail.ru', {
+            const response = await fetch('https://formsubmit.co/ajax/682eaee78211c05262608e9a42ee0b99', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
