@@ -6,8 +6,7 @@ import {
     PhoneIcon,
     EmailIcon,
     CheckIcon,
-    TelegramIcon,
-    WhatsAppIcon
+    TelegramIcon
 } from '@/icons';
 import { CONTACT_LINKS, SOCIAL_LINKS } from '@/constants/footer';
 import { ContactForm } from '@/components/forms/ContactForm';
@@ -100,11 +99,6 @@ export default function ContactsPage() {
                                     className="bg-primary-100 hover:bg-primary-200 text-primary-600 p-3 rounded-full transition-colors">
                                     <span className="sr-only">{SOCIAL_LINKS[0].name}</span>
                                     <TelegramIcon className="h-6 w-6" />
-                                </a>
-                                <a href={SOCIAL_LINKS[1].href} target="_blank" rel="noopener noreferrer"
-                                    className="bg-primary-100 hover:bg-primary-200 text-primary-600 p-3 rounded-full transition-colors">
-                                    <span className="sr-only">{SOCIAL_LINKS[1].name}</span>
-                                    <WhatsAppIcon className="h-6 w-6" />
                                 </a>
                             </div>
                         </div>

@@ -60,6 +60,7 @@ export const TrainingRequestForm: React.FC = () => {
         email: formData.email,
         program: formData.program,
         _template: 'table',
+        _replyto: 'zaiavka@gmail.com'
       };
       const response = await fetch('https://formsubmit.co/ajax/682eaee78211c05262608e9a42ee0b99', {
         method: 'POST',

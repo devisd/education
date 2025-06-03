@@ -20,10 +20,7 @@ export const CONTACT_LINKS = [
   { name: 'terminal.38@mail.ru', href: 'mailto:terminal.38@mail.ru' },
 ];
 
-export const SOCIAL_LINKS = [
-  { name: 'Telegram', href: 'https://t.me/termedu38', icon: 'TelegramIcon' },
-  { name: 'WhatsApp', href: 'https://wa.me/79149148185', icon: 'WhatsAppIcon' },
-];
+export const SOCIAL_LINKS = [{ name: 'Telegram', href: 'https://t.me/terninal_38', icon: 'TelegramIcon' }];
 
 export { CURRENT_YEAR };
 

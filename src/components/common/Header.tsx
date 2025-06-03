@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { TelegramIcon, WhatsAppIcon, ChevronDownIcon, MenuIcon, MapIcon, PhoneIcon, EmailIcon } from '@/icons';
+import { TelegramIcon, ChevronDownIcon, MenuIcon, MapIcon, PhoneIcon, EmailIcon } from '@/icons';
 import { ORGANIZATION_INFO } from '../../constants/header';
 import { CONTACT_LINKS } from '../../constants/footer';
 import { TRAINING_CATEGORIES } from '../../constants/trainingCategories';
@@ -192,13 +192,9 @@ export const Header = () => {
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="flex items-center justify-center space-x-4 w-full">
-                                <a href="https://t.me/termedu38" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-900">
+                                <a href="https://t.me/terninal_38" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-900">
                                     <span className="sr-only">Telegram</span>
                                     <TelegramIcon className="h-5 w-5 lg:h-6 lg:w-6" />
-                                </a>
-                                <a href="https://wa.me/79149148185" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-900">
-                                    <span className="sr-only">WhatsApp</span>
-                                    <WhatsAppIcon className="h-5 w-5 lg:h-6 lg:w-6" />
                                 </a>
                             </div>
                             {/* Десктоп: режим для слабовидящих + поиск */}
@@ -352,13 +348,9 @@ export const Header = () => {
                             </div>
                         </div>
                         <div className="flex space-x-4 items-center justify-center mt-3">
-                            <a href="https://t.me/termedu38" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-700">
+                            <a href="https://t.me/terninal_38" target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-700">
                                 <span className="sr-only">Telegram</span>
                                 <TelegramIcon className="h-5 w-5" />
-                            </a>
-                            <a href="https://wa.me/79149148185" target="_blank" rel="noopener noreferrer" className="text-primary-700 hover:text-primary-900">
-                                <span className="sr-only">WhatsApp</span>
-                                <WhatsAppIcon className="h-5 w-5" />
                             </a>
                         </div>
                     </div>
@@ -367,5 +359,3 @@ export const Header = () => {
         </header>
     );
 };
-
-Header.displayName = 'Header';
