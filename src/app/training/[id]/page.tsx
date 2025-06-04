@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { BookIcon, CertificateIcon, TeamIcon, ChecklistIcon, ClockIcon } from '@/icons';
+import { TrainingRequestForm } from '@/components/forms/TrainingRequestForm';
+import { Modal } from '@/components/ui/Modal';
 
 function extractTitle(content) {
     if (!Array.isArray(content)) return 'Услуга';
@@ -62,11 +64,11 @@ export default async function TrainingDetailPage({ params }) {
                             </p>
                             <p className='text-gray-800 text-xl max-sm:text-base flex items-center gap-2'>
                                 <BookIcon className="w-6 h-6 text-primary-600" />
-                                Формат обучения: <span className='text-primary-600 font-bold'>{data?.form_of_study}</span>
+                                Форма обучения: <span className='text-primary-600 font-bold'>{data?.form_of_study}</span>
                             </p>
                             <p className='text-gray-800 text-xl max-sm:text-base flex items-center gap-2'>
                                 <TeamIcon className="w-6 h-6 text-primary-600" />
-                                Категория студентов: <span className='text-primary-600 font-bold'>{data?.category_of_students}</span>
+                                Категория слушателей: <span className='text-primary-600 font-bold'>{data?.category_of_students}</span>
                             </p>
                             <a href={data?.study_plan_text} className='underline text-primary-600 hover:text-primary-800 text-base font-bold flex items-center gap-2'>
                                 <ChecklistIcon className="w-6 h-6 text-primary-600" />
@@ -84,20 +86,41 @@ export default async function TrainingDetailPage({ params }) {
                         </div>
                     </div>
                     <div className="p-6 md:p-8">
+                        <span className='text-gray-800 font-bold text-3xl flex mb-10'>
+                            Описание программы
+                        </span>
                         <div className="prose prose-lg max-w-none">
                             {renderBlocksWithBorders(item.content || [])}
                         </div>
                     </div>
                 </article>
 
-                {/* Кнопка назад */}
-                <div className="mt-10 flex justify-center">
-                    <Link
-                        href="/#services"
-                        className="inline-flex items-center justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
-                    >
-                        <span>← Назад к списку программ</span>
-                    </Link>
+                <div className='flex justify-center gap-5'>
+                    {/* Кнопка формы */}
+                    <div className="mt-10 flex justify-center">
+                        <Modal
+                            trigger={
+                                <button
+                                    className="inline-flex items-center justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
+                                >
+                                    Записаться на обучение
+                                </button>
+                            }
+                            title="Заявка на обучение"
+                        >
+                            <TrainingRequestForm />
+                        </Modal>
+                    </div>
+
+                    {/* Кнопка назад */}
+                    <div className="mt-10 flex justify-center">
+                        <Link
+                            href="/#services"
+                            className="inline-flex items-center justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
+                        >
+                            <span>Назад к списку программ</span>
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Рандомные услуги */}

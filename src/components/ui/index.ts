@@ -12,3 +12,4 @@ export * from './Carousel'
 export * from './VisuallyImpairedMode'
 export * from './GratitudeLetters'
 export * from './CourseTab'
+export { Modal } from './Modal';
