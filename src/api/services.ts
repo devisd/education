@@ -105,11 +105,6 @@ export const getStatistics = () => {
     });
 }
 
-// Страница 'Прайс'
-export const getPrice = () => {
-    return request<IPrice[]>({ path: '/stoimosts' });
-}
-
 // Скачать прайс-лист
 export const getPriceList = () => {
     return request<IPriceList>({ path: '/prajs-list?populate=*' });

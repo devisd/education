@@ -2,15 +2,14 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link';
-import type { IPrice, ITrainingResponse } from '@/types';
+import type { ITrainingResponse } from '@/types';
 
 interface IProps {
-    services: ITrainingResponse[] | null
-    courses: IPrice[] | null
+    courses: ITrainingResponse[] | null
 }
 
 function formatPrice(price: number) {
-    return price.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 });
+    return price?.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 });
 }
 
 const tabTypes = [
@@ -20,7 +19,7 @@ const tabTypes = [
     'Профессиональное обучение',
 ];
 
-export const CourseTab = ({ courses, services }: IProps) => {
+export const CourseTab = ({ courses }: IProps) => {
     const [activeTab, setActiveTab] = useState<string>('Обучение взрослых');
 
     const filteredCourses = courses?.filter(course => course.type === activeTab) || [];
@@ -71,33 +70,30 @@ export const CourseTab = ({ courses, services }: IProps) => {
                                     <td colSpan={6} className="px-6 py-4 text-center text-gray-500">Нет программ для выбранного типа</td>
                                 </tr>
                             ) : (
-                                filteredCourses.map((course) => {
-                                    const matchedService = services?.find(service => service.name === course.name);
-                                    const linkId = matchedService ? matchedService.documentId : '#';
-                                    return (
-                                        <tr key={course.id} className="hover:bg-gray-50">
-                                            <td className="px-6 py-4 whitespace-normal text-sm font-medium text-gray-900">
-                                                <Link href={`/training/${linkId}`} className='hover:text-primary-600'>
-                                                    {course.name}
-                                                </Link>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                                {course.term_of_study} ч.
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-normal text-sm text-gray-700">
-                                                {course.document}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                                {course.form_of_study}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <span className="bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full">
-                                                    {formatPrice(course.price)}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
+                                filteredCourses.map((course) => (
+                                    <tr key={course.id} className="hover:bg-gray-50">
+                                        <td className="px-6 py-4 whitespace-normal text-sm font-medium text-gray-900">
+                                            <Link href={`/training/${course.documentId}`} className='hover:text-primary-600'>
+                                                {course.name}
+                                            </Link>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                            {course.term_of_study} ч.
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-normal text-sm text-gray-700">
+                                            {course.document}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                            {course.form_of_study}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <span className="bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full">
+                                                {formatPrice(course.price)}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                )
+                                )
                             )}
                         </tbody>
                     </table>

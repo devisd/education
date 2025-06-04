@@ -240,6 +240,7 @@ export interface ITrainingResponse {
     form_of_study: string,
     study_plan_text: string,
     study_plan_link: string,
+    price: any,
     image: IImage,
     icon: IIcon,
     type: string

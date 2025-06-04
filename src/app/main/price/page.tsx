@@ -1,12 +1,11 @@
-import { getAllTraining, getPrice, getPriceList } from "@/api/services";
+import { getAllTraining, getPriceList } from "@/api/services";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { CourseTab } from "@/components/ui";
 import { PhoneIcon } from "@/icons";
 
 
 export default async function PricePage() {
-    const { data, error } = await getPrice()
-    const { data: services } = await getAllTraining()
+    const { data, error } = await getAllTraining()
     const { data: priceList } = await getPriceList()
 
     if (error) return <ErrorMessage />
@@ -26,7 +25,7 @@ export default async function PricePage() {
                 </div>
 
                 {/* Табы и контент для категорий курсов */}
-                <CourseTab courses={data} services={services} />
+                <CourseTab courses={data} />
 
                 {/* Скидки */}
                 <div className="bg-white rounded-lg shadow-md p-6 md:p-8">

@@ -70,7 +70,7 @@ export default async function TrainingDetailPage({ params }) {
                                 <TeamIcon className="w-6 h-6 text-primary-600" />
                                 Категория слушателей: <span className='text-primary-600 font-bold'>{data?.category_of_students}</span>
                             </p>
-                            <a href={data?.study_plan_text} className='underline text-primary-600 hover:text-primary-800 text-base font-bold flex items-center gap-2'>
+                            <a href={data?.study_plan_text} target='_blank' className='underline text-primary-600 hover:text-primary-800 text-base font-bold flex items-center gap-2'>
                                 <ChecklistIcon className="w-6 h-6 text-primary-600" />
                                 {data?.study_plan_link}
                             </a>
@@ -95,31 +95,40 @@ export default async function TrainingDetailPage({ params }) {
                     </div>
                 </article>
 
-                <div className='flex justify-center gap-5'>
-                    {/* Кнопка формы */}
-                    <div className="mt-10 flex justify-center">
-                        <Modal
-                            trigger={
-                                <button
-                                    className="inline-flex items-center justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
-                                >
-                                    Записаться на обучение
-                                </button>
-                            }
-                            title="Заявка на обучение"
-                        >
-                            <TrainingRequestForm />
-                        </Modal>
+                <div className='flex p-5 items-center lg:justify-start mt-10 max-lg:flex-col max-sm:gap-5 sm:gap-10'>
+                    {/* Стоимость обучения */}
+                    <div className="flex justify-center ">
+                        <p className='text-gray-800 font-bold text-2xl max-sm:text-base flex items-center gap-2'>
+                            Стоимость: <span className='text-primary-600'>{data?.price ? `${data?.price} руб.` : 'Уточняется'}</span>
+                        </p>
                     </div>
 
-                    {/* Кнопка назад */}
-                    <div className="mt-10 flex justify-center">
-                        <Link
-                            href="/#services"
-                            className="inline-flex items-center justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
-                        >
-                            <span>Назад к списку программ</span>
-                        </Link>
+                    <div className='flex max-sm:flex-col max-sm:gap-5 sm:gap-10'>
+                        {/* Кнопка формы */}
+                        <div className="flex justify-center">
+                            <Modal
+                                trigger={
+                                    <button
+                                        className="inline-flex items-center justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
+                                    >
+                                        Записаться на обучение
+                                    </button>
+                                }
+                                title="Заявка на обучение"
+                            >
+                                <TrainingRequestForm />
+                            </Modal>
+                        </div>
+
+                        {/* Кнопка назад */}
+                        <div className="flex justify-center">
+                            <Link
+                                href="/#services"
+                                className="inline-flex items-center justify-center bg-primary-600 text-white px-8 py-4 rounded-md hover:bg-primary-700 transition-colors font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50"
+                            >
+                                <span>Назад к списку программ</span>
+                            </Link>
+                        </div>
                     </div>
                 </div>
 

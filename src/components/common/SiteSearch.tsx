@@ -25,7 +25,6 @@ import {
     getReviews,
     getGratitudeLetters,
     getStatistics,
-    getPrice,
     getLicenses
 } from '@/api/services';
 import { useRouter } from 'next/navigation';
@@ -104,7 +103,6 @@ export const SiteSearch = () => {
                     reviewsResponse,
                     gratitudeLettersResponse,
                     statisticsResponse,
-                    priceResponse,
                     licensesResponse
                 ] = await Promise.all([
                     getAllNews(),
@@ -127,7 +125,6 @@ export const SiteSearch = () => {
                     getReviews(),
                     getGratitudeLetters(),
                     getStatistics(),
-                    getPrice(),
                     getLicenses()
                 ]);
 
@@ -318,14 +315,6 @@ export const SiteSearch = () => {
                     description: ''
                 })) || [];
 
-                // Добавляем прайс
-                const priceLink: SearchLink | null = priceResponse.data ? {
-                    title: 'Прайс',
-                    href: '/main/price',
-                    category: 'Цены',
-                    description: priceResponse.data.map(item => item.name).join('; ')
-                } : null;
-
                 // Добавляем лицензии
                 const licenseLinks: SearchLink[] = licensesResponse.data?.map(l => ({
                     title: l.Title || 'Лицензия',
@@ -371,8 +360,7 @@ export const SiteSearch = () => {
                         vacantPlacesLink,
                         studentSupportLink,
                         internationalCooperationLink,
-                        cateringLink,
-                        priceLink
+                        cateringLink
                     ].filter((link): link is SearchLink => link !== null)
                 ]);
             } catch (error) {

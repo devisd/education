@@ -59,7 +59,8 @@ export const TrainingRequestForm: React.FC = () => {
         phone: formData.phone,
         email: formData.email,
         program: formData.program,
-        _template: 'table'
+        _template: 'table',
+        _subject: `Новая заявка на ${formData.program}`
       };
       const response = await fetch('https://formsubmit.co/ajax/682eaee78211c05262608e9a42ee0b99', {
         method: 'POST',
