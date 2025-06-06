@@ -30,7 +30,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({ item }) => {
         >
             <div className="relative h-48 w-full">
                 <Image
-                    src={`https://terminal-38.cloudpub.ru${image}`}
+                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${image}`}
                     alt={title}
                     className="w-full h-full object-cover object-center"
                     width={340}

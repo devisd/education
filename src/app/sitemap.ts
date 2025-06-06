@@ -1,7 +1,10 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://yourdomain.com'
+    const baseUrl = 'https://терминал38.рф/'
+    if (!baseUrl) {
+        throw new Error('Environment variable NEXT_PUBLIC_BASE_URL is not set')
+    }
     const currentDate = new Date()
 
     // Главные страницы
@@ -86,5 +89,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...trainingRoutes,
         ...aboutRoutes,
         ...organizationRoutes,
-    ]
+    ] as { url: string; lastModified?: string | Date; changeFrequency?: "weekly" | "monthly" | "always" | "hourly" | "daily" | "yearly" | "never"; priority?: number }[]
 } 

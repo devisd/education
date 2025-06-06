@@ -97,7 +97,7 @@ export function renderBlock(block: any, idx: number) {
         return <Tag key={idx} className={className}>{children}</Tag>;
     }
     if (block.type === 'image' && block.image && block.image.url) {
-        const src = block.image.url.startsWith('http') ? block.image.url : `https://terminal-38.cloudpub.ru${block.image.url}`;
+        const src = block.image.url.startsWith('http') ? block.image.url : `${process.env.NEXT_PUBLIC_BASE_URL}${block.image.url}`;
         return (
             <div key={idx} className="my-8 flex justify-center" >
                 <img

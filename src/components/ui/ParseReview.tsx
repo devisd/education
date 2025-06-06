@@ -24,7 +24,7 @@ export const ParseReview = ({ data }: { data: IImageResponse[] | null }) => {
                         <div className="flex items-center mb-4">
                             {el.Image ? (
                                 <Image
-                                    src={`https://terminal-38.cloudpub.ru${el.Image.url}`}
+                                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${el.Image.url}`}
                                     alt={el.Image.name || "review image"}
                                     width={96}
                                     height={96}

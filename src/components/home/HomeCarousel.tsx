@@ -7,9 +7,9 @@ export const HomeCarousel = async () => {
         .map(el => ({
             id: el.id,
             image: {
-                mobile: 'https://terminal-38.cloudpub.ru' + el.small?.url,
-                tablet: 'https://terminal-38.cloudpub.ru' + el.medium?.url,
-                desktop: 'https://terminal-38.cloudpub.ru' + el.large?.url,
+                mobile: `${process.env.NEXT_PUBLIC_BASE_URL}${el.small?.url}`,
+                tablet: `${process.env.NEXT_PUBLIC_BASE_URL}${el.medium?.url}`,
+                desktop: `${process.env.NEXT_PUBLIC_BASE_URL}${el.large?.url}`,
             },
             link: el.link || '',
             title: '',

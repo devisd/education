@@ -16,7 +16,7 @@ export const GratitudeLetters: React.FC<GratitudeLettersProps> = ({ lettersData 
     // Преобразуем данные писем в формат DocumentCard
     const gratitudeDocs = (lettersData ?? []).map((el) => ({
         id: el.id,
-        src: el.Image ? `https://terminal-38.cloudpub.ru${el.Image.url}` : '/images/no_image.png',
+        src: el.Image ? `${process.env.NEXT_PUBLIC_BASE_URL}${el.Image.url}` : '/images/no_image.png',
         alt: el.Title,
         isPdf: false,
         isPlaceholder: !el.Image,

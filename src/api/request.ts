@@ -7,7 +7,7 @@ export interface RequestParams<T> {
 
 export async function request<T>({ path, method = 'GET', data, params }: RequestParams<T>) {
     // Формируем query string если есть params
-    let url = `${process.env.NEXT_PUBLIC_BASE_URL}${path}`;
+    let url = `${process.env.NEXT_PUBLIC_BASE_URL}/api${path}`;
     if (params && Object.keys(params).length > 0) {
         const searchParams = new URLSearchParams(params).toString();
         url += `?${searchParams}`;

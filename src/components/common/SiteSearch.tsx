@@ -1,33 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { SearchIcon } from '@/icons';
-import { MAIN_MENU } from '../../constants/header';
-import { TRAINING_CATEGORIES } from '../../constants/trainingCategories';
-import { MENU_LINKS, EDU_LINKS } from '../../constants/footer';
-import {
-    getAllNews,
-    getAllTraining,
-    getFAQ,
-    getMainInfo,
-    getStructure,
-    getDocs,
-    getEdu,
-    getStandarts,
-    getManagement,
-    getProfessors,
-    getMTS,
-    getPaidEdu,
-    getFinance,
-    getVacantPlaces,
-    getStudentSupport,
-    getInternationalCooperation,
-    getCatering,
-    getReviews,
-    getGratitudeLetters,
-    getStatistics,
-    getLicenses
-} from '@/api/services';
 import { useRouter } from 'next/navigation';
+import { useSearchData } from '../../utils/SearchDataContext';
 
 // Тип для поиска
 export type SearchLink = {
@@ -37,344 +12,18 @@ export type SearchLink = {
     description?: string;
 };
 
-function flattenMenu(menu: any[]): SearchLink[] {
-    let result: SearchLink[] = [];
-    for (const item of menu) {
-        if (item.href) result.push({
-            title: item.title,
-            href: item.href,
-            category: 'Меню',
-            description: item.description
-        });
-        if (item.children) result = result.concat(flattenMenu(item.children));
-    }
-    return result;
-}
-
-// Функция для извлечения текста из контента
-function extractTextFromContent(content: any[]): string {
-    if (!Array.isArray(content)) return '';
-
-    return content.map(block => {
-        if (block.children) {
-            return block.children.map((child: any) => {
-                if (child.text) return child.text;
-                if (child.children) return extractTextFromContent(child.children);
-                return '';
-            }).join(' ');
-        }
-        return '';
-    }).join(' ');
-}
-
 export const SiteSearch = () => {
     const [searchValue, setSearchValue] = useState('');
     const [searchOpen, setSearchOpen] = useState(false);
     const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
     const [searchResults, setSearchResults] = useState<SearchLink[]>([]);
-    const [allLinks, setAllLinks] = useState<SearchLink[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
     const desktopRef = useRef<HTMLDivElement>(null);
     const mobileRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
-
-    // Загружаем данные при монтировании компонента
-    useEffect(() => {
-        const loadData = async () => {
-            try {
-                const [
-                    newsResponse,
-                    trainingResponse,
-                    faqResponse,
-                    mainInfoResponse,
-                    structureResponse,
-                    docsResponse,
-                    eduResponse,
-                    standartsResponse,
-                    managementResponse,
-                    professorsResponse,
-                    mtsResponse,
-                    paidEduResponse,
-                    financeResponse,
-                    vacantPlacesResponse,
-                    studentSupportResponse,
-                    internationalCooperationResponse,
-                    cateringResponse,
-                    reviewsResponse,
-                    gratitudeLettersResponse,
-                    statisticsResponse,
-                    licensesResponse
-                ] = await Promise.all([
-                    getAllNews(),
-                    getAllTraining(),
-                    getFAQ(),
-                    getMainInfo(),
-                    getStructure(),
-                    getDocs(),
-                    getEdu(),
-                    getStandarts(),
-                    getManagement(),
-                    getProfessors(),
-                    getMTS(),
-                    getPaidEdu(),
-                    getFinance(),
-                    getVacantPlaces(),
-                    getStudentSupport(),
-                    getInternationalCooperation(),
-                    getCatering(),
-                    getReviews(),
-                    getGratitudeLetters(),
-                    getStatistics(),
-                    getLicenses()
-                ]);
-
-                const menuLinks: SearchLink[] = flattenMenu(MAIN_MENU);
-                const trainingLinks: SearchLink[] = TRAINING_CATEGORIES.map(c => ({
-                    title: c.title,
-                    href: c.href,
-                    category: 'Обучение',
-                    description: c.description
-                }));
-
-                // Добавляем новости из API
-                const newsLinks: SearchLink[] = newsResponse.data?.map(n => ({
-                    title: n.Title || 'Новость',
-                    href: `/about/news/${n.documentId}`,
-                    category: 'Новости',
-                    description: n.Description || ''
-                })) || [];
-
-                // Добавляем услуги из API
-                const apiTrainingLinks: SearchLink[] = trainingResponse.data?.map(t => {
-                    // Получаем заголовок услуги
-                    let title = '';
-                    if (Array.isArray(t.content) && t.content.length > 0) {
-                        // Пробуем взять первый текстовый блок как заголовок
-                        const firstBlock = t.content[0];
-                        if (firstBlock.children && Array.isArray(firstBlock.children) && firstBlock.children.length > 0) {
-                            title = firstBlock.children[0].text || '';
-                        }
-                        if (!title) {
-                            // Если не найдено, пробуем извлечь весь текст
-                            title = extractTextFromContent([firstBlock]);
-                        }
-                    }
-                    if (!title) title = 'Услуга';
-                    // Описание услуги
-                    const description = extractTextFromContent(t.content || []);
-                    return {
-                        title,
-                        href: `/training/${t.documentId}`,
-                        category: 'Обучение',
-                        description
-                    };
-                }) || [];
-
-                // Добавляем FAQ из API
-                const faqLinks: SearchLink[] = faqResponse.data?.map(f => {
-                    // Описание может быть строкой или массивом блоков
-                    let description = '';
-                    if (Array.isArray(f.Description)) {
-                        description = extractTextFromContent(f.Description);
-                    } else if (typeof f.Description === 'string') {
-                        description = f.Description;
-                    }
-                    return {
-                        title: f.Title || 'Вопрос',
-                        href: `/faq#${f.documentId}`,
-                        category: 'FAQ',
-                        description
-                    };
-                }) || [];
-
-                // Добавляем основные сведения
-                const mainInfoLink: SearchLink | null = mainInfoResponse.data ? {
-                    title: 'Основные сведения',
-                    href: '/organization/main-info',
-                    category: 'Организация',
-                    description: extractTextFromContent(mainInfoResponse.data.content || [])
-                } : null;
-
-                // Добавляем структуру
-                const structureLink: SearchLink | null = structureResponse.data ? {
-                    title: 'Структура и органы управления',
-                    href: '/organization/structure',
-                    category: 'Организация',
-                    description: extractTextFromContent(structureResponse.data.content || [])
-                } : null;
-
-                // Добавляем документы
-                const docsLink: SearchLink | null = docsResponse.data ? {
-                    title: 'Документы',
-                    href: '/organization/docs',
-                    category: 'Организация',
-                    description: extractTextFromContent(docsResponse.data.content || [])
-                } : null;
-
-                // Добавляем образование
-                const eduLink: SearchLink | null = eduResponse.data ? {
-                    title: 'Образование',
-                    href: '/organization/edu',
-                    category: 'Организация',
-                    description: extractTextFromContent(eduResponse.data.content || [])
-                } : null;
-
-                // Добавляем стандарты
-                const standartsLink: SearchLink | null = standartsResponse.data ? {
-                    title: 'Образовательные стандарты',
-                    href: '/organization/standarts',
-                    category: 'Организация',
-                    description: extractTextFromContent(standartsResponse.data.content || [])
-                } : null;
-
-                // Добавляем руководство
-                const managementLink: SearchLink | null = managementResponse.data ? {
-                    title: 'Руководство',
-                    href: '/organization/management',
-                    category: 'Организация',
-                    description: extractTextFromContent(managementResponse.data.content || [])
-                } : null;
-
-                // Добавляем преподавателей
-                const professorsLink: SearchLink | null = professorsResponse.data ? {
-                    title: 'Педагогический состав',
-                    href: '/organization/professors',
-                    category: 'Организация',
-                    description: extractTextFromContent(professorsResponse.data.content || [])
-                } : null;
-
-                // Добавляем МТО
-                const mtsLink: SearchLink | null = mtsResponse.data ? {
-                    title: 'Материально-техническое обеспечение',
-                    href: '/organization/mts',
-                    category: 'Организация',
-                    description: extractTextFromContent(mtsResponse.data.content || [])
-                } : null;
-
-                // Добавляем платные услуги
-                const paidEduLink: SearchLink | null = paidEduResponse.data ? {
-                    title: 'Платные образовательные услуги',
-                    href: '/organization/paid-edu',
-                    category: 'Организация',
-                    description: extractTextFromContent(paidEduResponse.data.content || [])
-                } : null;
-
-                // Добавляем финансы
-                const financeLink: SearchLink | null = financeResponse.data ? {
-                    title: 'Финансово-хозяйственная деятельность',
-                    href: '/organization/finance',
-                    category: 'Организация',
-                    description: extractTextFromContent(financeResponse.data.content || [])
-                } : null;
-
-                // Добавляем вакантные места
-                const vacantPlacesLink: SearchLink | null = vacantPlacesResponse.data ? {
-                    title: 'Вакантные места',
-                    href: '/organization/vacant-places',
-                    category: 'Организация',
-                    description: extractTextFromContent(vacantPlacesResponse.data.content || [])
-                } : null;
-
-                // Добавляем стипендии
-                const studentSupportLink: SearchLink | null = studentSupportResponse.data ? {
-                    title: 'Стипендии и меры поддержки',
-                    href: '/organization/student-support',
-                    category: 'Организация',
-                    description: extractTextFromContent(studentSupportResponse.data.content || [])
-                } : null;
-
-                // Добавляем международное сотрудничество
-                const internationalCooperationLink: SearchLink | null = internationalCooperationResponse.data ? {
-                    title: 'Международное сотрудничество',
-                    href: '/organization/international-cooperation',
-                    category: 'Организация',
-                    description: extractTextFromContent(internationalCooperationResponse.data.content || [])
-                } : null;
-
-                // Добавляем питание
-                const cateringLink: SearchLink | null = cateringResponse.data ? {
-                    title: 'Организация питания',
-                    href: '/organization/catering',
-                    category: 'Организация',
-                    description: extractTextFromContent(cateringResponse.data.content || [])
-                } : null;
-
-                // Добавляем отзывы
-                const reviewLinks: SearchLink[] = reviewsResponse.data?.map(r => ({
-                    title: r.Name || 'Отзыв',
-                    href: '/main/reviews',
-                    category: 'Отзывы',
-                    description: r.Content
-                })) || [];
-
-                // Добавляем благодарственные письма
-                const gratitudeLinks: SearchLink[] = gratitudeLettersResponse.data?.map(l => ({
-                    title: l.Title || 'Благодарственное письмо',
-                    href: '/main/reviews',
-                    category: 'Отзывы',
-                    description: ''
-                })) || [];
-
-                // Добавляем лицензии
-                const licenseLinks: SearchLink[] = licensesResponse.data?.map(l => ({
-                    title: l.Title || 'Лицензия',
-                    href: '/organization/docs',
-                    category: 'Документы',
-                    description: ''
-                })) || [];
-
-                const footerLinks: SearchLink[] = MENU_LINKS.map(l => ({
-                    title: l.name,
-                    href: l.href,
-                    category: 'Дополнительно'
-                }));
-
-                const eduLinks: SearchLink[] = EDU_LINKS.map(l => ({
-                    title: l.name,
-                    href: l.href,
-                    category: 'Образование'
-                }));
-
-                setAllLinks([
-                    ...menuLinks,
-                    ...trainingLinks,
-                    ...apiTrainingLinks,
-                    ...newsLinks,
-                    ...faqLinks,
-                    ...footerLinks,
-                    ...eduLinks,
-                    ...reviewLinks,
-                    ...gratitudeLinks,
-                    ...licenseLinks,
-                    ...[
-                        mainInfoLink,
-                        structureLink,
-                        docsLink,
-                        eduLink,
-                        standartsLink,
-                        managementLink,
-                        professorsLink,
-                        mtsLink,
-                        paidEduLink,
-                        financeLink,
-                        vacantPlacesLink,
-                        studentSupportLink,
-                        internationalCooperationLink,
-                        cateringLink
-                    ].filter((link): link is SearchLink => link !== null)
-                ]);
-            } catch (error) {
-                console.error('Error loading search data:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        loadData();
-    }, []);
+    const { allLinks, isLoading } = useSearchData();
 
     // Поиск
-    useEffect(() => {
+    React.useEffect(() => {
         if (!searchValue) {
             setSearchResults([]);
             return;
@@ -391,7 +40,7 @@ export const SiteSearch = () => {
     }, [searchValue, allLinks]);
 
     // Закрытие при клике вне (десктоп)
-    useEffect(() => {
+    React.useEffect(() => {
         if (!searchOpen) return;
         function handleClickOutside(event: MouseEvent) {
             if (desktopRef.current && !desktopRef.current.contains(event.target as Node)) {
@@ -403,7 +52,7 @@ export const SiteSearch = () => {
     }, [searchOpen]);
 
     // Закрытие при клике вне (мобайл)
-    useEffect(() => {
+    React.useEffect(() => {
         if (!mobileSearchOpen) return;
         function handleClickOutside(event: MouseEvent) {
             if (mobileRef.current && !mobileRef.current.contains(event.target as Node)) {

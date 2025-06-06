@@ -26,7 +26,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     >
       <div className="mb-5 text-primary-600 p-3 bg-primary-50 inline-flex rounded-lg">
         {typeof icon === 'string' ? icon?.length ?
-          <Image src={`https://terminal-38.cloudpub.ru${icon}`} alt={title} width={48} height={48} className="h-12 w-12 text-primary-600 " />
+          <Image src={`${process.env.NEXT_PUBLIC_BASE_URL}${icon}`} alt={title} width={48} height={48} className="h-12 w-12 text-primary-600 " />
           :
           <div className="h-12 w-12 bg-primary-600" />
           : icon ? React.createElement(icon, { className: 'h-12 w-12 text-primary-600' }) : null

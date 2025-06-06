@@ -42,7 +42,7 @@ export default async function TrainingDetailPage({ params }) {
     if (!item) return <EmptyContent />;
 
     const title = extractTitle(item.content);
-    const image = item.image?.url ? `https://terminal-38.cloudpub.ru${item.image.url}` : '/images/no_image.png';
+    const image = item.image?.url ? `${process.env.NEXT_PUBLIC_BASE_URL}${item.image.url}` : '/images/no_image.png';
 
     return (
         <section className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden">
@@ -140,7 +140,7 @@ export default async function TrainingDetailPage({ params }) {
                             {randomTrainings.map((t) => {
                                 const tTitle = extractTitle(t.content);
                                 const tDesc = extractTextFromContent(t.content?.slice(1, 2) || []);
-                                const tImage = t.image?.url ? `https://terminal-38.cloudpub.ru${t.image.url}` : '/images/no_image.png';
+                                const tImage = t.image?.url ? `${process.env.NEXT_PUBLIC_BASE_URL}${t.image.url}` : '/images/no_image.png';
                                 return (
                                     <Link
                                         key={t.id}
